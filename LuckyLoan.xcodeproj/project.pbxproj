@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		732A7F442CBA51390097B3FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 732A7F392CBA51390097B3FB /* LaunchScreen.storyboard */; };
 		732A7F4A2CBA526F0097B3FB /* LLBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */; };
 		732A7F4C2CBA52810097B3FB /* LLLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */; };
+		732A7F4F2CBA69DF0097B3FB /* LLAbsolute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */; };
 		D702CFD9A734E6AFCC7B2014 /* Pods_LuckyLoan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE11BCBF843106FE009F8DA /* Pods_LuckyLoan.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		732A7F382CBA51390097B3FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLBaseViewController.swift; sourceTree = "<group>"; };
 		732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLLaunchViewController.swift; sourceTree = "<group>"; };
+		732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLAbsolute.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */,
 				732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */,
+				732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */,
 			);
 			path = Confing;
 			sourceTree = "<group>";
@@ -115,6 +118,7 @@
 				732A7EF62CBA4EE50097B3FB /* Sources */,
 				732A7EF72CBA4EE50097B3FB /* Frameworks */,
 				732A7EF82CBA4EE50097B3FB /* Resources */,
+				93D0983EF35859017D0A0ADB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -148,7 +152,6 @@
 				Base,
 			);
 			mainGroup = 732A7EF12CBA4EE50097B3FB;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 732A7EFB2CBA4EE50097B3FB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -193,6 +196,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		93D0983EF35859017D0A0ADB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LuckyLoan/Pods-LuckyLoan-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LuckyLoan/Pods-LuckyLoan-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LuckyLoan/Pods-LuckyLoan-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -202,6 +222,7 @@
 			files = (
 				732A7F3F2CBA51390097B3FB /* AppDelegate.swift in Sources */,
 				732A7F4A2CBA526F0097B3FB /* LLBaseViewController.swift in Sources */,
+				732A7F4F2CBA69DF0097B3FB /* LLAbsolute.swift in Sources */,
 				732A7F4C2CBA52810097B3FB /* LLLaunchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
