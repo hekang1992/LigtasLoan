@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  LuckyLoan
+//  LigtasLoan
 //
 //  Created by 何康 on 2024/10/12.
 //

@@ -13,14 +13,13 @@
 		732A7F4A2CBA526F0097B3FB /* LLBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */; };
 		732A7F4C2CBA52810097B3FB /* LLLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */; };
 		732A7F4F2CBA69DF0097B3FB /* LLAbsolute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */; };
-		D702CFD9A734E6AFCC7B2014 /* Pods_LuckyLoan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BE11BCBF843106FE009F8DA /* Pods_LuckyLoan.framework */; };
+		738ED1462CBFB45A0085C713 /* LLRequsrtMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738ED1452CBFB45A0085C713 /* LLRequsrtMan.swift */; };
+		99178D3E924A5A601F340AF3 /* Pods_LigtasLoan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F241486B4886CF0557C586 /* Pods_LigtasLoan.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3DBCE376745A5FC426211EA5 /* Pods-LuckyLoan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuckyLoan.debug.xcconfig"; path = "Target Support Files/Pods-LuckyLoan/Pods-LuckyLoan.debug.xcconfig"; sourceTree = "<group>"; };
-		4BE11BCBF843106FE009F8DA /* Pods_LuckyLoan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuckyLoan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5FA536AFB4398E0448B8C14D /* Pods-LuckyLoan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuckyLoan.release.xcconfig"; path = "Target Support Files/Pods-LuckyLoan/Pods-LuckyLoan.release.xcconfig"; sourceTree = "<group>"; };
-		732A7EFA2CBA4EE50097B3FB /* LuckyLoan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuckyLoan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42F241486B4886CF0557C586 /* Pods_LigtasLoan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LigtasLoan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		732A7EFA2CBA4EE50097B3FB /* LigtasLoan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LigtasLoan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		732A7F352CBA51390097B3FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		732A7F362CBA51390097B3FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		732A7F372CBA51390097B3FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -28,6 +27,9 @@
 		732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLBaseViewController.swift; sourceTree = "<group>"; };
 		732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLLaunchViewController.swift; sourceTree = "<group>"; };
 		732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLAbsolute.swift; sourceTree = "<group>"; };
+		738ED1452CBFB45A0085C713 /* LLRequsrtMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRequsrtMan.swift; sourceTree = "<group>"; };
+		B721BA417BA54A55CBD8A223 /* Pods-LigtasLoan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LigtasLoan.debug.xcconfig"; path = "Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan.debug.xcconfig"; sourceTree = "<group>"; };
+		FDAB4B2D29834F0473B37268 /* Pods-LigtasLoan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LigtasLoan.release.xcconfig"; path = "Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D702CFD9A734E6AFCC7B2014 /* Pods_LuckyLoan.framework in Frameworks */,
+				99178D3E924A5A601F340AF3 /* Pods_LigtasLoan.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +47,7 @@
 		1D20C70B8FAC71472FC9BE5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4BE11BCBF843106FE009F8DA /* Pods_LuckyLoan.framework */,
+				42F241486B4886CF0557C586 /* Pods_LigtasLoan.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -53,7 +55,7 @@
 		732A7EF12CBA4EE50097B3FB = {
 			isa = PBXGroup;
 			children = (
-				732A7F3E2CBA51390097B3FB /* LuckyLoan */,
+				732A7F3E2CBA51390097B3FB /* LigtasLoan */,
 				732A7EFB2CBA4EE50097B3FB /* Products */,
 				9C6DEAF45D9CA6BC808160E1 /* Pods */,
 				1D20C70B8FAC71472FC9BE5C /* Frameworks */,
@@ -63,19 +65,19 @@
 		732A7EFB2CBA4EE50097B3FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				732A7EFA2CBA4EE50097B3FB /* LuckyLoan.app */,
+				732A7EFA2CBA4EE50097B3FB /* LigtasLoan.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		732A7F3E2CBA51390097B3FB /* LuckyLoan */ = {
+		732A7F3E2CBA51390097B3FB /* LigtasLoan */ = {
 			isa = PBXGroup;
 			children = (
 				732A7F372CBA51390097B3FB /* Info.plist */,
 				732A7F4D2CBA535E0097B3FB /* Main */,
 				732A7F462CBA524B0097B3FB /* Confing */,
 			);
-			path = LuckyLoan;
+			path = LigtasLoan;
 			sourceTree = "<group>";
 		};
 		732A7F462CBA524B0097B3FB /* Confing */ = {
@@ -84,6 +86,7 @@
 				732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */,
 				732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */,
 				732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */,
+				738ED1452CBFB45A0085C713 /* LLRequsrtMan.swift */,
 			);
 			path = Confing;
 			sourceTree = "<group>";
@@ -101,8 +104,8 @@
 		9C6DEAF45D9CA6BC808160E1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3DBCE376745A5FC426211EA5 /* Pods-LuckyLoan.debug.xcconfig */,
-				5FA536AFB4398E0448B8C14D /* Pods-LuckyLoan.release.xcconfig */,
+				B721BA417BA54A55CBD8A223 /* Pods-LigtasLoan.debug.xcconfig */,
+				FDAB4B2D29834F0473B37268 /* Pods-LigtasLoan.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -110,9 +113,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		732A7EF92CBA4EE50097B3FB /* LuckyLoan */ = {
+		732A7EF92CBA4EE50097B3FB /* LigtasLoan */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 732A7F0D2CBA4EE60097B3FB /* Build configuration list for PBXNativeTarget "LuckyLoan" */;
+			buildConfigurationList = 732A7F0D2CBA4EE60097B3FB /* Build configuration list for PBXNativeTarget "LigtasLoan" */;
 			buildPhases = (
 				05D045BCA308180B2F1D4554 /* [CP] Check Pods Manifest.lock */,
 				732A7EF62CBA4EE50097B3FB /* Sources */,
@@ -124,9 +127,9 @@
 			);
 			dependencies = (
 			);
-			name = LuckyLoan;
-			productName = LuckyLoan;
-			productReference = 732A7EFA2CBA4EE50097B3FB /* LuckyLoan.app */;
+			name = LigtasLoan;
+			productName = LigtasLoan;
+			productReference = 732A7EFA2CBA4EE50097B3FB /* LigtasLoan.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -144,7 +147,8 @@
 					};
 				};
 			};
-			buildConfigurationList = 732A7EF52CBA4EE50097B3FB /* Build configuration list for PBXProject "LuckyLoan" */;
+			buildConfigurationList = 732A7EF52CBA4EE50097B3FB /* Build configuration list for PBXProject "LigtasLoan" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -156,7 +160,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				732A7EF92CBA4EE50097B3FB /* LuckyLoan */,
+				732A7EF92CBA4EE50097B3FB /* LigtasLoan */,
 			);
 		};
 /* End PBXProject section */
@@ -189,7 +193,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LuckyLoan-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-LigtasLoan-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -202,15 +206,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LuckyLoan/Pods-LuckyLoan-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LuckyLoan/Pods-LuckyLoan-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LuckyLoan/Pods-LuckyLoan-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -220,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				738ED1462CBFB45A0085C713 /* LLRequsrtMan.swift in Sources */,
 				732A7F3F2CBA51390097B3FB /* AppDelegate.swift in Sources */,
 				732A7F4A2CBA526F0097B3FB /* LLBaseViewController.swift in Sources */,
 				732A7F4F2CBA69DF0097B3FB /* LLAbsolute.swift in Sources */,
@@ -243,7 +248,7 @@
 /* Begin XCBuildConfiguration section */
 		732A7F0E2CBA4EE60097B3FB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DBCE376745A5FC426211EA5 /* Pods-LuckyLoan.debug.xcconfig */;
+			baseConfigurationReference = B721BA417BA54A55CBD8A223 /* Pods-LigtasLoan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -251,9 +256,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2F6XZMZ52M;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = XS8842FK7N;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LuckyLoan/Info.plist;
+				INFOPLIST_FILE = LigtasLoan/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -264,10 +270,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.testph.first;
+				PRODUCT_BUNDLE_IDENTIFIER = test.app.ald.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Test PH1";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = testappaldprofile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -280,7 +286,7 @@
 		};
 		732A7F0F2CBA4EE60097B3FB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5FA536AFB4398E0448B8C14D /* Pods-LuckyLoan.release.xcconfig */;
+			baseConfigurationReference = FDAB4B2D29834F0473B37268 /* Pods-LigtasLoan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -288,9 +294,10 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2F6XZMZ52M;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = XS8842FK7N;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LuckyLoan/Info.plist;
+				INFOPLIST_FILE = LigtasLoan/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -301,10 +308,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.testph.first;
+				PRODUCT_BUNDLE_IDENTIFIER = test.app.ald.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Test PH1";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = testappaldprofile;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -437,7 +444,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		732A7EF52CBA4EE50097B3FB /* Build configuration list for PBXProject "LuckyLoan" */ = {
+		732A7EF52CBA4EE50097B3FB /* Build configuration list for PBXProject "LigtasLoan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				732A7F102CBA4EE60097B3FB /* Debug */,
@@ -446,7 +453,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		732A7F0D2CBA4EE60097B3FB /* Build configuration list for PBXNativeTarget "LuckyLoan" */ = {
+		732A7F0D2CBA4EE60097B3FB /* Build configuration list for PBXNativeTarget "LigtasLoan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				732A7F0E2CBA4EE60097B3FB /* Debug */,

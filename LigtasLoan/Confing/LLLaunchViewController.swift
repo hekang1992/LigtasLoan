@@ -1,13 +1,13 @@
 //
-//  LLBaseViewController.swift
-//  LuckyLoan
+//  LLLaunchViewController.swift
+//  LigtasLoan
 //
 //  Created by 何康 on 2024/10/12.
 //
 
 import UIKit
 
-class LLBaseViewController: UIViewController {
+class LLLaunchViewController: LLBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

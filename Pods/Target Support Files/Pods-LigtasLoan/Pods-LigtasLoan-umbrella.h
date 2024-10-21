@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_LuckyLoanVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_LuckyLoanVersionString[];
+FOUNDATION_EXPORT double Pods_LigtasLoanVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_LigtasLoanVersionString[];
 

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9F9CEAA538C77E4F41696FD548FE5449"
-               BuildableName = "Pods_LuckyLoan.framework"
-               BlueprintName = "Pods-LuckyLoan"
+               BlueprintIdentifier = "A114DE140BD2F8E2845403E72261EF54"
+               BuildableName = "Pods_LigtasLoan.framework"
+               BlueprintName = "Pods-LigtasLoan"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
