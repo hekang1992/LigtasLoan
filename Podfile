@@ -26,5 +26,9 @@ target 'LigtasLoan' do
   pod 'RxGesture', '~> 4.0.4'
   
   pod 'RxDataSources', '~> 5.0.0'
+  
+  pod 'GYSide', '~> 0.0.5'
+  
+  pod 'IQKeyboardManagerSwift', '~> 7.1.1'
 
 end
