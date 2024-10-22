@@ -25,7 +25,6 @@ class LLZCViewController: LLBaseViewController {
         loginView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
         loginView.phoneTx
             .rx
             .text
@@ -47,8 +46,14 @@ class LLZCViewController: LLBaseViewController {
             })
             .disposed(by: disposeBag)
         
+        
+        loginView.nextBtn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let yzmVc = LLYZMViewController()
+            self.navigationController?.pushViewController(yzmVc, animated: true)
+        }).disposed(by: disposeBag)
+        
     }
-    
 
     /*
     // MARK: - Navigation

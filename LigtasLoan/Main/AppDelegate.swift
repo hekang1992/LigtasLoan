@@ -31,7 +31,7 @@ extension AppDelegate {
     private func iqkeyman() {
         let manager = IQKeyboardManager.shared
         manager.enable = true
-        manager.resignOnTouchOutside = true
+        manager.shouldResignOnTouchOutside = true
     }
     
     private func pushVc() {

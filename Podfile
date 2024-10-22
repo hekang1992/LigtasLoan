@@ -29,6 +29,8 @@ target 'LigtasLoan' do
   
   pod 'GYSide', '~> 0.0.5'
   
-  pod 'IQKeyboardManagerSwift', '~> 7.1.1'
+  pod 'IQKeyboardManagerSwift', '~> 6.5.16'
+  
+  pod 'QuickSecurityCode', '~> 1.0.3'
 
 end

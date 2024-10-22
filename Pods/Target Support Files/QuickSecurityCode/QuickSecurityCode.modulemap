@@ -1,0 +1,6 @@
+framework module QuickSecurityCode {
+  umbrella header "QuickSecurityCode-umbrella.h"
+
+  export *
+  module * { export * }
+}

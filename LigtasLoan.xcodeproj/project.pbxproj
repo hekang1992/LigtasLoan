@@ -21,6 +21,7 @@
 		73342AC12CC7D6D2002EDA2B /* LLZCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342AC02CC7D6D2002EDA2B /* LLZCViewController.swift */; };
 		73342AC32CC7D9DA002EDA2B /* LLBaseNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342AC22CC7D9DA002EDA2B /* LLBaseNavViewController.swift */; };
 		73342AC72CC7E3D8002EDA2B /* LLDLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342AC62CC7E3D8002EDA2B /* LLDLView.swift */; };
+		73342ACB2CC7F65B002EDA2B /* LLYZMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342ACA2CC7F65B002EDA2B /* LLYZMViewController.swift */; };
 		738ED1462CBFB45A0085C713 /* LLRequestMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738ED1452CBFB45A0085C713 /* LLRequestMan.swift */; };
 		99178D3E924A5A601F340AF3 /* Pods_LigtasLoan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F241486B4886CF0557C586 /* Pods_LigtasLoan.framework */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		73342AC02CC7D6D2002EDA2B /* LLZCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLZCViewController.swift; sourceTree = "<group>"; };
 		73342AC22CC7D9DA002EDA2B /* LLBaseNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLBaseNavViewController.swift; sourceTree = "<group>"; };
 		73342AC62CC7E3D8002EDA2B /* LLDLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLDLView.swift; sourceTree = "<group>"; };
+		73342ACA2CC7F65B002EDA2B /* LLYZMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLYZMViewController.swift; sourceTree = "<group>"; };
 		738ED1452CBFB45A0085C713 /* LLRequestMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRequestMan.swift; sourceTree = "<group>"; };
 		B721BA417BA54A55CBD8A223 /* Pods-LigtasLoan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LigtasLoan.debug.xcconfig"; path = "Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan.debug.xcconfig"; sourceTree = "<group>"; };
 		FDAB4B2D29834F0473B37268 /* Pods-LigtasLoan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LigtasLoan.release.xcconfig"; path = "Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			children = (
 				73342AC62CC7E3D8002EDA2B /* LLDLView.swift */,
 				73342AC02CC7D6D2002EDA2B /* LLZCViewController.swift */,
+				73342ACA2CC7F65B002EDA2B /* LLYZMViewController.swift */,
 			);
 			path = LLZC;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				73342ABB2CC7D41B002EDA2B /* LLBaseView.swift in Sources */,
 				73342AC32CC7D9DA002EDA2B /* LLBaseNavViewController.swift in Sources */,
 				732A7F4C2CBA52810097B3FB /* LLLaunchViewController.swift in Sources */,
+				73342ACB2CC7F65B002EDA2B /* LLYZMViewController.swift in Sources */,
 				73342AC12CC7D6D2002EDA2B /* LLZCViewController.swift in Sources */,
 				73342ABE2CC7D68B002EDA2B /* LLSYViewController.swift in Sources */,
 				73342AC72CC7E3D8002EDA2B /* LLDLView.swift in Sources */,

@@ -13,7 +13,6 @@ import RxRelay
 import RxGesture
 import RxDataSources
 
-
 class LLBaseView: UIView {
     
     let disposeBag = DisposeBag()
