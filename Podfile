@@ -31,6 +31,5 @@ target 'LigtasLoan' do
   
   pod 'IQKeyboardManagerSwift', '~> 6.5.16'
   
-  pod 'QuickSecurityCode', '~> 1.0.3'
 
 end

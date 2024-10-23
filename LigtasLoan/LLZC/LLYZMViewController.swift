@@ -16,10 +16,10 @@ class LLYZMViewController: LLBaseViewController {
         codeView.nlabel.text = "Enter your phone number, if not registered, it will be automatically registered."
         return codeView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.addSubview(codeView)
         codeView.snp.makeConstraints { make in
@@ -31,20 +31,29 @@ class LLYZMViewController: LLBaseViewController {
             self.navigationController?.popToRootViewController(animated: true)
         }).disposed(by: disposeBag)
         
-//        codeView.securityCodeView.complete = { [weak self] code in
-//            
-//        }
-        
+        codeView.securityCodeView.addTarget(self, action: #selector(unitFieldEditingChanged(_:)), for: .editingChanged)
+
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        codeView.securityCodeView.resignFirstResponder()
     }
-    */
-
+    
 }
+
+extension LLYZMViewController: WLUnitFieldDelegate {
+    
+   @objc func unitFieldEditingChanged(_ sender: WLUnitField) {
+        print("\(#function), \(sender.text ?? "")")
+       if let textStr = sender.text, textStr.count > 0 {
+           codeView.nextBtn.isEnabled = true
+           codeView.nextBtn.setImage(UIImage(named: "keyiidanjibetn"), for: .normal)
+       }else {
+           codeView.nextBtn.isEnabled = false
+           codeView.nextBtn.setImage(UIImage(named: "nextimagebbt"), for: .normal)
+       }
+    }
+    
+}
+

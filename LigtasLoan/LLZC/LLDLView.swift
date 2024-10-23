@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import QuickSecurityCode
 
 class LLDLView: LLBaseView {
     
@@ -14,11 +13,13 @@ class LLDLView: LLBaseView {
 
 class LLYZMView: LLBaseView {
     
-    lazy var securityCodeView: QuickSecurityCode = {
-        let securityCodeView = QuickSecurityCode()
-        securityCodeView.preferredSixDigits = true
-        securityCodeView.focusBorderColor = .clear
-        securityCodeView.digitFont = UIFont(name: Bold_Poppins, size: 30)
+    lazy var securityCodeView: WLUnitField = {
+        let securityCodeView = WLUnitField(inputUnitCount: 6)
+        securityCodeView.borderRadius = 12
+        securityCodeView.borderWidth = 0
+        securityCodeView.backgroundColor = .white
+        securityCodeView.textFont = UIFont(name: Bold_Poppins, size: 30)!
+        securityCodeView.autoResignFirstResponderWhenInputFinished = true
         return securityCodeView
     }()
     

@@ -68,6 +68,7 @@ class LLBaseView: UIView {
     
     lazy var nextBtn: UIButton = {
         let nextBtn = UIButton(type: .custom)
+        nextBtn.isEnabled = false
         nextBtn.setImage(UIImage(named: "nextimagebbt"), for: .normal)
         return nextBtn
     }()
