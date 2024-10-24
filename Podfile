@@ -31,5 +31,10 @@ target 'LigtasLoan' do
   
   pod 'IQKeyboardManagerSwift', '~> 6.5.16'
   
+  pod 'SwiftyJSON', '~> 5.0.2'
+  
+  pod 'KeychainAccess', '~> 4.2.2'
+  
+  pod 'DeviceKit', '~> 5.2.2'
 
 end

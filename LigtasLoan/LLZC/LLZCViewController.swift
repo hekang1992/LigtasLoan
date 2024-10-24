@@ -49,7 +49,9 @@ class LLZCViewController: LLBaseViewController {
         
         loginView.nextBtn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
+            let phone = self.loginView.phoneTx.text ?? ""
             let yzmVc = LLYZMViewController()
+            yzmVc.phoneStr.accept(phone)
             self.navigationController?.pushViewController(yzmVc, animated: true)
         }).disposed(by: disposeBag)
         

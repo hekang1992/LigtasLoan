@@ -12,6 +12,7 @@ import RxCocoa
 import RxRelay
 import RxGesture
 import RxDataSources
+import Toaster
 
 class LLBaseView: UIView {
     
@@ -144,5 +145,21 @@ class LLBaseView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+class ToastUtility {
+    static func showToast(message: String) {
+        ToastView.appearance().font = UIFont(name: Bold_Poppins, size: 20)
+        let toast = Toast(text: message, duration: 1.0)
+        if let window = UIApplication.shared.windows.first {
+            let screenHeight = window.frame.size.height
+            let toastHeight: CGFloat = 50
+            let centerY = screenHeight / 2 - toastHeight / 2
+            ToastView.appearance().bottomOffsetPortrait = centerY
+            ToastView.appearance().bottomOffsetLandscape = centerY
+        }
+        toast.show()
     }
 }

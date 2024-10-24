@@ -10,6 +10,7 @@
 		730CECF12CC92AEA002F96E0 /* WLUnitField.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECEC2CC92AEA002F96E0 /* WLUnitField.m */; };
 		730CECF22CC92AEA002F96E0 /* WLUnitFieldTextPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECEE2CC92AEA002F96E0 /* WLUnitFieldTextPosition.m */; };
 		730CECF32CC92AEA002F96E0 /* WLUnitFieldTextRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECF02CC92AEA002F96E0 /* WLUnitFieldTextRange.m */; };
+		730CECF82CC9363F002F96E0 /* LLDLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730CECF72CC9363F002F96E0 /* LLDLInfo.swift */; };
 		732A7F3F2CBA51390097B3FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F352CBA51390097B3FB /* AppDelegate.swift */; };
 		732A7F422CBA51390097B3FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 732A7F362CBA51390097B3FB /* Assets.xcassets */; };
 		732A7F442CBA51390097B3FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 732A7F392CBA51390097B3FB /* LaunchScreen.storyboard */; };
@@ -25,7 +26,8 @@
 		73342AC32CC7D9DA002EDA2B /* LLBaseNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342AC22CC7D9DA002EDA2B /* LLBaseNavViewController.swift */; };
 		73342AC72CC7E3D8002EDA2B /* LLDLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342AC62CC7E3D8002EDA2B /* LLDLView.swift */; };
 		73342ACB2CC7F65B002EDA2B /* LLYZMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342ACA2CC7F65B002EDA2B /* LLYZMViewController.swift */; };
-		738ED1462CBFB45A0085C713 /* LLRequestMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738ED1452CBFB45A0085C713 /* LLRequestMan.swift */; };
+		733465392CCA7A5F00856E02 /* juhuajiaz.json in Resources */ = {isa = PBXBuildFile; fileRef = 733465382CCA7A5F00856E02 /* juhuajiaz.json */; };
+		738ED1462CBFB45A0085C713 /* LLRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738ED1452CBFB45A0085C713 /* LLRequestManager.swift */; };
 		99178D3E924A5A601F340AF3 /* Pods_LigtasLoan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F241486B4886CF0557C586 /* Pods_LigtasLoan.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,7 @@
 		730CECEF2CC92AEA002F96E0 /* WLUnitFieldTextRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLUnitFieldTextRange.h; sourceTree = "<group>"; };
 		730CECF02CC92AEA002F96E0 /* WLUnitFieldTextRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLUnitFieldTextRange.m; sourceTree = "<group>"; };
 		730CECF42CC92AEC002F96E0 /* LigtasLoan-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LigtasLoan-Bridging-Header.h"; sourceTree = "<group>"; };
+		730CECF72CC9363F002F96E0 /* LLDLInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLDLInfo.swift; sourceTree = "<group>"; };
 		732A7EFA2CBA4EE50097B3FB /* LigtasLoan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LigtasLoan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		732A7F352CBA51390097B3FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		732A7F362CBA51390097B3FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,7 +58,8 @@
 		73342AC22CC7D9DA002EDA2B /* LLBaseNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLBaseNavViewController.swift; sourceTree = "<group>"; };
 		73342AC62CC7E3D8002EDA2B /* LLDLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLDLView.swift; sourceTree = "<group>"; };
 		73342ACA2CC7F65B002EDA2B /* LLYZMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLYZMViewController.swift; sourceTree = "<group>"; };
-		738ED1452CBFB45A0085C713 /* LLRequestMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRequestMan.swift; sourceTree = "<group>"; };
+		733465382CCA7A5F00856E02 /* juhuajiaz.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = juhuajiaz.json; sourceTree = "<group>"; };
+		738ED1452CBFB45A0085C713 /* LLRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRequestManager.swift; sourceTree = "<group>"; };
 		B721BA417BA54A55CBD8A223 /* Pods-LigtasLoan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LigtasLoan.debug.xcconfig"; path = "Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan.debug.xcconfig"; sourceTree = "<group>"; };
 		FDAB4B2D29834F0473B37268 /* Pods-LigtasLoan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LigtasLoan.release.xcconfig"; path = "Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,10 +133,11 @@
 			children = (
 				732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */,
 				73342ABA2CC7D41B002EDA2B /* LLBaseView.swift */,
-				738ED1452CBFB45A0085C713 /* LLRequestMan.swift */,
+				738ED1452CBFB45A0085C713 /* LLRequestManager.swift */,
 				732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */,
 				732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */,
 				73342AC22CC7D9DA002EDA2B /* LLBaseNavViewController.swift */,
+				730CECF72CC9363F002F96E0 /* LLDLInfo.swift */,
 			);
 			path = Confing;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				730CECEA2CC92AD8002F96E0 /* OC */,
+				733465382CCA7A5F00856E02 /* juhuajiaz.json */,
 				732A7F362CBA51390097B3FB /* Assets.xcassets */,
 				73342AB62CC7D34A002EDA2B /* poppinsregular.otf */,
 				73342AB42CC7D20A002EDA2B /* poppinsbold.otf */,
@@ -242,6 +248,7 @@
 				73342AB72CC7D34A002EDA2B /* poppinsregular.otf in Resources */,
 				73342AB52CC7D20A002EDA2B /* poppinsbold.otf in Resources */,
 				732A7F422CBA51390097B3FB /* Assets.xcassets in Resources */,
+				733465392CCA7A5F00856E02 /* juhuajiaz.json in Resources */,
 				732A7F442CBA51390097B3FB /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,7 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				738ED1462CBFB45A0085C713 /* LLRequestMan.swift in Sources */,
+				738ED1462CBFB45A0085C713 /* LLRequestManager.swift in Sources */,
 				732A7F3F2CBA51390097B3FB /* AppDelegate.swift in Sources */,
 				732A7F4A2CBA526F0097B3FB /* LLBaseViewController.swift in Sources */,
 				732A7F4F2CBA69DF0097B3FB /* LLAbsolute.swift in Sources */,
@@ -308,6 +315,7 @@
 				73342AC72CC7E3D8002EDA2B /* LLDLView.swift in Sources */,
 				730CECF12CC92AEA002F96E0 /* WLUnitField.m in Sources */,
 				730CECF22CC92AEA002F96E0 /* WLUnitFieldTextPosition.m in Sources */,
+				730CECF82CC9363F002F96E0 /* LLDLInfo.swift in Sources */,
 				730CECF32CC92AEA002F96E0 /* WLUnitFieldTextRange.m in Sources */,
 				73342AB92CC7D39A002EDA2B /* LLConfig.swift in Sources */,
 			);
@@ -342,6 +350,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LigtasLoan/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LigtasLoan;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -351,7 +360,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = test.app.ald.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -383,6 +392,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LigtasLoan/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LigtasLoan;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -392,7 +402,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = test.app.ald.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
