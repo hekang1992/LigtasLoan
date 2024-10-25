@@ -30,9 +30,7 @@ class LLLaunchViewController: LLBaseViewController {
             make.edges.equalToSuperview()
         }
         NotificationCenter.default.post(name: NSNotification.Name(ROOT_VC), object: nil)
-        DispatchQueue.main.async {
-            self.judugeNet()
-        }
+        self.judugeNet()
     }
     
 }

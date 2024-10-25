@@ -36,5 +36,11 @@ target 'LigtasLoan' do
   pod 'KeychainAccess', '~> 4.2.2'
   
   pod 'DeviceKit', '~> 5.2.2'
+  
+  pod 'TYAlertController', '~> 1.2.0'
+  
+  pod 'MJRefresh', '~> 3.7.9'
+  
+  pod 'FSPagerView', '~> 0.8.3'
 
 end
