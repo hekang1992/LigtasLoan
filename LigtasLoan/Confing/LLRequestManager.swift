@@ -22,12 +22,80 @@ class CommonModel {
 class preferredaModel {
     var ofhurt: String?
     var screamed: String?
+    var nothave: nothaveModel?
+    var foryou: String?
+    var hisgold: hisgoldModel?
+    var toremember: torememberModel?
+    var unending: [unendingModel]?
     init(json: JSON) {
         self.ofhurt = json["ofhurt"].stringValue
         self.screamed = json["screamed"].stringValue
+        self.nothave = nothaveModel(json: json["nothave"])
+        self.foryou = json["foryou"].stringValue
+        self.hisgold = hisgoldModel(json: json["hisgold"])
+        self.toremember = torememberModel(json: json["toremember"])
+        self.unending = json["unending"].arrayValue.map {
+            unendingModel(json: $0)
+        }
     }
-    
 }
+
+class unendingModel {
+    var aquizzical: String?
+    var pic_url: String?
+    init(json: JSON) {
+        self.aquizzical = json["aquizzical"].stringValue
+        self.pic_url = json["pic_url"].stringValue
+    }
+}
+
+class torememberModel {
+    var dully: Int?
+    var foryou: String?
+    init(json: JSON) {
+        self.dully = json["dully"].intValue
+        self.foryou = json["foryou"].stringValue
+    }
+}
+
+class hisgoldModel {
+    var gabbling: String?
+    init(json: JSON) {
+        self.gabbling = json["gabbling"].stringValue
+    }
+}
+
+class nothaveModel {
+    var elemental: String?
+    var aviolence: [aviolenceModel]?
+    init(json: JSON) {
+        self.elemental = json["elemental"].stringValue
+        self.aviolence = json["aviolence"].arrayValue.map {
+            aviolenceModel(json: $0)
+        }
+    }
+}
+
+class aviolenceModel {
+    var cad: String?
+    init(json: JSON) {
+        self.cad = json["cad"].stringValue
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let BASE_URL = "http://8.220.185.183:8081/llapi"
 
@@ -68,7 +136,7 @@ extension APIService: TargetType {
             
         case .uploadImageAPI(let params, _, let data, _):
             var formData = [MultipartFormData]()
-            formData.append(MultipartFormData(provider: .data(data), name: "shock", fileName: "shock.png", mimeType: "image/png"))
+            formData.append(MultipartFormData(provider: .data(data), name: "tryst", fileName: "tryst.png", mimeType: "image/png"))
             if let params = params {
                 for (key, value) in params {
                     if let value = value as? String, let data = value.data(using: .utf8) {

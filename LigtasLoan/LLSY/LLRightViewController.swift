@@ -337,20 +337,17 @@ extension LLRightViewController {
         }).disposed(by: disposeBag)
     }
     
-    
     private func delInfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["del": "1", "cost": "cent"], pageUrl: "/ll/education/social/gather", method: .get) { [weak self] result in
+        man.requestAPI(params: ["del": "1", "cost": "cent"], pageUrl: "/ll/education/social/gather", method: .get) { result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
                     DispatchQueue.main.async {
-                        self?.dismiss(animated: true, completion: {
-                            LLDLInfo.removedlInfo()
-                            NotificationCenter.default.post(name: NSNotification.Name(ROOT_VC), object: nil)
-                        })
+                        LLDLInfo.removedlInfo()
+                        NotificationCenter.default.post(name: NSNotification.Name(ROOT_VC), object: nil)
                     }
                 }
                 break
@@ -363,16 +360,14 @@ extension LLRightViewController {
     private func logInfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["thatstupid": "1", "silenceanything": "trump"], pageUrl: "/ll/mothers/spring/journeyed", method: .get) { [weak self] result in
+        man.requestAPI(params: ["thatstupid": "1", "silenceanything": "trump"], pageUrl: "/ll/mothers/spring/journeyed", method: .get) { result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
                     DispatchQueue.main.async {
-                        self?.dismiss(animated: true, completion: {
-                            LLDLInfo.removedlInfo()
-                            NotificationCenter.default.post(name: NSNotification.Name(ROOT_VC), object: nil)
-                        })
+                        LLDLInfo.removedlInfo()
+                        NotificationCenter.default.post(name: NSNotification.Name(ROOT_VC), object: nil)
                     }
                 }
                 break

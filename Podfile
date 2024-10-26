@@ -42,5 +42,7 @@ target 'LigtasLoan' do
   pod 'MJRefresh', '~> 3.7.9'
   
   pod 'FSPagerView', '~> 0.8.3'
+  
+  pod 'ActiveLabel', '~> 1.1.0'
 
 end

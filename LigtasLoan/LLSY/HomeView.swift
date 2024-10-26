@@ -14,6 +14,7 @@ class OneView: UIView {
         let scro = UIScrollView()
         scro.backgroundColor = .white
         scro.showsHorizontalScrollIndicator = false
+        scro.showsVerticalScrollIndicator = false
         scro.contentInsetAdjustmentBehavior = .never
         return scro
     }()
@@ -21,7 +22,6 @@ class OneView: UIView {
     lazy var ctImageView: UIImageView = {
         let ctImageView = UIImageView()
         ctImageView.image = UIImage(named: "homeonbg")
-        ctImageView.contentMode = .scaleAspectFill
         ctImageView.isUserInteractionEnabled = true
         return ctImageView
     }()
