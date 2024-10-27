@@ -27,7 +27,14 @@ class preferredaModel {
     var hisgold: hisgoldModel?
     var toremember: torememberModel?
     var unending: [unendingModel]?
+    var squatty: String?
+    var aquizzical: String?
+    var deepseats: String?
+    var widehall: [widehallModel]?
     init(json: JSON) {
+        self.squatty = json["squatty"].stringValue
+        self.aquizzical = json["aquizzical"].stringValue
+        self.deepseats = json["deepseats"].stringValue
         self.ofhurt = json["ofhurt"].stringValue
         self.screamed = json["screamed"].stringValue
         self.nothave = nothaveModel(json: json["nothave"])
@@ -36,6 +43,9 @@ class preferredaModel {
         self.toremember = torememberModel(json: json["toremember"])
         self.unending = json["unending"].arrayValue.map {
             unendingModel(json: $0)
+        }
+        self.widehall = json["widehall"].arrayValue.map {
+            widehallModel(json: $0)
         }
     }
 }
@@ -52,7 +62,9 @@ class unendingModel {
 class torememberModel {
     var dully: Int?
     var foryou: String?
+    var hearth: String?
     init(json: JSON) {
+        self.hearth = json["hearth"].stringValue
         self.dully = json["dully"].intValue
         self.foryou = json["foryou"].stringValue
     }
@@ -83,8 +95,44 @@ class aviolenceModel {
     }
 }
 
+class widehallModel {
+    var hatred: String?
+    var throwingher: String?
+    var andmammy: String? // key
+    var underthe: String? // type -- tx -- btn
+    var risked: String? // jianpanleixing
+    var theirbeauty: [theirbeautyModel]?
+    init(json: JSON) {
+        self.hatred = json["hatred"].stringValue
+        self.throwingher = json["throwingher"].stringValue
+        self.andmammy = json["andmammy"].stringValue
+        self.underthe = json["underthe"].stringValue
+        self.risked = json["risked"].stringValue
+        self.theirbeauty = json["theirbeauty"].arrayValue.map {
+            theirbeautyModel(json: $0)
+        }
+    }
+}
+
+class theirbeautyModel {
+    var aquizzical: String?
+    var elemental: String?
+    init(json: JSON) {
+        self.aquizzical = json["aquizzical"].stringValue
+        self.elemental = json["elemental"].stringValue
+    }
+}
 
 
+
+
+
+
+
+
+
+
+//==================================================
 
 
 

@@ -31,9 +31,11 @@
 		7338B9C32CCBD7AA001CBAFE /* LLRightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7338B9C22CCBD7AA001CBAFE /* LLRightViewController.swift */; };
 		7338B9C52CCBEFE7001CBAFE /* LLTypeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7338B9C42CCBEFE7001CBAFE /* LLTypeListViewController.swift */; };
 		738ED1462CBFB45A0085C713 /* LLRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738ED1452CBFB45A0085C713 /* LLRequestManager.swift */; };
+		73A6F6FC2CCE8C8F0081DF5C /* LLStepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A6F6FB2CCE8C8F0081DF5C /* LLStepTwoViewController.swift */; };
 		73E1CA632CCD3E3000072597 /* LLIDListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E1CA622CCD3E3000072597 /* LLIDListViewController.swift */; };
 		73E1CA652CCD4B1F00072597 /* LLUploadIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E1CA642CCD4B1F00072597 /* LLUploadIDViewController.swift */; };
 		73E1CA672CCD54BD00072597 /* LLTypePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E1CA662CCD54AB00072597 /* LLTypePopView.swift */; };
+		73E1CA692CCD5D4400072597 /* LLPhotoConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E1CA682CCD5D2E00072597 /* LLPhotoConfig.swift */; };
 		99178D3E924A5A601F340AF3 /* Pods_LigtasLoan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F241486B4886CF0557C586 /* Pods_LigtasLoan.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,9 +71,11 @@
 		7338B9C22CCBD7AA001CBAFE /* LLRightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRightViewController.swift; sourceTree = "<group>"; };
 		7338B9C42CCBEFE7001CBAFE /* LLTypeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLTypeListViewController.swift; sourceTree = "<group>"; };
 		738ED1452CBFB45A0085C713 /* LLRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRequestManager.swift; sourceTree = "<group>"; };
+		73A6F6FB2CCE8C8F0081DF5C /* LLStepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLStepTwoViewController.swift; sourceTree = "<group>"; };
 		73E1CA622CCD3E3000072597 /* LLIDListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLIDListViewController.swift; sourceTree = "<group>"; };
 		73E1CA642CCD4B1F00072597 /* LLUploadIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLUploadIDViewController.swift; sourceTree = "<group>"; };
 		73E1CA662CCD54AB00072597 /* LLTypePopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLTypePopView.swift; sourceTree = "<group>"; };
+		73E1CA682CCD5D2E00072597 /* LLPhotoConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLPhotoConfig.swift; sourceTree = "<group>"; };
 		B721BA417BA54A55CBD8A223 /* Pods-LigtasLoan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LigtasLoan.debug.xcconfig"; path = "Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan.debug.xcconfig"; sourceTree = "<group>"; };
 		FDAB4B2D29834F0473B37268 /* Pods-LigtasLoan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LigtasLoan.release.xcconfig"; path = "Target Support Files/Pods-LigtasLoan/Pods-LigtasLoan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +147,7 @@
 		732A7F462CBA524B0097B3FB /* Confing */ = {
 			isa = PBXGroup;
 			children = (
+				73E1CA682CCD5D2E00072597 /* LLPhotoConfig.swift */,
 				732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */,
 				73342ABA2CC7D41B002EDA2B /* LLBaseView.swift */,
 				738ED1452CBFB45A0085C713 /* LLRequestManager.swift */,
@@ -179,6 +184,7 @@
 				7338B9C42CCBEFE7001CBAFE /* LLTypeListViewController.swift */,
 				73E1CA622CCD3E3000072597 /* LLIDListViewController.swift */,
 				73E1CA642CCD4B1F00072597 /* LLUploadIDViewController.swift */,
+				73A6F6FB2CCE8C8F0081DF5C /* LLStepTwoViewController.swift */,
 			);
 			path = LLSY;
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 				732A7F4A2CBA526F0097B3FB /* LLBaseViewController.swift in Sources */,
 				7338B9C52CCBEFE7001CBAFE /* LLTypeListViewController.swift in Sources */,
 				732A7F4F2CBA69DF0097B3FB /* LLAbsolute.swift in Sources */,
+				73A6F6FC2CCE8C8F0081DF5C /* LLStepTwoViewController.swift in Sources */,
 				73342ABB2CC7D41B002EDA2B /* LLBaseView.swift in Sources */,
 				7338B9C12CCBCBA2001CBAFE /* HomeView.swift in Sources */,
 				73E1CA632CCD3E3000072597 /* LLIDListViewController.swift in Sources */,
@@ -332,6 +339,7 @@
 				732A7F4C2CBA52810097B3FB /* LLLaunchViewController.swift in Sources */,
 				73342ACB2CC7F65B002EDA2B /* LLYZMViewController.swift in Sources */,
 				73342AC12CC7D6D2002EDA2B /* LLZCViewController.swift in Sources */,
+				73E1CA692CCD5D4400072597 /* LLPhotoConfig.swift in Sources */,
 				73E1CA652CCD4B1F00072597 /* LLUploadIDViewController.swift in Sources */,
 				73342ABE2CC7D68B002EDA2B /* LLSYViewController.swift in Sources */,
 				73342AC72CC7E3D8002EDA2B /* LLDLView.swift in Sources */,

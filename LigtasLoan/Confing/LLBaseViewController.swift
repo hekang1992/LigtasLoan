@@ -75,7 +75,29 @@ extension LLBaseViewController {
         }
     }
     
-    func typeVc(form type: String, proid: String) {
+    func pageinDetailInfo(from proid: String) {
+        ViewLoadingManager.addLoadingView()
+        let man = LLRequestManager()
+        man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageUrl: "/ll/another/between/healthy", method: .post) { [weak self] result in
+            ViewLoadingManager.hideLoadingView()
+            guard let self = self else { return }
+            switch result {
+            case .success(let success):
+                if success.andmammy == 0 || success.andmammy == 00 {
+                    if let hisgold = success.preferreda.hisgold {
+                        if hisgold.gabbling == "eastern2" {
+                            self.pageintypeVc(form: hisgold.gabbling ?? "", proid: proid)
+                        }
+                    }
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    func pageintypeVc(form type: String, proid: String) {
         switch type {
         case "eastern1":
             let listVc = LLTypeListViewController()
@@ -83,6 +105,9 @@ extension LLBaseViewController {
             self.navigationController?.pushViewController(listVc, animated: true)
             break
         case "eastern2":
+            let listVc = LLStepTwoViewController()
+            listVc.lo.accept(proid)
+            self.navigationController?.pushViewController(listVc, animated: true)
             break
         case "eastern3":
             break
@@ -93,6 +118,12 @@ extension LLBaseViewController {
         default:
             break
         }
+    }
+    
+    func typeVc(form type: String, proid: String) {
+        let listVc = LLTypeListViewController()
+        listVc.lo.accept(proid)
+        self.navigationController?.pushViewController(listVc, animated: true)
     }
     
     func pushlistvc() {

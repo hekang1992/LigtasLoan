@@ -206,6 +206,14 @@ class ListView: UIView {
     
 }
 
+
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
 class LLTypeListViewController: LLBaseViewController {
     
     var lo = BehaviorRelay<String>(value: "")
@@ -236,7 +244,7 @@ class LLTypeListViewController: LLBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        proDetailInfo(from: lo.value)
+        pproDetailInfo(from: lo.value)
     }
     
 }
@@ -244,13 +252,18 @@ class LLTypeListViewController: LLBaseViewController {
 extension LLTypeListViewController {
     
     private func tapClick() {
+        
+        
+        
+        
+        
         listView.nextBtn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             self.nextvc(form: self.nextStr.value, proid: self.lo.value)
         }).disposed(by: disposeBag)
     }
     
-    override func proDetailInfo(from proid: String) {
+     func pproDetailInfo(from proid: String) {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageUrl: "/ll/another/between/healthy", method: .post) { [weak self] result in
@@ -298,9 +311,14 @@ extension LLTypeListViewController {
         }
     }
     
+    
     func nextvc(form type: String, proid: String) {
         if type == "eastern1" {
             self.huoquid(from: proid)
+        } else if type == "eastern2" {
+            let ne = LLStepTwoViewController()
+            ne.lo.accept(proid)
+            self.navigationController?.pushViewController(ne, animated: true)
         }
     }
     
@@ -316,7 +334,7 @@ extension LLTypeListViewController {
                     if dully == 0 {
                         self.goIDvC()
                     }else {
-                        
+                        self.goca()
                     }
                 }
                 break
@@ -328,6 +346,12 @@ extension LLTypeListViewController {
     
     func goIDvC() {
         let vc = LLIDListViewController()
+        vc.lo.accept(lo.value)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func goca() {
+        let vc = LLUploadIDViewController()
         vc.lo.accept(lo.value)
         self.navigationController?.pushViewController(vc, animated: true)
     }

@@ -138,6 +138,16 @@ class UploadView: UIView {
 
 
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
 
 class LLUploadIDViewController: LLBaseViewController {
     
@@ -152,10 +162,6 @@ class LLUploadIDViewController: LLBaseViewController {
         return uploadView
     }()
     
-    var type = BehaviorRelay<String>(value: "")
-    
-    var lo = BehaviorRelay<String>(value: "")
-    
     lazy var pop1: PopPhotoView = {
         let pop1 = PopPhotoView(frame: self.view.bounds)
         return pop1
@@ -165,6 +171,13 @@ class LLUploadIDViewController: LLBaseViewController {
         let pop2 = PopCameraView(frame: self.view.bounds)
         return pop2
     }()
+    
+    var type = BehaviorRelay<String>(value: "")
+    
+    var lo = BehaviorRelay<String>(value: "")
+    
+    var isFace = BehaviorRelay<String>(value: "0")
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -203,12 +216,13 @@ class LLUploadIDViewController: LLBaseViewController {
             cacInfo()
         }).disposed(by: disposeBag)
         
+        huoquid(from: lo.value)
     }
 
 }
 
 
-extension LLUploadIDViewController {
+extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     private func idPinfo() {
         let alertVc = TYAlertController(alert: self.pop1, preferredStyle: .actionSheet)
@@ -216,6 +230,22 @@ extension LLUploadIDViewController {
         self.pop1.backBtn.rx.tap.subscribe(onNext: { [weak self] in
             self?.dismiss(animated: true)
         }).disposed(by: disposeBag)
+        
+        self.pop1.nextBtn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true) {
+                PLAPhotoManager.shared.presentPhoto(from: self)
+            }
+        }).disposed(by: disposeBag)
+        
+        self.pop1.nextBtn1.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true) {
+                self.isFace.accept("0")
+                PLAPhotoManager.shared.presentCamera(from: self, isfront: "0")
+            }
+        }).disposed(by: disposeBag)
+        
     }
     
     private func cacInfo() {
@@ -224,6 +254,130 @@ extension LLUploadIDViewController {
         self.pop2.backBtn.rx.tap.subscribe(onNext: { [weak self] in
             self?.dismiss(animated: true)
         }).disposed(by: disposeBag)
+        self.pop2.nextBtn1.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true) {
+                self.isFace.accept("1")
+                PLAPhotoManager.shared.presentCamera(from: self, isfront: "1")
+            }
+        }).disposed(by: disposeBag)
     }
     
+    func huoquid(from proid: String) {
+        let man = LLRequestManager()
+        ViewLoadingManager.addLoadingView()
+        man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageUrl: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
+            ViewLoadingManager.hideLoadingView()
+            switch result {
+            case .success(let success):
+                let model = success.preferreda
+                if let dully = model.toremember?.dully, let self = self {
+                    if dully == 0 {
+                        self.uploadView.cBtn.isEnabled = true
+                        self.uploadView.cameaBtn.isEnabled = false
+                    }else {
+                        self.uploadView.cBtn.kf.setImage(with: URL(string: model.toremember?.foryou ?? ""), for: .normal)
+                        self.uploadView.typelabel.text = model.toremember?.hearth ?? ""
+                        self.uploadView.changeBtn.isHidden = true
+                        self.uploadView.cBtn.isEnabled = false
+                        self.uploadView.cameaBtn.isEnabled = true
+                    }
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage)!
+        if let data = Data.imageQuality(image: image, maxLength: 1024) {
+            picker.dismiss(animated: true) { [weak self] in
+                self?.upimageData(from: data, image: image)
+            }
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func upimageData(from data: Data, image: UIImage) {
+        var imageDict: [String: String]
+        imageDict = ["numbers": "1",
+                     "precepts": "1",
+                     "lo": lo.value,
+                     "hearth": type.value,
+                     "chosen": "",
+                     "depressed": "1"]
+        if self.isFace.value == "0" {
+            let dict = ["elemental": "11"]
+            imageDict.merge(dict) { (_, new) in new }
+        }else {
+            let dict = ["elemental": "10"]
+            imageDict.merge(dict) { (_, new) in new }
+        }
+        ViewLoadingManager.addLoadingView()
+        let man = LLRequestManager()
+        man.uploadImageAPI(params: imageDict, pageUrl: "/ll/rough/handful/spoke", data: data, method: .post) { [weak self] result in
+            ViewLoadingManager.hideLoadingView()
+            switch result {
+            case .success(let success):
+                if let self = self {
+                    if self.isFace.value == "0" {
+                        self.popnameIDView(from: success.preferreda)
+                    }else {
+                        self.pageinDetailInfo(from: lo.value)
+                    }
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
+        
+    }
+    
+    func popnameIDView(from model: preferredaModel) {
+        let nameIDView = PopNameIDCardView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: nameIDView, preferredStyle: .actionSheet)
+        nameIDView.model = model
+        self.present(alertVc!, animated: true)
+        nameIDView.backBtn.rx.tap.subscribe(onNext: { [weak self] in
+            self?.dismiss(animated: true)
+        }).disposed(by: disposeBag)
+        
+        
+        nameIDView.name1.nextBtn.rx.tap.subscribe(onNext: { [weak self] in
+            
+        }).disposed(by: disposeBag)
+        
+        
+        nameIDView.nextBtn1.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.bcnameInfo(form: nameIDView)
+        }).disposed(by: disposeBag)
+        
+    }
+    
+    private func bcnameInfo(form view: PopNameIDCardView) {
+        ViewLoadingManager.addLoadingView()
+        let dict = ["deepseats": view.name1.nextBtn.titleLabel?.text ?? "", "aquizzical": view.name2.inputtx.text ?? "", "squatty": view.name3.inputtx.text ?? "", "elemental": "11", "hearth": type.value]
+        let man = LLRequestManager()
+        man.requestAPI(params: dict, pageUrl: "/ll/girlsas/trouble/mother", method: .post) { [weak self] result in
+            ViewLoadingManager.hideLoadingView()
+            guard let self = self else { return }
+            switch result {
+            case .success(let success):
+                self.dismiss(animated: true) {
+                    self.huoquid(from: self.lo.value)
+                }
+                break
+            case .failure(let failure):
+                break
+            }
+        }
+    }
+
 }
