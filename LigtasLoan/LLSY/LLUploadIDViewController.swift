@@ -8,6 +8,7 @@
 import UIKit
 import RxRelay
 import TYAlertController
+import BRPickerView
 
 class UploadView: UIView {
     
@@ -178,10 +179,10 @@ class LLUploadIDViewController: LLBaseViewController {
     
     var isFace = BehaviorRelay<String>(value: "0")
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.addSubview(headView)
         view.addSubview(uploadView)
@@ -218,7 +219,7 @@ class LLUploadIDViewController: LLBaseViewController {
         
         huoquid(from: lo.value)
     }
-
+    
 }
 
 
@@ -339,6 +340,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         
     }
     
+    // shenfenxinxi----pop
     func popnameIDView(from model: preferredaModel) {
         let nameIDView = PopNameIDCardView(frame: self.view.bounds)
         let alertVc = TYAlertController(alert: nameIDView, preferredStyle: .actionSheet)
@@ -350,9 +352,9 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         
         
         nameIDView.name1.nextBtn.rx.tap.subscribe(onNext: { [weak self] in
-            
+            guard let self = self else { return }
+            settitme(form: nameIDView, clickBtn: nameIDView.name1.nextBtn)
         }).disposed(by: disposeBag)
-        
         
         nameIDView.nextBtn1.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
@@ -369,15 +371,51 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
             ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
-            case .success(let success):
+            case .success(_):
                 self.dismiss(animated: true) {
                     self.huoquid(from: self.lo.value)
                 }
                 break
-            case .failure(let failure):
+            case .failure(_):
                 break
             }
         }
     }
-
+    
+    func settitme(form view: PopNameIDCardView, clickBtn: UIButton) {
+        let timeStr = clickBtn.titleLabel?.text ?? "01-01-1900"
+        let timeArray = timeStr.components(separatedBy: "-")
+        
+        guard timeArray.count == 3,
+              let day = Int(timeArray[0]),
+              let month = Int(timeArray[1]),
+              let year = Int(timeArray[2]) else {
+            return
+        }
+        let datePickerView = BRDatePickerView()
+        datePickerView.pickerMode = .YMD
+        datePickerView.title = "Date"
+        datePickerView.minDate = NSDate.br_setYear(1900, month: 01, day: 01)
+        datePickerView.selectDate = NSDate.br_setYear(year, month: month, day: day)
+        datePickerView.maxDate = Date()
+        
+        datePickerView.resultBlock = { selectDate, selectValue in
+            guard let selectValue = selectValue else { return }
+            let selectedArray = selectValue.components(separatedBy: "-")
+            
+            if selectedArray.count == 3 {
+                let selectedDay = selectedArray[2]
+                let selectedMonth = selectedArray[1]
+                let selectedYear = selectedArray[0]
+                clickBtn.setTitle("\(selectedDay)-\(selectedMonth)-\(selectedYear)", for: .normal)
+            }
+        }
+        let customStyle = BRPickerStyle()
+        customStyle.pickerColor = .white
+        customStyle.pickerTextFont = UIFont(name: Bold_Poppins, size: 18) ?? UIFont.systemFont(ofSize: 18)
+        customStyle.selectRowTextColor = UIColor(cssStr: "#000000")
+        datePickerView.pickerStyle = customStyle
+        datePickerView.show()
+    }
+    
 }

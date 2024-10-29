@@ -53,9 +53,15 @@ class preferredaModel {
 class unendingModel {
     var aquizzical: String?
     var pic_url: String?
+    var cad: String?
+    var unending: [unendingModel]?
     init(json: JSON) {
         self.aquizzical = json["aquizzical"].stringValue
         self.pic_url = json["pic_url"].stringValue
+        self.cad = json["cad"].stringValue
+        self.unending = json["unending"].arrayValue.map {
+            unendingModel(json: $0)
+        }
     }
 }
 
@@ -101,6 +107,8 @@ class widehallModel {
     var andmammy: String? // key
     var underthe: String? // type -- tx -- btn
     var risked: String? // jianpanleixing
+    var butshe: String?
+    var elemental: String?
     var theirbeauty: [theirbeautyModel]?
     init(json: JSON) {
         self.hatred = json["hatred"].stringValue
@@ -108,6 +116,8 @@ class widehallModel {
         self.andmammy = json["andmammy"].stringValue
         self.underthe = json["underthe"].stringValue
         self.risked = json["risked"].stringValue
+        self.butshe = json["butshe"].stringValue
+        self.elemental = json["elemental"].stringValue
         self.theirbeauty = json["theirbeauty"].arrayValue.map {
             theirbeautyModel(json: $0)
         }

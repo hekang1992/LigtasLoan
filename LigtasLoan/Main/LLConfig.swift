@@ -7,6 +7,7 @@
 
 import UIKit
 import Lottie
+import BRPickerView
 
 let Bold_Poppins = "Poppins-Bold"
 let Regular_Poppins = "Poppins-Regular"
@@ -111,5 +112,98 @@ class ViewLoadingManager {
             loadView.removeFromSuperview()
         }
     }
+    
+}
+
+
+class SanPopConfig {
+    static func SanChengArray(dataArr: [Any]) -> [BRProvinceModel] {
+        var tempArr1 = [BRProvinceModel]()
+        for proviceDic in dataArr {
+            guard let proviceDic = proviceDic as? unendingModel else {
+                continue
+            }
+            let proviceModel = BRProvinceModel()
+            proviceModel.code = proviceDic.cad
+            proviceModel.name = proviceDic.aquizzical
+            proviceModel.index = dataArr.firstIndex(where: { $0 as AnyObject === proviceDic as AnyObject }) ?? 0
+            let cityList = proviceDic.unending ?? proviceDic.unending ?? []
+            var tempArr2 = [BRCityModel]()
+            for cityDic in cityList {
+                let cityModel = BRCityModel()
+                cityModel.code = cityDic.cad
+                cityModel.name = cityDic.aquizzical
+                cityModel.index = cityList.firstIndex(where: { $0 as AnyObject === cityDic as AnyObject }) ?? 0
+                let areaList = cityDic.unending ?? cityDic.unending ?? []
+                var tempArr3 = [BRAreaModel]()
+                for areaDic in areaList {
+                    let areaModel = BRAreaModel()
+                    areaModel.code = areaDic.cad
+                    areaModel.name = areaDic.aquizzical
+                    areaModel.index = areaList.firstIndex(where: { $0 as AnyObject === areaDic as AnyObject }) ?? 0
+                    tempArr3.append(areaModel)
+                }
+                cityModel.arealist = tempArr3
+                tempArr2.append(cityModel)
+            }
+            proviceModel.citylist = tempArr2
+            tempArr1.append(proviceModel)
+        }
+        return tempArr1
+    }
+}
+
+
+class OneTwoThreePopConfig {
+    static func popLastEnum(_ model: BRAddressPickerMode, _ label: UILabel, _ provinces: [BRProvinceModel], _ modelData: widehallModel) {
+        let addressPickerView = BRAddressPickerView()
+        addressPickerView.title = modelData.hatred ?? ""
+        addressPickerView.pickerMode = model
+        addressPickerView.selectIndexs = [0, 0, 0]
+        addressPickerView.dataSourceArr = provinces
+        
+        addressPickerView.resultBlock = { province, city, area in
+            let addressDetails = self.getAddressDetails(province: province, city: city, area: area)
+            modelData.butshe = addressDetails.addressString
+            modelData.elemental = addressDetails.code
+            label.text = addressDetails.addressString
+            label.textColor = UIColor.init(cssStr: "#000000")
+        }
+        
+        let customStyle = BRPickerStyle()
+        customStyle.pickerColor = .white
+        customStyle.pickerTextFont = UIFont(name: Bold_Poppins, size: 18)
+        customStyle.selectRowTextColor = UIColor(cssStr: "#000000")
+        addressPickerView.pickerStyle = customStyle
+        
+        addressPickerView.show()
+    }
+
+    private static func getAddressDetails(province: BRProvinceModel?, city: BRCityModel?, area: BRAreaModel?) -> (addressString: String, code: String) {
+        let provinceName = province?.name ?? ""
+        let cityName = city?.name ?? ""
+        let areaName = area?.name ?? ""
+
+        var addressString = ""
+        var code = ""
+
+        if !provinceName.isEmpty {
+            addressString += provinceName
+            code += province?.code ?? ""
+            
+            if !cityName.isEmpty {
+                addressString += "|\(cityName)"
+                code += "|\(city?.code ?? "")"
+                
+                if !areaName.isEmpty {
+                    addressString += "|\(areaName)"
+                    code += "|\(area?.code ?? "")"
+                }
+            }
+        }
+
+        return (addressString, code)
+    }
+    
     
 }

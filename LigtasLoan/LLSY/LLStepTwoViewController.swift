@@ -6,16 +6,20 @@
 //
 
 import UIKit
+import RxSwift
 import RxRelay
 
 class LLInputCell: UITableViewCell {
+    
+    let disposeBag = DisposeBag()
+    
+    var model = BehaviorRelay<widehallModel?>(value: nil)
     
     lazy var mlabel: UILabel = {
         let mlabel = UILabel()
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
         mlabel.font = UIFont(name: Bold_Poppins, size: 16)
-        mlabel.text = "LigtasLoan"
         return mlabel
     }()
     
@@ -29,7 +33,7 @@ class LLInputCell: UITableViewCell {
     lazy var inputtx: UITextField = {
         let inputtx = UITextField()
         inputtx.font = UIFont(name: Bold_Poppins, size: 16)
-        inputtx.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
+        inputtx.textColor = UIColor.init(cssStr: "#000000")
         return inputtx
     }()
     
@@ -56,6 +60,14 @@ class LLInputCell: UITableViewCell {
             make.width.equalTo(sc_width - 50)
             make.left.equalToSuperview().offset(12)
         }
+        
+        
+        model.subscribe(onNext: { [weak self] imodel in
+            guard let self = self, let imodel = imodel else { return }
+            mlabel.text = imodel.hatred ?? ""
+            inputtx.placeholder = imodel.throwingher ?? ""
+        }).disposed(by: disposeBag)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -65,16 +77,17 @@ class LLInputCell: UITableViewCell {
 }
 
 
-
-
 class LLBtnClickCell: UITableViewCell {
+    
+    let disposeBag = DisposeBag()
+    
+    var model = BehaviorRelay<widehallModel?>(value: nil)
     
     lazy var mlabel: UILabel = {
         let mlabel = UILabel()
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
         mlabel.font = UIFont(name: Bold_Poppins, size: 16)
-        mlabel.text = "LigtasLoan"
         return mlabel
     }()
     
@@ -85,20 +98,27 @@ class LLBtnClickCell: UITableViewCell {
         return bgView
     }()
     
-    lazy var nextBtn: UIButton = {
-        let nextBtn = UIButton(type: .custom)
-        nextBtn.contentHorizontalAlignment = .left
-        nextBtn.setTitleColor(UIColor.init(cssStr: "#000000").withAlphaComponent(0.5), for: .normal)
-        nextBtn.titleLabel?.font = UIFont(name: Bold_Poppins, size: 16)
-        return nextBtn
+    lazy var mlabel1: UILabel = {
+        let mlabel1 = UILabel()
+        mlabel1.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.2)
+        mlabel1.textAlignment = .left
+        mlabel1.font = UIFont(name: Bold_Poppins, size: 16)
+        return mlabel1
+    }()
+    
+    lazy var ctImageView: UIImageView = {
+        let ctImageView = UIImageView()
+        ctImageView.image = UIImage(named: "righticon")
+        ctImageView.contentMode = .scaleAspectFit
+        return ctImageView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(mlabel)
         contentView.addSubview(bgView)
-        bgView.addSubview(nextBtn)
-        
+        bgView.addSubview(mlabel1)
+        bgView.addSubview(ctImageView)
         mlabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(24)
             make.left.equalToSuperview().offset(15)
@@ -111,11 +131,22 @@ class LLBtnClickCell: UITableViewCell {
             make.height.equalTo(65)
             make.bottom.equalToSuperview()
         }
-        nextBtn.snp.makeConstraints { make in
+        mlabel1.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.width.equalTo(sc_width - 50)
             make.left.equalToSuperview().offset(12)
         }
+        ctImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(mlabel1.snp.centerY)
+            make.size.equalTo(CGSize(width: 24, height: 24))
+            make.right.equalToSuperview().offset(-35)
+        }
+        
+        model.subscribe(onNext: { [weak self] imodel in
+            guard let self = self, let imodel = imodel else { return }
+            mlabel.text = imodel.hatred ?? ""
+            mlabel1.text = imodel.throwingher ?? ""
+        }).disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
@@ -179,7 +210,7 @@ class LLStepTwoViewController: LLBaseViewController {
         tableView.register(LLBtnClickCell.self, forCellReuseIdentifier: "LLBtnClickCell")
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -211,23 +242,76 @@ class LLStepTwoViewController: LLBaseViewController {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "LLInputCell", for: IndexPath(row: index, section: 0)) as? LLInputCell  {
                     cell.backgroundColor = .clear
                     cell.selectionStyle = .none
+                    cell.model.accept(model)
                     return cell
                 }
             }else {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "LLBtnClickCell", for: IndexPath(row: index, section: 0)) as? LLBtnClickCell  {
                     cell.backgroundColor = .clear
                     cell.selectionStyle = .none
+                    cell.model.accept(model)
                     return cell
                 }
             }
             return UITableViewCell()
         }.disposed(by: disposeBag)
         
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
+                self.view.endEditing(true)
+                
+                let model = self.modelArray.value[indexPath.row]
+                guard let cell = tableView.cellForRow(at: indexPath) as? LLBtnClickCell else { return }
+                
+                let underthe = model.underthe ?? ""
+                self.handleStorySelection(underthe, cell: cell)
+            })
+            .disposed(by: disposeBag)
+        
     }
     
 }
 
 extension LLStepTwoViewController: UITableViewDelegate {
+    
+    private func handleStorySelection(_ underthe: String, cell: LLBtnClickCell) {
+        switch underthe {
+        case "story1":
+            print("story1")
+            
+        case "story2":
+            print("story2")
+            
+        case "story3":
+            print("story3")
+            fetchStoryData(for: cell)
+            
+        case "story4":
+            print("story4")
+            
+        default:
+            break
+        }
+    }
+    
+    private func fetchStoryData(for cell: LLBtnClickCell) {
+        ViewLoadingManager.addLoadingView()
+        let man = LLRequestManager()
+        man.requestAPI(params: ["": ""], pageUrl: "/ll/after/tomcat/foreverrankled", method: .get) { result in
+            ViewLoadingManager.hideLoadingView()
+            switch result {
+            case .success(let success):
+                if let unending = success.preferreda.unending, let model = cell.model.value {
+                    let modelArray = SanPopConfig.SanChengArray(dataArr: unending)
+                    OneTwoThreePopConfig.popLastEnum(.area, cell.mlabel1, modelArray, model)
+                }
+                
+            case .failure(let failure):
+                print("请求失败: \(failure.localizedDescription)")
+            }
+        }
+    }
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -262,8 +346,10 @@ extension LLStepTwoViewController: UITableViewDelegate {
     }
     
     private func mesinfo() {
+        ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": lo.value], pageUrl: "/ll/would/sitting/everyone", method: .post) { [weak self] result in
+            ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 let model = success.preferreda

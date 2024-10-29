@@ -1,6 +1,32 @@
 PODS:
   - ActiveLabel (1.1.0)
   - Alamofire (5.9.1)
+  - BRPickerView (2.9.1):
+    - BRPickerView/All (= 2.9.1)
+  - BRPickerView/All (2.9.1):
+    - BRPickerView/Default
+    - BRPickerView/Deprecated
+  - BRPickerView/Core (2.9.1)
+  - BRPickerView/DatePicker (2.9.1):
+    - BRPickerView/Core
+  - BRPickerView/Default (2.9.1):
+    - BRPickerView/DatePicker
+    - BRPickerView/TextPicker
+  - BRPickerView/Deprecated (2.9.1):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/AddressPickerView (= 2.9.1)
+    - BRPickerView/Deprecated/Base (= 2.9.1)
+    - BRPickerView/Deprecated/StringPickerView (= 2.9.1)
+  - BRPickerView/Deprecated/AddressPickerView (2.9.1):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/Base
+  - BRPickerView/Deprecated/Base (2.9.1):
+    - BRPickerView/Core
+  - BRPickerView/Deprecated/StringPickerView (2.9.1):
+    - BRPickerView/Core
+    - BRPickerView/Deprecated/Base
+  - BRPickerView/TextPicker (2.9.1):
+    - BRPickerView/Core
   - DeviceKit (5.2.3)
   - Differentiator (5.0.0)
   - FSPagerView (0.8.3)
@@ -35,6 +61,7 @@ PODS:
 DEPENDENCIES:
   - ActiveLabel (~> 1.1.0)
   - Alamofire (~> 5.9.1)
+  - BRPickerView (~> 2.9.1)
   - DeviceKit (~> 5.2.2)
   - FSPagerView (~> 0.8.3)
   - GYSide (~> 0.0.5)
@@ -57,6 +84,7 @@ SPEC REPOS:
   trunk:
     - ActiveLabel
     - Alamofire
+    - BRPickerView
     - DeviceKit
     - Differentiator
     - FSPagerView
@@ -80,6 +108,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
+  BRPickerView: 6dd69ea2c48e0a0abf1d197a705050e13143ee63
   DeviceKit: 4504e64df8f8ad1c42aae68f30ece5b51d56022a
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
@@ -100,6 +129,6 @@ SPEC CHECKSUMS:
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
   TYAlertController: c121090edb0bea7426f987da94cdddd81eef4231
 
-PODFILE CHECKSUM: cd019b013ff10bbc34e3d8ab0589a2aec3b8fe56
+PODFILE CHECKSUM: 985b0349e02367f64cf42c215084fa8e79861b98
 
 COCOAPODS: 1.15.2
