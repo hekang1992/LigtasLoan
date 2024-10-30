@@ -217,7 +217,7 @@ class LLUploadIDViewController: LLBaseViewController {
             cacInfo()
         }).disposed(by: disposeBag)
         
-        huoquid(from: lo.value)
+        huoimquid(from: lo.value)
     }
     
 }
@@ -264,7 +264,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         }).disposed(by: disposeBag)
     }
     
-    func huoquid(from proid: String) {
+    func huoimquid(from proid: String) {
         let man = LLRequestManager()
         ViewLoadingManager.addLoadingView()
         man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageUrl: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
@@ -373,7 +373,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
             switch result {
             case .success(_):
                 self.dismiss(animated: true) {
-                    self.huoquid(from: self.lo.value)
+                    self.huoimquid(from: self.lo.value)
                 }
                 break
             case .failure(_):

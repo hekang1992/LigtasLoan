@@ -1,191 +1,14 @@
 //
-//  LLStepTwoViewController.swift
+//  LLStepTHRViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/27.
+//  Created by 何康 on 2024/10/30.
 //
 
 import UIKit
-import RxSwift
 import RxRelay
 
-class LLInputCell: UITableViewCell {
-    
-    let disposeBag = DisposeBag()
-    
-    var model = BehaviorRelay<widehallModel?>(value: nil)
-    
-    lazy var mlabel: UILabel = {
-        let mlabel = UILabel()
-        mlabel.textColor = UIColor.init(cssStr: "#000000")
-        mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 16)
-        return mlabel
-    }()
-    
-    lazy var bgView: UIView = {
-        let bgView = UIView()
-        bgView.backgroundColor = .init(cssStr: "#FFFFFF")
-        bgView.layer.cornerRadius = 4
-        return bgView
-    }()
-    
-    lazy var inputtx: UITextField = {
-        let inputtx = UITextField()
-        inputtx.font = UIFont(name: Bold_Poppins, size: 16)
-        inputtx.textColor = UIColor.init(cssStr: "#000000")
-        return inputtx
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(mlabel)
-        contentView.addSubview(bgView)
-        bgView.addSubview(inputtx)
-        
-        mlabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.left.equalToSuperview().offset(15)
-            make.height.equalTo(20)
-        }
-        bgView.snp.makeConstraints { make in
-            make.width.equalTo(sc_width - 30)
-            make.left.equalToSuperview().offset(15)
-            make.top.equalTo(mlabel.snp.bottom).offset(8)
-            make.height.equalTo(65)
-            make.bottom.equalToSuperview()
-        }
-        inputtx.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.width.equalTo(sc_width - 50)
-            make.left.equalToSuperview().offset(12)
-        }
-        
-        model.subscribe(onNext: { [weak self] imodel in
-            guard let self = self, let imodel = imodel else { return }
-            mlabel.text = imodel.hatred ?? ""
-            inputtx.placeholder = imodel.throwingher ?? ""
-        }).disposed(by: disposeBag)
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-
-class LLBtnClickCell: UITableViewCell {
-    
-    let disposeBag = DisposeBag()
-    
-    var model = BehaviorRelay<widehallModel?>(value: nil)
-    
-    lazy var mlabel: UILabel = {
-        let mlabel = UILabel()
-        mlabel.textColor = UIColor.init(cssStr: "#000000")
-        mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 16)
-        return mlabel
-    }()
-    
-    lazy var bgView: UIView = {
-        let bgView = UIView()
-        bgView.backgroundColor = .init(cssStr: "#FFFFFF")
-        bgView.layer.cornerRadius = 4
-        return bgView
-    }()
-    
-    lazy var mlabel1: UILabel = {
-        let mlabel1 = UILabel()
-        mlabel1.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.2)
-        mlabel1.textAlignment = .left
-        mlabel1.font = UIFont(name: Bold_Poppins, size: 16)
-        return mlabel1
-    }()
-    
-    lazy var ctImageView: UIImageView = {
-        let ctImageView = UIImageView()
-        ctImageView.image = UIImage(named: "righticon")
-        ctImageView.contentMode = .scaleAspectFit
-        return ctImageView
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(mlabel)
-        contentView.addSubview(bgView)
-        bgView.addSubview(mlabel1)
-        bgView.addSubview(ctImageView)
-        mlabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.left.equalToSuperview().offset(15)
-            make.height.equalTo(20)
-        }
-        bgView.snp.makeConstraints { make in
-            make.width.equalTo(sc_width - 30)
-            make.left.equalToSuperview().offset(15)
-            make.top.equalTo(mlabel.snp.bottom).offset(8)
-            make.height.equalTo(65)
-            make.bottom.equalToSuperview()
-        }
-        mlabel1.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.width.equalTo(sc_width - 50)
-            make.left.equalToSuperview().offset(12)
-        }
-        ctImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(mlabel1.snp.centerY)
-            make.size.equalTo(CGSize(width: 24, height: 24))
-            make.right.equalToSuperview().offset(-35)
-        }
-        
-        model.subscribe(onNext: { [weak self] imodel in
-            guard let self = self, let imodel = imodel else { return }
-            mlabel.text = imodel.hatred ?? ""
-            mlabel1.text = imodel.throwingher ?? ""
-        }).disposed(by: disposeBag)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//+++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-
-
-
-
-
-
-class LLStepTwoViewController: LLBaseViewController {
+class LLStepTHRViewController: LLBaseViewController {
     
     var lo = BehaviorRelay<String>(value: "")
     
@@ -193,7 +16,7 @@ class LLStepTwoViewController: LLBaseViewController {
     
     lazy var headView: HeadView = {
         let headView = HeadView()
-        headView.mlabel.text = "ID CARD INFORMATION"
+        headView.mlabel.text = "WORK INFORMATION"
         return headView
     }()
     
@@ -279,7 +102,7 @@ class LLStepTwoViewController: LLBaseViewController {
     
 }
 
-extension LLStepTwoViewController: UITableViewDelegate {
+extension LLStepTHRViewController: UITableViewDelegate {
     
     private func handleStorySelection(_ model: widehallModel, cell: LLBtnClickCell) {
         let underthe = model.underthe ?? ""
@@ -358,7 +181,7 @@ extension LLStepTwoViewController: UITableViewDelegate {
     private func mesinfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["lo": lo.value], pageUrl: "/ll/would/sitting/everyone", method: .post) { [weak self] result in
+        man.requestAPI(params: ["lo": lo.value], pageUrl: "/ll/mating/cookie/andmelanie", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
@@ -389,7 +212,7 @@ extension LLStepTwoViewController: UITableViewDelegate {
         dict?["bidding"] = "1"
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: dict, pageUrl: "/ll/yankees/tongue/groupof", method: .post) { [weak self] result in
+        man.requestAPI(params: dict, pageUrl: "/ll/thisdignity/their/unbroken", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {

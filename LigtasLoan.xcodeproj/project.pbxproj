@@ -11,6 +11,8 @@
 		730CECF22CC92AEA002F96E0 /* WLUnitFieldTextPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECEE2CC92AEA002F96E0 /* WLUnitFieldTextPosition.m */; };
 		730CECF32CC92AEA002F96E0 /* WLUnitFieldTextRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECF02CC92AEA002F96E0 /* WLUnitFieldTextRange.m */; };
 		730CECF82CC9363F002F96E0 /* LLDLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730CECF72CC9363F002F96E0 /* LLDLInfo.swift */; };
+		7326BCF72CD26DEF00432E44 /* LLStepTHRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7326BCF62CD26DEF00432E44 /* LLStepTHRViewController.swift */; };
+		7326BCF92CD2701200432E44 /* LLStepTFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7326BCF82CD2701200432E44 /* LLStepTFViewController.swift */; };
 		732A7F3F2CBA51390097B3FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F352CBA51390097B3FB /* AppDelegate.swift */; };
 		732A7F422CBA51390097B3FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 732A7F362CBA51390097B3FB /* Assets.xcassets */; };
 		732A7F442CBA51390097B3FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 732A7F392CBA51390097B3FB /* LaunchScreen.storyboard */; };
@@ -49,6 +51,8 @@
 		730CECF02CC92AEA002F96E0 /* WLUnitFieldTextRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLUnitFieldTextRange.m; sourceTree = "<group>"; };
 		730CECF42CC92AEC002F96E0 /* LigtasLoan-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LigtasLoan-Bridging-Header.h"; sourceTree = "<group>"; };
 		730CECF72CC9363F002F96E0 /* LLDLInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLDLInfo.swift; sourceTree = "<group>"; };
+		7326BCF62CD26DEF00432E44 /* LLStepTHRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLStepTHRViewController.swift; sourceTree = "<group>"; };
+		7326BCF82CD2701200432E44 /* LLStepTFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLStepTFViewController.swift; sourceTree = "<group>"; };
 		732A7EFA2CBA4EE50097B3FB /* LigtasLoan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LigtasLoan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		732A7F352CBA51390097B3FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		732A7F362CBA51390097B3FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 				73E1CA622CCD3E3000072597 /* LLIDListViewController.swift */,
 				73E1CA642CCD4B1F00072597 /* LLUploadIDViewController.swift */,
 				73A6F6FB2CCE8C8F0081DF5C /* LLStepTwoViewController.swift */,
+				7326BCF62CD26DEF00432E44 /* LLStepTHRViewController.swift */,
+				7326BCF82CD2701200432E44 /* LLStepTFViewController.swift */,
 			);
 			path = LLSY;
 			sourceTree = "<group>";
@@ -338,7 +344,9 @@
 				73342AC32CC7D9DA002EDA2B /* LLBaseNavViewController.swift in Sources */,
 				732A7F4C2CBA52810097B3FB /* LLLaunchViewController.swift in Sources */,
 				73342ACB2CC7F65B002EDA2B /* LLYZMViewController.swift in Sources */,
+				7326BCF92CD2701200432E44 /* LLStepTFViewController.swift in Sources */,
 				73342AC12CC7D6D2002EDA2B /* LLZCViewController.swift in Sources */,
+				7326BCF72CD26DEF00432E44 /* LLStepTHRViewController.swift in Sources */,
 				73E1CA692CCD5D4400072597 /* LLPhotoConfig.swift in Sources */,
 				73E1CA652CCD4B1F00072597 /* LLUploadIDViewController.swift in Sources */,
 				73342ABE2CC7D68B002EDA2B /* LLSYViewController.swift in Sources */,

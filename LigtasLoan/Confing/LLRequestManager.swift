@@ -31,6 +31,7 @@ class preferredaModel {
     var aquizzical: String?
     var deepseats: String?
     var widehall: [widehallModel]?
+    var andfalling: andfallingModel?
     init(json: JSON) {
         self.squatty = json["squatty"].stringValue
         self.aquizzical = json["aquizzical"].stringValue
@@ -47,20 +48,42 @@ class preferredaModel {
         self.widehall = json["widehall"].arrayValue.map {
             widehallModel(json: $0)
         }
+        self.andfalling = andfallingModel(json: json["andfalling"])
+    }
+}
+
+class andfallingModel {
+    var unending: [unendingModel]
+    init(json: JSON) {
+        self.unending = json["unending"].arrayValue.map {
+            unendingModel(json: $0)
+        }
     }
 }
 
 class unendingModel {
-    var aquizzical: String?
     var pic_url: String?
     var cad: String?
     var unending: [unendingModel]?
+    var prettiest: String?
+    var haddreamed: String?
+    var wasempty: String?//key
+    var aquizzical: String?//name
+    var waslooking: String?//phone
+    var losing: [theirbeautyModel]
     init(json: JSON) {
         self.aquizzical = json["aquizzical"].stringValue
         self.pic_url = json["pic_url"].stringValue
         self.cad = json["cad"].stringValue
         self.unending = json["unending"].arrayValue.map {
             unendingModel(json: $0)
+        }
+        self.prettiest = json["prettiest"].stringValue
+        self.haddreamed = json["haddreamed"].stringValue
+        self.wasempty = json["wasempty"].stringValue
+        self.waslooking = json["waslooking"].stringValue
+        self.losing = json["losing"].arrayValue.map {
+            theirbeautyModel(json: $0)
         }
     }
 }

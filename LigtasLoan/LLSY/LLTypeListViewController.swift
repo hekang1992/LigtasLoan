@@ -256,11 +256,6 @@ class LLTypeListViewController: LLBaseViewController {
 extension LLTypeListViewController {
     
     private func tapClick() {
-        
-        
-        
-        
-        
         listView.nextBtn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             self.nextvc(form: self.nextStr.value, proid: self.lo.value)
@@ -313,51 +308,6 @@ extension LLTypeListViewController {
         default:
             break
         }
-    }
-    
-    
-    func nextvc(form type: String, proid: String) {
-        if type == "eastern1" {
-            self.huoquid(from: proid)
-        } else if type == "eastern2" {
-            let ne = LLStepTwoViewController()
-            ne.lo.accept(proid)
-            self.navigationController?.pushViewController(ne, animated: true)
-        }
-    }
-    
-    func huoquid(from proid: String) {
-        let man = LLRequestManager()
-        ViewLoadingManager.addLoadingView()
-        man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageUrl: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
-            switch result {
-            case .success(let success):
-                let model = success.preferreda
-                if let dully = model.toremember?.dully, let self = self {
-                    if dully == 0 {
-                        self.goIDvC()
-                    }else {
-                        self.goca()
-                    }
-                }
-                break
-            case .failure(_):
-                break
-            }
-        }
-    }
-    
-    func goIDvC() {
-        let vc = LLIDListViewController()
-        vc.lo.accept(lo.value)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func goca() {
-        let vc = LLUploadIDViewController()
-        vc.lo.accept(lo.value)
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

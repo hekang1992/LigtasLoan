@@ -110,6 +110,9 @@ extension LLBaseViewController {
             self.navigationController?.pushViewController(listVc, animated: true)
             break
         case "eastern3":
+            let listVc = LLStepTHRViewController()
+            listVc.lo.accept(proid)
+            self.navigationController?.pushViewController(listVc, animated: true)
             break
         case "eastern4":
             break
@@ -140,6 +143,58 @@ extension LLBaseViewController {
                 navigationController?.popToRootViewController(animated: true)
             }
         }
+    }
+    
+    func nextvc(form type: String, proid: String) {
+        if type == "eastern1" {
+            self.huoquid(from: proid)
+        } else if type == "eastern2" {
+            let ne = LLStepTwoViewController()
+            ne.lo.accept(proid)
+            self.navigationController?.pushViewController(ne, animated: true)
+        } else if type == "eastern3" {
+            let ne = LLStepTHRViewController()
+            ne.lo.accept(proid)
+            self.navigationController?.pushViewController(ne, animated: true)
+        } else if type == "eastern4" {
+            let ne = LLStepTFViewController()
+            ne.lo.accept(proid)
+            self.navigationController?.pushViewController(ne, animated: true)
+        }
+    }
+    
+    func huoquid(from proid: String) {
+        let man = LLRequestManager()
+        ViewLoadingManager.addLoadingView()
+        man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageUrl: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
+            ViewLoadingManager.hideLoadingView()
+            switch result {
+            case .success(let success):
+                let model = success.preferreda
+                if let dully = model.toremember?.dully, let self = self {
+                    if dully == 0 {
+                        self.goIDvC(form: proid)
+                    }else {
+                        self.goca(form: proid)
+                    }
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
+    func goIDvC(form lo: String) {
+        let vc = LLIDListViewController()
+        vc.lo.accept(lo)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func goca(form lo: String) {
+        let vc = LLUploadIDViewController()
+        vc.lo.accept(lo)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

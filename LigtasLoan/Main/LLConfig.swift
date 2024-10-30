@@ -169,13 +169,11 @@ class OneTwoThreePopConfig {
             label.text = addressDetails.addressString
             label.textColor = UIColor.init(cssStr: "#000000")
         }
-        
         let customStyle = BRPickerStyle()
         customStyle.pickerColor = .white
         customStyle.pickerTextFont = UIFont(name: Bold_Poppins, size: 18)
         customStyle.selectRowTextColor = UIColor(cssStr: "#000000")
         addressPickerView.pickerStyle = customStyle
-        
         addressPickerView.show()
     }
 
@@ -183,14 +181,11 @@ class OneTwoThreePopConfig {
         let provinceName = province?.name ?? ""
         let cityName = city?.name ?? ""
         let areaName = area?.name ?? ""
-
         var addressString = ""
         var code = ""
-
         if !provinceName.isEmpty {
             addressString += provinceName
             code += province?.code ?? ""
-            
             if !cityName.isEmpty {
                 addressString += "|\(cityName)"
                 code += "|\(city?.code ?? "")"
@@ -201,9 +196,20 @@ class OneTwoThreePopConfig {
                 }
             }
         }
-
         return (addressString, code)
     }
-    
-    
+}
+
+class OnePopConfig {
+    static func getOneDetails(dataSourceArr: [Any]) -> [BRProvinceModel] {
+        return dataSourceArr.compactMap { item in
+            guard let proviceDic = item as? theirbeautyModel else { return nil }
+            let proviceModel = BRProvinceModel()
+            proviceModel.name = proviceDic.aquizzical
+            proviceModel.code = proviceDic.elemental
+            proviceModel.index = dataSourceArr.firstIndex { $0 as AnyObject === proviceDic as AnyObject } ?? 0
+            
+            return proviceModel
+        }
+    }
 }
