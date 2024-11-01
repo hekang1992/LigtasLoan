@@ -193,7 +193,7 @@ class LLIDListViewController: LLBaseViewController {
     
     var lo = BehaviorRelay<String>(value: "")
     
-    var picModelArray = BehaviorRelay<[unendingModel]>(value: [])
+    var picModelArray = BehaviorRelay<[widehallModel]>(value: [])
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -218,7 +218,7 @@ class LLIDListViewController: LLBaseViewController {
             cell.ctImageView.kf.setImage(with: URL(string: model.pic_url ?? ""))
         }.disposed(by: disposeBag)
         
-        listView.tableView.rx.modelSelected(unendingModel.self).subscribe(onNext: { [weak self] model in
+        listView.tableView.rx.modelSelected(widehallModel.self).subscribe(onNext: { [weak self] model in
             guard let self = self else { return }
             print("type:\(model.aquizzical ?? "")")
             let vc = LLUploadIDViewController()

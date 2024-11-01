@@ -26,7 +26,7 @@ class preferredaModel {
     var foryou: String?
     var hisgold: hisgoldModel?
     var toremember: torememberModel?
-    var unending: [unendingModel]?
+    var unending: [widehallModel]?
     var squatty: String?
     var aquizzical: String?
     var deepseats: String?
@@ -43,7 +43,7 @@ class preferredaModel {
         self.hisgold = hisgoldModel(json: json["hisgold"])
         self.toremember = torememberModel(json: json["toremember"])
         self.unending = json["unending"].arrayValue.map {
-            unendingModel(json: $0)
+            widehallModel(json: $0)
         }
         self.widehall = json["widehall"].arrayValue.map {
             widehallModel(json: $0)
@@ -53,37 +53,10 @@ class preferredaModel {
 }
 
 class andfallingModel {
-    var unending: [unendingModel]
+    var unending: [widehallModel]
     init(json: JSON) {
         self.unending = json["unending"].arrayValue.map {
-            unendingModel(json: $0)
-        }
-    }
-}
-
-class unendingModel {
-    var pic_url: String?
-    var cad: String?
-    var unending: [unendingModel]?
-    var prettiest: String?
-    var haddreamed: String?
-    var wasempty: String?//key
-    var aquizzical: String?//name
-    var waslooking: String?//phone
-    var losing: [theirbeautyModel]
-    init(json: JSON) {
-        self.aquizzical = json["aquizzical"].stringValue
-        self.pic_url = json["pic_url"].stringValue
-        self.cad = json["cad"].stringValue
-        self.unending = json["unending"].arrayValue.map {
-            unendingModel(json: $0)
-        }
-        self.prettiest = json["prettiest"].stringValue
-        self.haddreamed = json["haddreamed"].stringValue
-        self.wasempty = json["wasempty"].stringValue
-        self.waslooking = json["waslooking"].stringValue
-        self.losing = json["losing"].arrayValue.map {
-            theirbeautyModel(json: $0)
+            widehallModel(json: $0)
         }
     }
 }
@@ -133,7 +106,18 @@ class widehallModel {
     var butshe: String?
     var elemental: String?
     var theirbeauty: [theirbeautyModel]?
+    var pic_url: String?
+    var cad: String?
+    var unending: [widehallModel]?
+    var prettiest: String?
+    var haddreamed: String?
+    var wasempty: String?//key
+    var aquizzical: String?//name
+    var waslooking: String?//phone
+    var losing: [theirbeautyModel]
+    var relationText: String?
     init(json: JSON) {
+        self.relationText = json["relationText"].stringValue
         self.hatred = json["hatred"].stringValue
         self.throwingher = json["throwingher"].stringValue
         self.andmammy = json["andmammy"].stringValue
@@ -142,6 +126,19 @@ class widehallModel {
         self.butshe = json["butshe"].stringValue
         self.elemental = json["elemental"].stringValue
         self.theirbeauty = json["theirbeauty"].arrayValue.map {
+            theirbeautyModel(json: $0)
+        }
+        self.aquizzical = json["aquizzical"].stringValue
+        self.pic_url = json["pic_url"].stringValue
+        self.cad = json["cad"].stringValue
+        self.unending = json["unending"].arrayValue.map {
+            widehallModel(json: $0)
+        }
+        self.prettiest = json["prettiest"].stringValue
+        self.haddreamed = json["haddreamed"].stringValue
+        self.wasempty = json["wasempty"].stringValue
+        self.waslooking = json["waslooking"].stringValue
+        self.losing = json["losing"].arrayValue.map {
             theirbeautyModel(json: $0)
         }
     }

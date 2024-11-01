@@ -28,7 +28,7 @@ extension LLBaseViewController {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "knewdifferently": "1", "flirting": "love"], pageUrl: "/ll/tarletonwho/faces/straight", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+//            ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):
@@ -56,7 +56,7 @@ extension LLBaseViewController {
     }
     
     @objc func proDetailInfo(from proid: String) {
-        ViewLoadingManager.addLoadingView()
+//        ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageUrl: "/ll/another/between/healthy", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
@@ -160,6 +160,11 @@ extension LLBaseViewController {
             let ne = LLStepTFViewController()
             ne.lo.accept(proid)
             self.navigationController?.pushViewController(ne, animated: true)
+        } else if type == "eastern5" {
+            let ne = LLQAWViewController()
+            ne.lo.accept(proid)
+            self.navigationController?.pushViewController(ne, animated: true)
+            
         }
     }
     

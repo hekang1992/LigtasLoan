@@ -120,7 +120,7 @@ class SanPopConfig {
     static func SanChengArray(dataArr: [Any]) -> [BRProvinceModel] {
         var tempArr1 = [BRProvinceModel]()
         for proviceDic in dataArr {
-            guard let proviceDic = proviceDic as? unendingModel else {
+            guard let proviceDic = proviceDic as? widehallModel else {
                 continue
             }
             let proviceModel = BRProvinceModel()
@@ -153,9 +153,10 @@ class SanPopConfig {
     }
 }
 
+typealias complete = () -> Void
 
 class OneTwoThreePopConfig {
-    static func popLastEnum(_ model: BRAddressPickerMode, _ label: UILabel, _ provinces: [BRProvinceModel], _ modelData: widehallModel) {
+    static func popLastEnum<T: widehallModel>(_ model: BRAddressPickerMode, _ label: UILabel, _ provinces: [BRProvinceModel], _ modelData: T, complete: @escaping complete) {
         let addressPickerView = BRAddressPickerView()
         addressPickerView.title = modelData.hatred ?? ""
         addressPickerView.pickerMode = model
@@ -164,10 +165,16 @@ class OneTwoThreePopConfig {
         
         addressPickerView.resultBlock = { province, city, area in
             let addressDetails = self.getAddressDetails(province: province, city: city, area: area)
-            modelData.butshe = addressDetails.addressString
-            modelData.elemental = addressDetails.code
+            if let haddreamed = modelData.haddreamed, !haddreamed.isEmpty {
+                modelData.relationText = addressDetails.addressString
+                modelData.wasempty = addressDetails.code
+            }else {
+                modelData.butshe = addressDetails.addressString
+                modelData.elemental = addressDetails.code
+            }
             label.text = addressDetails.addressString
             label.textColor = UIColor.init(cssStr: "#000000")
+            complete()
         }
         let customStyle = BRPickerStyle()
         customStyle.pickerColor = .white
@@ -208,7 +215,7 @@ class OnePopConfig {
             proviceModel.name = proviceDic.aquizzical
             proviceModel.code = proviceDic.elemental
             proviceModel.index = dataSourceArr.firstIndex { $0 as AnyObject === proviceDic as AnyObject } ?? 0
-            
+
             return proviceModel
         }
     }

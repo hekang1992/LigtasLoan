@@ -64,7 +64,12 @@ class LLInputCell: UITableViewCell {
         model.subscribe(onNext: { [weak self] imodel in
             guard let self = self, let imodel = imodel else { return }
             mlabel.text = imodel.hatred ?? ""
-            inputtx.placeholder = imodel.throwingher ?? ""
+            let butshe = imodel.butshe ?? ""
+            if !butshe.isEmpty {
+                inputtx.text = butshe
+            } else {
+                inputtx.placeholder = imodel.throwingher ?? ""
+            }
         }).disposed(by: disposeBag)
         
     }
@@ -144,7 +149,9 @@ class LLBtnClickCell: UITableViewCell {
         model.subscribe(onNext: { [weak self] imodel in
             guard let self = self, let imodel = imodel else { return }
             mlabel.text = imodel.hatred ?? ""
-            mlabel1.text = imodel.throwingher ?? ""
+            let butshe = imodel.butshe ?? ""
+            mlabel1.text = !butshe.isEmpty ? butshe : imodel.throwingher ?? ""
+            mlabel1.textColor = !butshe.isEmpty ? UIColor.black : UIColor.black.withAlphaComponent(0.2)
         }).disposed(by: disposeBag)
     }
     
@@ -288,7 +295,9 @@ extension LLStepTwoViewController: UITableViewDelegate {
             print("story1")
             if let theirbeauty = model.theirbeauty {
                 let modelArray = OnePopConfig.getOneDetails(dataSourceArr: theirbeauty)
-                OneTwoThreePopConfig.popLastEnum(.province, cell.mlabel1, modelArray, model)
+                OneTwoThreePopConfig.popLastEnum(.province, cell.mlabel1, modelArray, model) {
+                    
+                }
             }
         case "story2":
             print("story2")
@@ -311,7 +320,9 @@ extension LLStepTwoViewController: UITableViewDelegate {
             case .success(let success):
                 if let unending = success.preferreda.unending, let model = cell.model.value {
                     let modelArray = SanPopConfig.SanChengArray(dataArr: unending)
-                    OneTwoThreePopConfig.popLastEnum(.area, cell.mlabel1, modelArray, model)
+                    OneTwoThreePopConfig.popLastEnum(.area, cell.mlabel1, modelArray, model) {
+                        
+                    }
                 }
             case .failure(let failure):
                 print("\(failure.localizedDescription)")

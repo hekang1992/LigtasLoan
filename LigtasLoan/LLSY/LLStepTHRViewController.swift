@@ -111,7 +111,9 @@ extension LLStepTHRViewController: UITableViewDelegate {
             print("story1")
             if let theirbeauty = model.theirbeauty {
                 let modelArray = OnePopConfig.getOneDetails(dataSourceArr: theirbeauty)
-                OneTwoThreePopConfig.popLastEnum(.province, cell.mlabel1, modelArray, model)
+                OneTwoThreePopConfig.popLastEnum(.province, cell.mlabel1, modelArray, model) {
+                    
+                }
             }
         case "story2":
             print("story2")
@@ -134,7 +136,9 @@ extension LLStepTHRViewController: UITableViewDelegate {
             case .success(let success):
                 if let unending = success.preferreda.unending, let model = cell.model.value {
                     let modelArray = SanPopConfig.SanChengArray(dataArr: unending)
-                    OneTwoThreePopConfig.popLastEnum(.area, cell.mlabel1, modelArray, model)
+                    OneTwoThreePopConfig.popLastEnum(.area, cell.mlabel1, modelArray, model) {
+                        
+                    }
                 }
             case .failure(let failure):
                 print("\(failure.localizedDescription)")

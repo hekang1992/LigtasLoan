@@ -244,10 +244,8 @@ class LLTypeListViewController: LLBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.main.async { [weak self] in
-            if let self = self {
-                pproDetailInfo(from: lo.value)
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            self.pproDetailInfo(from: self.lo.value)
         }
     }
     
