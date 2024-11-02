@@ -28,14 +28,16 @@ extension LLBaseViewController {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "knewdifferently": "1", "flirting": "love"], pageUrl: "/ll/tarletonwho/faces/straight", method: .post) { [weak self] result in
-//            ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
                     let nextUrl = success.preferreda.foryou ?? ""
                     if nextUrl.hasPrefix("http") {
-                        
+                        ViewLoadingManager.hideLoadingView()
+                        let wv = LLWYViewController()
+                        wv.pageUrl.accept(nextUrl)
+                        self.navigationController?.pushViewController(wv, animated: true)
                     }else if nextUrl.hasPrefix(schemeurl) {
                         if let url = URL(string: nextUrl) {
                             let path = url.path
@@ -56,20 +58,24 @@ extension LLBaseViewController {
     }
     
     @objc func proDetailInfo(from proid: String) {
-//        ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageUrl: "/ll/another/between/healthy", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
-                    if let hisgold = success.preferreda.hisgold {
-                        typeVc(form: hisgold.gabbling ?? "", proid: proid)
+                    if let hisgold = success.preferreda.hisgold, let gabbling = hisgold.gabbling, !gabbling.isEmpty {
+                        ViewLoadingManager.hideLoadingView()
+                        typeVc(form: gabbling, proid: proid)
+                    }else {
+                        if let trembling = success.preferreda.consternation?.trembling {
+                            self.ddtovc(from: trembling)
+                        }
                     }
                 }
                 break
             case .failure(_):
+                ViewLoadingManager.hideLoadingView()
                 break
             }
         }
@@ -79,14 +85,18 @@ extension LLBaseViewController {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageUrl: "/ll/another/between/healthy", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
-                    if let hisgold = success.preferreda.hisgold {
-                        if hisgold.gabbling == "eastern2" {
-                            self.pageintypeVc(form: hisgold.gabbling ?? "", proid: proid)
+                    if let hisgold = success.preferreda.hisgold, let gabbling = hisgold.gabbling, !gabbling.isEmpty {
+                        ViewLoadingManager.hideLoadingView()
+                        if gabbling == "eastern2" {
+                            self.pageintypeVc(form: gabbling, proid: proid)
+                        }
+                    }else {
+                        if let trembling = success.preferreda.consternation?.trembling {
+                            self.ddtovc(from: trembling)
                         }
                     }
                 }
@@ -115,8 +125,14 @@ extension LLBaseViewController {
             self.navigationController?.pushViewController(listVc, animated: true)
             break
         case "eastern4":
+            let listVc = LLStepTFViewController()
+            listVc.lo.accept(proid)
+            self.navigationController?.pushViewController(listVc, animated: true)
             break
         case "eastern5":
+            let listVc = LLQAWViewController()
+            listVc.lo.accept(proid)
+            self.navigationController?.pushViewController(listVc, animated: true)
             break
         default:
             break
@@ -164,7 +180,8 @@ extension LLBaseViewController {
             let ne = LLQAWViewController()
             ne.lo.accept(proid)
             self.navigationController?.pushViewController(ne, animated: true)
-            
+        } else if type == "eastern6" {
+            pageinDetailInfo(from: proid)
         }
     }
     
@@ -200,6 +217,74 @@ extension LLBaseViewController {
         let vc = LLUploadIDViewController()
         vc.lo.accept(lo)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func handleStorySelection(_ model: widehallModel, cell: LLBtnClickCell) {
+        let underthe = model.underthe ?? ""
+        let hatred = model.hatred ?? ""
+        switch underthe {
+        case "story1":
+            print("story1")
+            if hatred.contains("Payday") {
+                if let theirbeauty = model.theirbeauty {
+                    let modelArray = TPopConfig.getTDetails(dataSourceArr: theirbeauty)
+                    OneTwoThreePopConfig.popLastEnum(.city, cell.mlabel1, modelArray, model) {
+                    }
+                }
+            }else {
+                if let theirbeauty = model.theirbeauty {
+                    let modelArray = OnePopConfig.getOneDetails(dataSourceArr: theirbeauty)
+                    OneTwoThreePopConfig.popLastEnum(.province, cell.mlabel1, modelArray, model) {
+                    }
+                }
+            }
+        case "story2":
+            print("story2")
+        case "story3":
+            print("story3")
+            fetchStoryData(for: cell)
+        case "story4":
+            print("story4")
+        default:
+            break
+        }
+    }
+    
+    func fetchStoryData(for cell: LLBtnClickCell) {
+        ViewLoadingManager.addLoadingView()
+        let man = LLRequestManager()
+        man.requestAPI(params: ["": ""], pageUrl: "/ll/after/tomcat/foreverrankled", method: .get) { result in
+            ViewLoadingManager.hideLoadingView()
+            switch result {
+            case .success(let success):
+                if let unending = success.preferreda.unending, let model = cell.model.value {
+                    let modelArray = SanPopConfig.SanChengArray(dataArr: unending)
+                    OneTwoThreePopConfig.popLastEnum(.area, cell.mlabel1, modelArray, model) {
+                    }
+                }
+            case .failure(let failure):
+                print("\(failure.localizedDescription)")
+            }
+        }
+    }
+    
+    func ddtovc(from oid: String) {
+        let odDict = ["comforting": "1", "finally": oid, "twinge": "owo", "marriedindia": "lg-sa"]
+        let man = LLRequestManager()
+        man.requestAPI(params: odDict, pageUrl: "/ll/wonderedif/thenher/these", method: .post) { result in
+            ViewLoadingManager.hideLoadingView()
+            switch result {
+            case .success(let success):
+                ViewLoadingManager.hideLoadingView()
+                let nextUrl = success.preferreda.foryou ?? ""
+                let wv = LLWYViewController()
+                wv.pageUrl.accept(nextUrl)
+                self.navigationController?.pushViewController(wv, animated: true)
+                break
+            case .failure(_):
+                break
+            }
+        }
     }
     
 }

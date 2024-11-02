@@ -95,7 +95,7 @@ class LLRightView: UIView {
         mlabel.text = phone
         mlabel.textColor = UIColor.init(cssStr: "#0F0B03")
         mlabel.textAlignment = .center
-        mlabel.font = UIFont(name: Bold_Poppins, size: 18)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 18)
         return mlabel
     }()
     
@@ -210,7 +210,7 @@ class LLRightItemView: UIView {
     lazy var bgView: UIView = {
         let bgView = UIView()
         bgView.layer.cornerRadius = 4
-        bgView.backgroundColor = UIColor.init(cssStr: "#1EFB91")
+        bgView.backgroundColor = UIColor.init(cssStr: "#F6F7F6")
         return bgView
     }()
 
@@ -218,7 +218,7 @@ class LLRightItemView: UIView {
         let mlabel = UILabel()
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 14)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 15)
         return mlabel
     }()
     

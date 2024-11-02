@@ -104,49 +104,6 @@ class LLStepTHRViewController: LLBaseViewController {
 
 extension LLStepTHRViewController: UITableViewDelegate {
     
-    private func handleStorySelection(_ model: widehallModel, cell: LLBtnClickCell) {
-        let underthe = model.underthe ?? ""
-        switch underthe {
-        case "story1":
-            print("story1")
-            if let theirbeauty = model.theirbeauty {
-                let modelArray = OnePopConfig.getOneDetails(dataSourceArr: theirbeauty)
-                OneTwoThreePopConfig.popLastEnum(.province, cell.mlabel1, modelArray, model) {
-                    
-                }
-            }
-        case "story2":
-            print("story2")
-        case "story3":
-            print("story3")
-            fetchStoryData(for: cell)
-        case "story4":
-            print("story4")
-        default:
-            break
-        }
-    }
-    
-    private func fetchStoryData(for cell: LLBtnClickCell) {
-        ViewLoadingManager.addLoadingView()
-        let man = LLRequestManager()
-        man.requestAPI(params: ["": ""], pageUrl: "/ll/after/tomcat/foreverrankled", method: .get) { result in
-            ViewLoadingManager.hideLoadingView()
-            switch result {
-            case .success(let success):
-                if let unending = success.preferreda.unending, let model = cell.model.value {
-                    let modelArray = SanPopConfig.SanChengArray(dataArr: unending)
-                    OneTwoThreePopConfig.popLastEnum(.area, cell.mlabel1, modelArray, model) {
-                        
-                    }
-                }
-            case .failure(let failure):
-                print("\(failure.localizedDescription)")
-            }
-        }
-    }
-    
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
@@ -166,7 +123,7 @@ extension LLStepTHRViewController: UITableViewDelegate {
             nextBtn.backgroundColor = UIColor.init(cssStr: "#222222")
             nextBtn.setTitle("NEXT STEP", for: .normal)
             nextBtn.setTitleColor(UIColor.init(cssStr: "#1EFB91"), for: .normal)
-            nextBtn.titleLabel?.font = UIFont(name: Bold_Poppins, size: 18)
+            nextBtn.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 18)
             footView.addSubview(nextBtn)
             nextBtn.snp.makeConstraints { make in
                 make.bottom.equalToSuperview()
@@ -204,8 +161,8 @@ extension LLStepTHRViewController: UITableViewDelegate {
     private func bcinfo() {
         var dict: [String: Any]?
         dict = modelArray.value.reduce(into: [String: Any](), { preesult, model in
-            let type = model.underthe
-            if type == "story1" || type == "story4" {
+            let underthe = model.underthe
+            if underthe == "story1" || underthe == "story4" {
                 preesult[model.andmammy!] = model.elemental
             }else {
                 preesult[model.andmammy!] = model.butshe

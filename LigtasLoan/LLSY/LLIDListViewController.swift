@@ -21,7 +21,7 @@ class HeadView: UIView {
         let mlabel = UILabel()
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .center
-        mlabel.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel
     }()
     
@@ -122,7 +122,7 @@ class ListCell: UITableViewCell {
         let mlabel = UILabel()
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 14)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 14)
         return mlabel
     }()
     

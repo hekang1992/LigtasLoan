@@ -8,6 +8,7 @@
 import UIKit
 import GYSide
 import RxRelay
+import MJRefresh
 
 class LLSYViewController: LLBaseViewController {
     
@@ -45,12 +46,34 @@ class LLSYViewController: LLBaseViewController {
             self?.rightVc()
         }).disposed(by: disposeBag)
         
+        twoView.backBtn.rx
+            .tap
+            .subscribe(onNext: { [weak self] in
+            self?.rightVc()
+        }).disposed(by: disposeBag)
+        
         oneView.ctImageView.rx
             .tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 self?.apply(from: self?.homeModel.value?.nothave?.aviolence?.first?.cad ?? "")
             }).disposed(by: disposeBag)
+        
+        oneView.scro.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            self?.homeInfo()
+        })
+        twoView.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            self?.homeInfo()
+        })
+        
+        
+        homeModel.subscribe(onNext: { [weak self] model in
+            if let self = self {
+                self.twoView.model.accept(model)
+                self.twoView.lunboView.reloadData()
+            }
+            
+        }).disposed(by: disposeBag)
         
     }
     
@@ -71,12 +94,13 @@ extension LLSYViewController {
         }, vc)
     }
     
-    
     private func homeInfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["home": "misdeeds", "ancestors": "purple"], pageUrl: "/ll/huntingsquire/enough/hishorses", method: .get) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
+            self?.oneView.scro.mj_header?.endRefreshing()
+            self?.twoView.tableView.mj_header?.endRefreshing()
             switch result {
             case .success(let success):
                 let model = success.preferreda
@@ -85,7 +109,8 @@ extension LLSYViewController {
                     self?.oneView.isHidden = false
                     self?.twoView.isHidden = true
                 } else {
-                    
+                    self?.oneView.isHidden = true
+                    self?.twoView.isHidden = false
                 }
                 break
             case .failure(_):

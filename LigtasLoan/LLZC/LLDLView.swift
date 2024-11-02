@@ -20,7 +20,8 @@ class LLYZMView: LLBaseView {
         securityCodeView.borderRadius = 12
         securityCodeView.borderWidth = 0
         securityCodeView.backgroundColor = .white
-        securityCodeView.textFont = UIFont(name: Bold_Poppins, size: 30)!
+        securityCodeView.cursorColor = UIColor.init(cssStr: "#5AD7F3")
+        securityCodeView.textFont = UIFont(name: Bold_SFDisplay, size: 30)!
         securityCodeView.autoResignFirstResponderWhenInputFinished = true
         return securityCodeView
     }()
@@ -30,7 +31,7 @@ class LLYZMView: LLBaseView {
         codeBtn.setTitle("Send", for: .normal)
         codeBtn.contentHorizontalAlignment = .right
         codeBtn.setTitleColor(UIColor.black, for: .normal)
-        codeBtn.titleLabel?.font = UIFont(name: Bold_Poppins, size: 18)
+        codeBtn.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 18)
         return codeBtn
     }()
     

@@ -44,7 +44,7 @@ class LLBaseView: UIView {
         mlabel.text = "Enter phone number"
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 24)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 24)
         return mlabel
     }()
     
@@ -54,7 +54,7 @@ class LLBaseView: UIView {
         nlabel.text = "Enter your phone number, if not registered, it will be automatically registered."
         nlabel.textColor = UIColor.init(cssStr: "#CCCCCC")
         nlabel.textAlignment = .left
-        nlabel.font = UIFont(name: Bold_Poppins, size: 12)
+        nlabel.font = UIFont(name: Bold_SFDisplay, size: 12)
         return nlabel
     }()
     
@@ -79,10 +79,10 @@ class LLBaseView: UIView {
         phoneTx.keyboardType = .numberPad
         let attrString = NSMutableAttributedString(string: "Enter phone number", attributes: [
             .foregroundColor: UIColor.init(cssStr: "#000000").withAlphaComponent(0.2) as Any,
-            .font: UIFont(name: Bold_Poppins, size: 12)!
+            .font: UIFont(name: Bold_SFDisplay, size: 12)!
         ])
         phoneTx.attributedPlaceholder = attrString
-        phoneTx.font = UIFont(name: Bold_Poppins, size: 12)
+        phoneTx.font = UIFont(name: Bold_SFDisplay, size: 12)
         phoneTx.textColor = UIColor.init(cssStr: "#000000")
         return phoneTx
     }()
@@ -151,7 +151,7 @@ class LLBaseView: UIView {
 
 class ToastUtility {
     static func showToast(message: String) {
-        ToastView.appearance().font = UIFont(name: Bold_Poppins, size: 20)
+        ToastView.appearance().font = UIFont(name: Bold_SFDisplay, size: 20)
         let toast = Toast(text: message, duration: 1.0)
         if let window = UIApplication.shared.windows.first {
             let screenHeight = window.frame.size.height

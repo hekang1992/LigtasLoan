@@ -19,7 +19,7 @@ class LLInputCell: UITableViewCell {
         let mlabel = UILabel()
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel
     }()
     
@@ -32,7 +32,7 @@ class LLInputCell: UITableViewCell {
     
     lazy var inputtx: UITextField = {
         let inputtx = UITextField()
-        inputtx.font = UIFont(name: Bold_Poppins, size: 16)
+        inputtx.font = UIFont(name: Bold_SFDisplay, size: 16)
         inputtx.textColor = UIColor.init(cssStr: "#000000")
         return inputtx
     }()
@@ -65,11 +65,8 @@ class LLInputCell: UITableViewCell {
             guard let self = self, let imodel = imodel else { return }
             mlabel.text = imodel.hatred ?? ""
             let butshe = imodel.butshe ?? ""
-            if !butshe.isEmpty {
-                inputtx.text = butshe
-            } else {
-                inputtx.placeholder = imodel.throwingher ?? ""
-            }
+            inputtx.placeholder = imodel.throwingher ?? ""
+            inputtx.text = !butshe.isEmpty ? butshe : ""
         }).disposed(by: disposeBag)
         
     }
@@ -91,7 +88,7 @@ class LLBtnClickCell: UITableViewCell {
         let mlabel = UILabel()
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel
     }()
     
@@ -106,7 +103,7 @@ class LLBtnClickCell: UITableViewCell {
         let mlabel1 = UILabel()
         mlabel1.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.2)
         mlabel1.textAlignment = .left
-        mlabel1.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel1.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel1
     }()
     
@@ -243,7 +240,7 @@ class LLStepTwoViewController: LLBaseViewController {
         mesinfo()
         
         modelArray.asObservable().bind(to: tableView.rx.items) { [weak self] tableView, index, model in
-            guard let self = self else { return  UITableViewCell()}
+            guard let self = self else { return UITableViewCell()}
             let underthe = model.underthe ?? ""
             if underthe == "story2" {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "LLInputCell", for: IndexPath(row: index, section: 0)) as? LLInputCell  {
@@ -288,49 +285,6 @@ class LLStepTwoViewController: LLBaseViewController {
 
 extension LLStepTwoViewController: UITableViewDelegate {
     
-    private func handleStorySelection(_ model: widehallModel, cell: LLBtnClickCell) {
-        let underthe = model.underthe ?? ""
-        switch underthe {
-        case "story1":
-            print("story1")
-            if let theirbeauty = model.theirbeauty {
-                let modelArray = OnePopConfig.getOneDetails(dataSourceArr: theirbeauty)
-                OneTwoThreePopConfig.popLastEnum(.province, cell.mlabel1, modelArray, model) {
-                    
-                }
-            }
-        case "story2":
-            print("story2")
-        case "story3":
-            print("story3")
-            fetchStoryData(for: cell)
-        case "story4":
-            print("story4")
-        default:
-            break
-        }
-    }
-    
-    private func fetchStoryData(for cell: LLBtnClickCell) {
-        ViewLoadingManager.addLoadingView()
-        let man = LLRequestManager()
-        man.requestAPI(params: ["": ""], pageUrl: "/ll/after/tomcat/foreverrankled", method: .get) { result in
-            ViewLoadingManager.hideLoadingView()
-            switch result {
-            case .success(let success):
-                if let unending = success.preferreda.unending, let model = cell.model.value {
-                    let modelArray = SanPopConfig.SanChengArray(dataArr: unending)
-                    OneTwoThreePopConfig.popLastEnum(.area, cell.mlabel1, modelArray, model) {
-                        
-                    }
-                }
-            case .failure(let failure):
-                print("\(failure.localizedDescription)")
-            }
-        }
-    }
-    
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
@@ -350,7 +304,7 @@ extension LLStepTwoViewController: UITableViewDelegate {
             nextBtn.backgroundColor = UIColor.init(cssStr: "#222222")
             nextBtn.setTitle("NEXT STEP", for: .normal)
             nextBtn.setTitleColor(UIColor.init(cssStr: "#1EFB91"), for: .normal)
-            nextBtn.titleLabel?.font = UIFont(name: Bold_Poppins, size: 18)
+            nextBtn.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 18)
             footView.addSubview(nextBtn)
             nextBtn.snp.makeConstraints { make in
                 make.bottom.equalToSuperview()

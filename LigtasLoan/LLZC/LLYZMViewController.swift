@@ -103,12 +103,10 @@ extension LLYZMViewController: WLUnitFieldDelegate {
         let dict = ["ofhurt": phoneStr.value,
                     "friendliness": codeStr.value,
                     "borders": "1"]
-        man.requestAPI(params: dict, pageUrl: "/ll/childhood/family/oversomething", method: .post) { [weak self] result in
+        man.requestAPI(params: dict, pageUrl: "/ll/childhood/family/oversomething", method: .post) { result in
             ViewLoadingManager.hideLoadingView()
-            guard let self = self else { return }
             switch result {
             case .success(let success):
-                ToastUtility.showToast(message: success.whey)
                 let model = success.preferreda
                 LLDLInfo.savedlInfo(model.ofhurt ?? "", model.screamed ?? "")
                 NotificationCenter.default.post(name: NSNotification.Name(ROOT_VC), object: nil)

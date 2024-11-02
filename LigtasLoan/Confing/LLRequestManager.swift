@@ -32,6 +32,8 @@ class preferredaModel {
     var deepseats: String?
     var widehall: [widehallModel]?
     var andfalling: andfallingModel?
+    var consternation: hisgoldModel?
+    var herplacid: herplacidModel?
     init(json: JSON) {
         self.squatty = json["squatty"].stringValue
         self.aquizzical = json["aquizzical"].stringValue
@@ -42,6 +44,7 @@ class preferredaModel {
         self.foryou = json["foryou"].stringValue
         self.hisgold = hisgoldModel(json: json["hisgold"])
         self.toremember = torememberModel(json: json["toremember"])
+        self.consternation = hisgoldModel(json: json["consternation"])
         self.unending = json["unending"].arrayValue.map {
             widehallModel(json: $0)
         }
@@ -49,6 +52,16 @@ class preferredaModel {
             widehallModel(json: $0)
         }
         self.andfalling = andfallingModel(json: json["andfalling"])
+        self.herplacid = herplacidModel(json: json["herplacid"])
+    }
+}
+
+class herplacidModel {
+    var aviolence: [aviolenceModel]
+    init(json: JSON) {
+        self.aviolence = json["aviolence"].arrayValue.map {
+            aviolenceModel(json: $0)
+        }
     }
 }
 
@@ -74,8 +87,10 @@ class torememberModel {
 
 class hisgoldModel {
     var gabbling: String?
+    var trembling: String?
     init(json: JSON) {
         self.gabbling = json["gabbling"].stringValue
+        self.trembling = json["trembling"].stringValue
     }
 }
 
@@ -92,8 +107,22 @@ class nothaveModel {
 
 class aviolenceModel {
     var cad: String?
+    var foryou: String?
+    var caring: String?
+    var blot: String?
+    var thenyou: String?
+    var itseemed: String?
+    var toanyone: String?
+    var makeyou: String?
     init(json: JSON) {
         self.cad = json["cad"].stringValue
+        self.foryou = json["foryou"].stringValue
+        self.caring = json["caring"].stringValue
+        self.blot = json["blot"].stringValue
+        self.thenyou = json["thenyou"].stringValue
+        self.itseemed = json["itseemed"].stringValue
+        self.makeyou = json["makeyou"].stringValue
+        self.toanyone = json["toanyone"].stringValue
     }
 }
 
@@ -116,6 +145,7 @@ class widehallModel {
     var waslooking: String?//phone
     var losing: [theirbeautyModel]
     var relationText: String?
+    var widehall: [widehallModel]?
     init(json: JSON) {
         self.relationText = json["relationText"].stringValue
         self.hatred = json["hatred"].stringValue
@@ -134,6 +164,9 @@ class widehallModel {
         self.unending = json["unending"].arrayValue.map {
             widehallModel(json: $0)
         }
+        self.widehall = json["widehall"].arrayValue.map {
+            widehallModel(json: $0)
+        }
         self.prettiest = json["prettiest"].stringValue
         self.haddreamed = json["haddreamed"].stringValue
         self.wasempty = json["wasempty"].stringValue
@@ -147,9 +180,15 @@ class widehallModel {
 class theirbeautyModel {
     var aquizzical: String?
     var elemental: String?
+    var triumphedasherealize: String?
+    var theirbeauty: [theirbeautyModel]?
     init(json: JSON) {
         self.aquizzical = json["aquizzical"].stringValue
         self.elemental = json["elemental"].stringValue
+        self.triumphedasherealize = json["triumphedasherealize"].stringValue
+        self.theirbeauty = json["theirbeauty"].arrayValue.map {
+            theirbeautyModel(json: $0)
+        }
     }
 }
 

@@ -32,7 +32,7 @@ class UploadView: UIView {
         let typelabel = UILabel()
         typelabel.textColor = UIColor.init(cssStr: "#000000")
         typelabel.textAlignment = .left
-        typelabel.font = UIFont(name: Bold_Poppins, size: 14)
+        typelabel.font = UIFont(name: Bold_SFDisplay, size: 14)
         return typelabel
     }()
     
@@ -55,7 +55,7 @@ class UploadView: UIView {
         mlabel.text = "Please confirm that it matches the selected document!"
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel
     }()
     
@@ -72,7 +72,7 @@ class UploadView: UIView {
         mlabel1.text = "Please ensure good lighting, maintain a natural expression, and remain relatively still!"
         mlabel1.textColor = UIColor.init(cssStr: "#000000")
         mlabel1.textAlignment = .left
-        mlabel1.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel1.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel1
     }()
     
@@ -295,7 +295,9 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage)!
         if let data = Data.imageQuality(image: image, maxLength: 1024) {
             picker.dismiss(animated: true) { [weak self] in
-                self?.upimageData(from: data, image: image)
+                DispatchQueue.main.async {
+                    self?.upimageData(from: data, image: image)
+                }
             }
         }
     }
@@ -412,7 +414,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         }
         let customStyle = BRPickerStyle()
         customStyle.pickerColor = .white
-        customStyle.pickerTextFont = UIFont(name: Bold_Poppins, size: 18) ?? UIFont.systemFont(ofSize: 18)
+        customStyle.pickerTextFont = UIFont(name: Bold_SFDisplay, size: 18) ?? UIFont.systemFont(ofSize: 18)
         customStyle.selectRowTextColor = UIColor(cssStr: "#000000")
         datePickerView.pickerStyle = customStyle
         datePickerView.show()

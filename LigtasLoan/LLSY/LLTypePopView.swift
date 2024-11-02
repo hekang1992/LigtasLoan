@@ -24,7 +24,7 @@ class PopPhotoView: UIView {
         mlabel.text = "Please upload the front side of your ID photo."
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 14)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 14)
         return mlabel
     }()
     
@@ -51,7 +51,7 @@ class PopPhotoView: UIView {
     lazy var nextBtn: UIButton = {
         let nextBtn = UIButton(type: .custom)
         nextBtn.setTitle("ALBUM", for: .normal)
-        nextBtn.titleLabel?.font = UIFont(name: Bold_Poppins, size: 18)
+        nextBtn.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 18)
         nextBtn.backgroundColor = .white
         nextBtn.layer.borderWidth = 2
         nextBtn.setTitleColor(UIColor.init(cssStr: "#222222"), for: .normal)
@@ -63,7 +63,7 @@ class PopPhotoView: UIView {
         let nextBtn1 = UIButton(type: .custom)
         nextBtn1.setTitleColor(UIColor.init(cssStr: "#1EFB91"), for: .normal)
         nextBtn1.setTitle("SHOOT", for: .normal)
-        nextBtn1.titleLabel?.font = UIFont(name: Bold_Poppins, size: 18)
+        nextBtn1.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 18)
         nextBtn1.backgroundColor = UIColor.init(cssStr: "#222222")
         return nextBtn1
     }()
@@ -141,7 +141,7 @@ class PopCameraView: UIView {
         mlabel.text = "Please upload the front side of your ID photo."
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 14)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 14)
         return mlabel
     }()
     
@@ -169,7 +169,7 @@ class PopCameraView: UIView {
         let nextBtn1 = UIButton(type: .custom)
         nextBtn1.setTitleColor(UIColor.init(cssStr: "#1EFB91"), for: .normal)
         nextBtn1.setTitle("UPLOAD", for: .normal)
-        nextBtn1.titleLabel?.font = UIFont(name: Bold_Poppins, size: 18)
+        nextBtn1.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 18)
         nextBtn1.backgroundColor = UIColor.init(cssStr: "#222222")
         return nextBtn1
     }()
@@ -249,7 +249,7 @@ class PopNameIDCardView: UIView {
         mlabel.text = "Please confirm the information."
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 14)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 14)
         return mlabel
     }()
     
@@ -279,7 +279,7 @@ class PopNameIDCardView: UIView {
     
     lazy var inputtx: UITextField = {
         let inputtx = UITextField()
-        inputtx.font = UIFont(name: Bold_Poppins, size: 16)
+        inputtx.font = UIFont(name: Bold_SFDisplay, size: 16)
         inputtx.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
         inputtx.backgroundColor = .purple
         return inputtx
@@ -289,7 +289,7 @@ class PopNameIDCardView: UIView {
         let nextBtn1 = UIButton(type: .custom)
         nextBtn1.setTitleColor(UIColor.init(cssStr: "#1EFB91"), for: .normal)
         nextBtn1.setTitle("CONFIRM", for: .normal)
-        nextBtn1.titleLabel?.font = UIFont(name: Bold_Poppins, size: 18)
+        nextBtn1.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 18)
         nextBtn1.backgroundColor = UIColor.init(cssStr: "#222222")
         return nextBtn1
     }()
@@ -365,7 +365,7 @@ class LLNameView: UIView {
         let mlabel = UILabel()
         mlabel.textColor = UIColor.init(cssStr: "#000000")
         mlabel.textAlignment = .left
-        mlabel.font = UIFont(name: Bold_Poppins, size: 16)
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel
     }()
     
@@ -378,7 +378,7 @@ class LLNameView: UIView {
     
     lazy var inputtx: UITextField = {
         let inputtx = UITextField()
-        inputtx.font = UIFont(name: Bold_Poppins, size: 16)
+        inputtx.font = UIFont(name: Bold_SFDisplay, size: 16)
         inputtx.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
         return inputtx
     }()
@@ -387,7 +387,7 @@ class LLNameView: UIView {
         let nextBtn = UIButton(type: .custom)
         nextBtn.contentHorizontalAlignment = .left
         nextBtn.setTitleColor(UIColor.init(cssStr: "#000000").withAlphaComponent(0.5), for: .normal)
-        nextBtn.titleLabel?.font = UIFont(name: Bold_Poppins, size: 16)
+        nextBtn.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 16)
         return nextBtn
     }()
     

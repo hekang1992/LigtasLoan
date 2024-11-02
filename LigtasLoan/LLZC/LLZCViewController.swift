@@ -16,10 +16,10 @@ class LLZCViewController: LLBaseViewController {
         loginView.nextBtn.isEnabled = false
         return loginView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         view.addSubview(loginView)
         loginView.snp.makeConstraints { make in
@@ -55,16 +55,31 @@ class LLZCViewController: LLBaseViewController {
             self.navigationController?.pushViewController(yzmVc, animated: true)
         }).disposed(by: disposeBag)
         
+        locationInfo()
+        
     }
-
+    
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension LLZCViewController {
+    
+    private func locationInfo() {
+        let location = LLLocationConfig()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        location.startUpdatingLocation { model in
+            print("model========:\(model.strongest)====\(dateFormatter.string(from: Date()))")
+        }
     }
-    */
-
+    
 }

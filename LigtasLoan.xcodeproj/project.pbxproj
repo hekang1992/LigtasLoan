@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		730C41272CD5566A0011E4EB /* LLQAWViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C41262CD5566A0011E4EB /* LLQAWViewController.swift */; };
+		730C41292CD6260E0011E4EB /* LLWYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C41282CD6260E0011E4EB /* LLWYViewController.swift */; };
 		730CECF12CC92AEA002F96E0 /* WLUnitField.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECEC2CC92AEA002F96E0 /* WLUnitField.m */; };
 		730CECF22CC92AEA002F96E0 /* WLUnitFieldTextPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECEE2CC92AEA002F96E0 /* WLUnitFieldTextPosition.m */; };
 		730CECF32CC92AEA002F96E0 /* WLUnitFieldTextRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 730CECF02CC92AEA002F96E0 /* WLUnitFieldTextRange.m */; };
@@ -20,8 +21,6 @@
 		732A7F4A2CBA526F0097B3FB /* LLBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */; };
 		732A7F4C2CBA52810097B3FB /* LLLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */; };
 		732A7F4F2CBA69DF0097B3FB /* LLAbsolute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */; };
-		73342AB52CC7D20A002EDA2B /* poppinsbold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73342AB42CC7D20A002EDA2B /* poppinsbold.otf */; };
-		73342AB72CC7D34A002EDA2B /* poppinsregular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 73342AB62CC7D34A002EDA2B /* poppinsregular.otf */; };
 		73342AB92CC7D39A002EDA2B /* LLConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342AB82CC7D39A002EDA2B /* LLConfig.swift */; };
 		73342ABB2CC7D41B002EDA2B /* LLBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342ABA2CC7D41B002EDA2B /* LLBaseView.swift */; };
 		73342ABE2CC7D68B002EDA2B /* LLSYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342ABD2CC7D68B002EDA2B /* LLSYViewController.swift */; };
@@ -35,6 +34,9 @@
 		7338B9C52CCBEFE7001CBAFE /* LLTypeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7338B9C42CCBEFE7001CBAFE /* LLTypeListViewController.swift */; };
 		738ED1462CBFB45A0085C713 /* LLRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738ED1452CBFB45A0085C713 /* LLRequestManager.swift */; };
 		73A6F6FC2CCE8C8F0081DF5C /* LLStepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A6F6FB2CCE8C8F0081DF5C /* LLStepTwoViewController.swift */; };
+		73B728192CD68057006CBAA7 /* LLLocationConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B728182CD68057006CBAA7 /* LLLocationConfig.swift */; };
+		73B7281C2CD69781006CBAA7 /* sflight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73B7281A2CD69781006CBAA7 /* sflight.ttf */; };
+		73B7281D2CD69781006CBAA7 /* sfsemibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73B7281B2CD69781006CBAA7 /* sfsemibold.ttf */; };
 		73E1CA632CCD3E3000072597 /* LLIDListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E1CA622CCD3E3000072597 /* LLIDListViewController.swift */; };
 		73E1CA652CCD4B1F00072597 /* LLUploadIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E1CA642CCD4B1F00072597 /* LLUploadIDViewController.swift */; };
 		73E1CA672CCD54BD00072597 /* LLTypePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E1CA662CCD54AB00072597 /* LLTypePopView.swift */; };
@@ -45,6 +47,7 @@
 /* Begin PBXFileReference section */
 		42F241486B4886CF0557C586 /* Pods_LigtasLoan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LigtasLoan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		730C41262CD5566A0011E4EB /* LLQAWViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLQAWViewController.swift; sourceTree = "<group>"; };
+		730C41282CD6260E0011E4EB /* LLWYViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLWYViewController.swift; sourceTree = "<group>"; };
 		730CECEB2CC92AEA002F96E0 /* WLUnitField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLUnitField.h; sourceTree = "<group>"; };
 		730CECEC2CC92AEA002F96E0 /* WLUnitField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLUnitField.m; sourceTree = "<group>"; };
 		730CECED2CC92AEA002F96E0 /* WLUnitFieldTextPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLUnitFieldTextPosition.h; sourceTree = "<group>"; };
@@ -63,8 +66,6 @@
 		732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLBaseViewController.swift; sourceTree = "<group>"; };
 		732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLLaunchViewController.swift; sourceTree = "<group>"; };
 		732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLAbsolute.swift; sourceTree = "<group>"; };
-		73342AB42CC7D20A002EDA2B /* poppinsbold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = poppinsbold.otf; sourceTree = "<group>"; };
-		73342AB62CC7D34A002EDA2B /* poppinsregular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = poppinsregular.otf; sourceTree = "<group>"; };
 		73342AB82CC7D39A002EDA2B /* LLConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLConfig.swift; sourceTree = "<group>"; };
 		73342ABA2CC7D41B002EDA2B /* LLBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLBaseView.swift; sourceTree = "<group>"; };
 		73342ABD2CC7D68B002EDA2B /* LLSYViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLSYViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +79,9 @@
 		7338B9C42CCBEFE7001CBAFE /* LLTypeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLTypeListViewController.swift; sourceTree = "<group>"; };
 		738ED1452CBFB45A0085C713 /* LLRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRequestManager.swift; sourceTree = "<group>"; };
 		73A6F6FB2CCE8C8F0081DF5C /* LLStepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLStepTwoViewController.swift; sourceTree = "<group>"; };
+		73B728182CD68057006CBAA7 /* LLLocationConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLLocationConfig.swift; sourceTree = "<group>"; };
+		73B7281A2CD69781006CBAA7 /* sflight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sflight.ttf; sourceTree = "<group>"; };
+		73B7281B2CD69781006CBAA7 /* sfsemibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sfsemibold.ttf; sourceTree = "<group>"; };
 		73E1CA622CCD3E3000072597 /* LLIDListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLIDListViewController.swift; sourceTree = "<group>"; };
 		73E1CA642CCD4B1F00072597 /* LLUploadIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLUploadIDViewController.swift; sourceTree = "<group>"; };
 		73E1CA662CCD54AB00072597 /* LLTypePopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLTypePopView.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 		732A7F462CBA524B0097B3FB /* Confing */ = {
 			isa = PBXGroup;
 			children = (
+				73B728182CD68057006CBAA7 /* LLLocationConfig.swift */,
 				73E1CA682CCD5D2E00072597 /* LLPhotoConfig.swift */,
 				732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */,
 				73342ABA2CC7D41B002EDA2B /* LLBaseView.swift */,
@@ -169,10 +174,10 @@
 			isa = PBXGroup;
 			children = (
 				730CECEA2CC92AD8002F96E0 /* OC */,
+				73B7281A2CD69781006CBAA7 /* sflight.ttf */,
+				73B7281B2CD69781006CBAA7 /* sfsemibold.ttf */,
 				733465382CCA7A5F00856E02 /* juhuajiaz.json */,
 				732A7F362CBA51390097B3FB /* Assets.xcassets */,
-				73342AB62CC7D34A002EDA2B /* poppinsregular.otf */,
-				73342AB42CC7D20A002EDA2B /* poppinsbold.otf */,
 				732A7F392CBA51390097B3FB /* LaunchScreen.storyboard */,
 				73342AB82CC7D39A002EDA2B /* LLConfig.swift */,
 				732A7F352CBA51390097B3FB /* AppDelegate.swift */,
@@ -194,6 +199,7 @@
 				7326BCF62CD26DEF00432E44 /* LLStepTHRViewController.swift */,
 				7326BCF82CD2701200432E44 /* LLStepTFViewController.swift */,
 				730C41262CD5566A0011E4EB /* LLQAWViewController.swift */,
+				730C41282CD6260E0011E4EB /* LLWYViewController.swift */,
 			);
 			path = LLSY;
 			sourceTree = "<group>";
@@ -278,8 +284,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73342AB72CC7D34A002EDA2B /* poppinsregular.otf in Resources */,
-				73342AB52CC7D20A002EDA2B /* poppinsbold.otf in Resources */,
+				73B7281C2CD69781006CBAA7 /* sflight.ttf in Resources */,
+				73B7281D2CD69781006CBAA7 /* sfsemibold.ttf in Resources */,
 				732A7F422CBA51390097B3FB /* Assets.xcassets in Resources */,
 				733465392CCA7A5F00856E02 /* juhuajiaz.json in Resources */,
 				732A7F442CBA51390097B3FB /* LaunchScreen.storyboard in Resources */,
@@ -337,6 +343,7 @@
 			files = (
 				738ED1462CBFB45A0085C713 /* LLRequestManager.swift in Sources */,
 				732A7F3F2CBA51390097B3FB /* AppDelegate.swift in Sources */,
+				730C41292CD6260E0011E4EB /* LLWYViewController.swift in Sources */,
 				732A7F4A2CBA526F0097B3FB /* LLBaseViewController.swift in Sources */,
 				7338B9C52CCBEFE7001CBAFE /* LLTypeListViewController.swift in Sources */,
 				732A7F4F2CBA69DF0097B3FB /* LLAbsolute.swift in Sources */,
@@ -362,6 +369,7 @@
 				730CECF32CC92AEA002F96E0 /* WLUnitFieldTextRange.m in Sources */,
 				73E1CA672CCD54BD00072597 /* LLTypePopView.swift in Sources */,
 				73342AB92CC7D39A002EDA2B /* LLConfig.swift in Sources */,
+				73B728192CD68057006CBAA7 /* LLLocationConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

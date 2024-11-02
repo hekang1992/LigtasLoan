@@ -102,7 +102,7 @@ class ListView: UIView {
         let nextBtn = UIButton(type: .custom)
         nextBtn.backgroundColor = UIColor.init(cssStr: "#222222")
         nextBtn.setTitle("GO CERTIFICATION", for: .normal)
-        nextBtn.titleLabel?.font = UIFont(name: Bold_Poppins, size: 15)
+        nextBtn.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 15)
         return nextBtn
     }()
     
@@ -110,7 +110,7 @@ class ListView: UIView {
         let clickLabel = ActiveLabel()
         clickLabel.textAlignment = .center
         clickLabel.textColor = UIColor.init(cssStr: "#050505").withAlphaComponent(0.4)
-        clickLabel.font = UIFont(name: Regular_Poppins, size: 14)
+        clickLabel.font = UIFont(name: Regular_SFDisplay, size: 14)
         clickLabel.text = "For a detailed overview of how we manage and process data, kindly refer to our Privacy Policy."
         clickLabel.numberOfLines = 0
         let customType1 = ActiveType.custom(pattern: "\\bPrivacy Policy\\b")
@@ -269,9 +269,12 @@ extension LLTypeListViewController {
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
-                    if let hisgold = success.preferreda.hisgold {
+                    if let hisgold = success.preferreda.hisgold, let gabbling = hisgold.gabbling, !gabbling.isEmpty {
                         self.nextStr.accept(hisgold.gabbling ?? "")
                         self.nextListTy(form: hisgold.gabbling ?? "")
+                    }else {
+                        self.nextStr.accept("eastern6")
+                        self.nextListTy(form: "eastern6")
                     }
                 }
                 break
@@ -302,6 +305,13 @@ extension LLTypeListViewController {
             listView.listView2.bgView.backgroundColor = UIColor.init(cssStr: "#1EFB91")
             listView.listView3.bgView.backgroundColor = UIColor.init(cssStr: "#1EFB91")
             listView.listView4.bgView.backgroundColor = UIColor.init(cssStr: "#1EFB91")
+            break
+        case "eastern6":
+            listView.listView1.bgView.backgroundColor = UIColor.init(cssStr: "#1EFB91")
+            listView.listView2.bgView.backgroundColor = UIColor.init(cssStr: "#1EFB91")
+            listView.listView3.bgView.backgroundColor = UIColor.init(cssStr: "#1EFB91")
+            listView.listView4.bgView.backgroundColor = UIColor.init(cssStr: "#1EFB91")
+            listView.listView5.bgView.backgroundColor = UIColor.init(cssStr: "#1EFB91")
             break
         default:
             break
