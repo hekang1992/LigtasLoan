@@ -152,6 +152,11 @@ class UploadView: UIView {
 
 class LLUploadIDViewController: LLBaseViewController {
     
+    
+    var idtime = BehaviorRelay<String>(value: "")
+    
+    var rfaceTime = BehaviorRelay<String>(value: "")
+    
     lazy var headView: HeadView = {
         let headView = HeadView()
         headView.mlabel.text = "ID VERIFICATION"
@@ -206,15 +211,16 @@ class LLUploadIDViewController: LLBaseViewController {
             self.navigationController?.popViewController(animated: true)
         }).disposed(by: disposeBag)
         
-        
         uploadView.cBtn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             idPinfo()
+            idtime.accept(LLSBTwoDict.getCurrentTime())
         }).disposed(by: disposeBag)
         
         uploadView.cameaBtn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             cacInfo()
+            rfaceTime.accept(LLSBTwoDict.getCurrentTime())
         }).disposed(by: disposeBag)
         
         huoimquid(from: lo.value)
@@ -306,7 +312,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func upimageData(from data: Data, image: UIImage) {
+    private func upimageData(from data: Data, image: UIImage) {
         var imageDict: [String: String]
         imageDict = ["numbers": "1",
                      "precepts": "1",
@@ -331,6 +337,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
                     if self.isFace.value == "0" {
                         self.popnameIDView(from: success.preferreda)
                     }else {
+                        self.bcrencc()
                         self.pageinDetailInfo(from: lo.value)
                     }
                 }
@@ -343,7 +350,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
     }
     
     // shenfenxinxi----pop
-    func popnameIDView(from model: preferredaModel) {
+    private func popnameIDView(from model: preferredaModel) {
         let nameIDView = PopNameIDCardView(frame: self.view.bounds)
         let alertVc = TYAlertController(alert: nameIDView, preferredStyle: .actionSheet)
         nameIDView.model = model
@@ -351,7 +358,6 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         nameIDView.backBtn.rx.tap.subscribe(onNext: { [weak self] in
             self?.dismiss(animated: true)
         }).disposed(by: disposeBag)
-        
         
         nameIDView.name1.nextBtn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
@@ -376,6 +382,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
             case .success(_):
                 self.dismiss(animated: true) {
                     self.huoimquid(from: self.lo.value)
+                    self.bcmcc()
                 }
                 break
             case .failure(_):
@@ -384,7 +391,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         }
     }
     
-    func settitme(form view: PopNameIDCardView, clickBtn: UIButton) {
+    private func settitme(form view: PopNameIDCardView, clickBtn: UIButton) {
         let timeStr = clickBtn.titleLabel?.text ?? "01-01-1900"
         let timeArray = timeStr.components(separatedBy: "-")
         
@@ -418,6 +425,22 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         customStyle.selectRowTextColor = UIColor(cssStr: "#000000")
         datePickerView.pickerStyle = customStyle
         datePickerView.show()
+    }
+    
+    private func bcmcc() {
+        let location = LLLocationConfig()
+        location.startUpdatingLocation { [weak self] model in
+            guard let self = self else { return }
+            LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.idtime.value, jd: LLSBTwoDict.getCurrentTime(), type: "3")
+        }
+    }
+    
+    private func bcrencc() {
+        let location = LLLocationConfig()
+        location.startUpdatingLocation { [weak self] model in
+            guard let self = self else { return }
+            LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.rfaceTime.value, jd: LLSBTwoDict.getCurrentTime(), type: "4")
+        }
     }
     
 }

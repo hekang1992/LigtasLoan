@@ -82,7 +82,7 @@ class LLBaseView: UIView {
             .font: UIFont(name: Bold_SFDisplay, size: 12)!
         ])
         phoneTx.attributedPlaceholder = attrString
-        phoneTx.font = UIFont(name: Bold_SFDisplay, size: 12)
+        phoneTx.font = UIFont(name: Bold_SFDisplay, size: 24)
         phoneTx.textColor = UIColor.init(cssStr: "#000000")
         return phoneTx
     }()

@@ -7,12 +7,15 @@
 
 import UIKit
 import RxSwift
+import RxRelay
 
 let schemeurl = "loan://app.ligtas.ios/"
 
 class LLBaseViewController: UIViewController {
     
     let disposeBag = DisposeBag()
+    
+    var ksshjinof = BehaviorRelay<String>(value: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +99,7 @@ extension LLBaseViewController {
                         }
                     }else {
                         if let trembling = success.preferreda.consternation?.trembling {
+                            ksshjinof.accept(LLSBTwoDict.getCurrentTime())
                             self.ddtovc(from: trembling)
                         }
                     }
@@ -271,10 +275,12 @@ extension LLBaseViewController {
     func ddtovc(from oid: String) {
         let odDict = ["comforting": "1", "finally": oid, "twinge": "owo", "marriedindia": "lg-sa"]
         let man = LLRequestManager()
-        man.requestAPI(params: odDict, pageURL: "/ll/wonderedif/thenher/these", method: .post) { result in
+        man.requestAPI(params: odDict, pageURL: "/ll/wonderedif/thenher/these", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
+            guard let self = self else { return }
             switch result {
             case .success(let success):
+                self.nineinfo(form: oid)
                 ViewLoadingManager.hideLoadingView()
                 let nextUrl = success.preferreda.foryou ?? ""
                 let wv = LLWYViewController()
@@ -284,6 +290,14 @@ extension LLBaseViewController {
             case .failure(_):
                 break
             }
+        }
+    }
+    
+    private func nineinfo(form prod: String) {
+        let location = LLLocationConfig()
+        location.startUpdatingLocation { [weak self] model in
+            guard let self = self else { return }
+            LLMdMessInfo.bpOInfo(from: model, proloID: prod, st:self.ksshjinof.value, jd: LLSBTwoDict.getCurrentTime(), type: "9")
         }
     }
     

@@ -121,7 +121,7 @@ class LLSBTwoDict {
         var dict: [String: Any] = ["": ""]
         dict["two"] = ["two": "2"]
         dict["coalmines"] = [
-            "quarrel": SaveIdentityConfig.huoquidfv() ?? "",
+            "quarrel": SaveIdentityConfig.huoidfv() ?? "",
             "seldomthat": SaveIdentityConfig.getidfa(),
             "shipyards": getMac(),
             "factories": getCurrentTime(),

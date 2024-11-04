@@ -12,6 +12,8 @@ class LLStepTHRViewController: LLBaseViewController {
     
     var lo = BehaviorRelay<String>(value: "")
     
+    var ksst = BehaviorRelay<String>(value: "")
+    
     var modelArray = BehaviorRelay<[widehallModel]>(value: [])
     
     lazy var headView: HeadView = {
@@ -98,6 +100,7 @@ class LLStepTHRViewController: LLBaseViewController {
             })
             .disposed(by: disposeBag)
         
+        ksst.accept(LLSBTwoDict.getCurrentTime())
     }
     
 }
@@ -178,12 +181,21 @@ extension LLStepTHRViewController: UITableViewDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let success):
+                self.mmofnfi()
                 let gabbling = success.preferreda.hisgold?.gabbling ?? ""
                 self.nextvc(form: gabbling, proid: lo.value)
                 break
-            case .failure(let failure):
+            case .failure(_):
                 break
             }
+        }
+    }
+    
+    private func mmofnfi() {
+        let location = LLLocationConfig()
+        location.startUpdatingLocation { [weak self] model in
+            guard let self = self else { return }
+            LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "6")
         }
     }
     

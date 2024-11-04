@@ -11,40 +11,33 @@ import AdSupport
 import SystemServices
 
 let LL_LOGIN = "LL_LOGIN"
-let LL_SESSIONID = "LL_SESSIONID"
-let LL_MAI_DIAN_ONE = "LL_MAI_DIAN_ONE"
+let LL_NID = "LL_NID"
 
 class LLDLInfo: NSObject {
     
     static func savedlInfo(_ phone: String, _ sessionID: String) {
-        UserDefaults.standard.setValue(sessionID, forKey: LL_SESSIONID)
+        UserDefaults.standard.setValue(sessionID, forKey: LL_NID)
         UserDefaults.standard.setValue(phone, forKey: LL_LOGIN)
-        UserDefaults.standard.setValue("", forKey: LL_MAI_DIAN_ONE)
         UserDefaults.standard.synchronize()
     }
     
     static func removedlInfo() {
-        let keys = [LL_LOGIN, LL_SESSIONID, LL_MAI_DIAN_ONE]
+        let keys = [LL_LOGIN, LL_NID, LLMAIO]
         keys.forEach { UserDefaults.standard.setValue("", forKey: $0) }
         UserDefaults.standard.synchronize()
     }
     
-    static func getAppVersion() -> String {
-        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
-    }
-    
     static func getLogiInfo() -> [String: String] {
-        let screamed = UserDefaults.standard.string(forKey: LL_SESSIONID) ?? ""
+        let screamed = UserDefaults.standard.string(forKey: LL_NID) ?? ""
         
         let duty = UIDevice.current.systemVersion
         
         let kitchen = UIDevice.current.name
         
-        let idfv = SaveIdentityConfig.huoquidfv() ?? ""
+        let idfv = SaveIdentityConfig.huoidfv() ?? ""
         
         var logdict: [String: String] = ["meal": "ios",
-                                         "inquiring": getAppVersion(),
-                                         "warmed": "mmla",
+                                         "inquiring": "1.0.0",
                                          "kitchen": kitchen,
                                          "cheerless": idfv,
                                          "php": "peace"]
@@ -81,27 +74,26 @@ class WLInfo: NSObject {
 
 class SaveIdentityConfig {
     
-    static func savein() {
-        let cc = UIDevice.current
-        guard let idfv = cc.identifierForVendor?.uuidString else {
+    static func saveinfoAdc() {
+        guard let idfv = UIDevice.current.identifierForVendor?.uuidString else {
             return
         }
-        let keychain = Keychain(service: "com.LigtasLoan.123")
+        let keyin = Keychain(service: "com.LigtasLoan.123")
         do {
-            try keychain.set(idfv, key: "dfv.lig")
+            try keyin.set(idfv, key: "dfv.lig")
         } catch {
             print("Error: \(error)")
         }
     }
     
-    static func huoquidfv() -> String? {
+    static func huoidfv() -> String? {
         let keychain = Keychain(service: "com.LigtasLoan.123")
         do {
             if let idfv = try keychain.get("dfv.lig") {
                 return idfv
             } else {
-                savein()
-                return huoquidfv()
+                saveinfoAdc()
+                return huoidfv()
             }
         } catch {
             print("Error: \(error)")

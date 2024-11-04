@@ -15,7 +15,7 @@ let Regular_SFDisplay = "SFDisplay-Light"
 let ROOT_VC = "ROOT_VC"
 
 var is_login: Bool {
-    if let sessionID = UserDefaults.standard.object(forKey: LL_SESSIONID) as? String {
+    if let sessionID = UserDefaults.standard.object(forKey: LL_NID) as? String {
         return !sessionID.isEmpty
     } else {
         return false

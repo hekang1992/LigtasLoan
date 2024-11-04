@@ -94,7 +94,7 @@ class NetworkManager {
     
     private func upshine() {
         let man = LLRequestManager()
-        let dict = ["heavily": "0", "quarrel": SaveIdentityConfig.huoquidfv() ?? "", "seldomthat": SaveIdentityConfig.getidfa()]
+        let dict = ["heavily": "0", "quarrel": SaveIdentityConfig.huoidfv() ?? "", "seldomthat": SaveIdentityConfig.getidfa()]
         man.requestAPI(params: dict, pageURL: "/ll/gambling/rounded/scarlett", method: .post) { result in
             
         }

@@ -30,11 +30,13 @@ class preferredaModel {
     var squatty: String?
     var aquizzical: String?
     var deepseats: String?
+    var consciousness: String?
     var widehall: [widehallModel]?
     var andfalling: andfallingModel?
     var consternation: hisgoldModel?
     var herplacid: herplacidModel?
     init(json: JSON) {
+        self.consciousness = json["consciousness"].stringValue
         self.squatty = json["squatty"].stringValue
         self.aquizzical = json["aquizzical"].stringValue
         self.deepseats = json["deepseats"].stringValue
@@ -233,9 +235,7 @@ extension APIService: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .request(_, _, let method),
-             .uploadImage(_, _, _, let method),
-             .uploadData(_, _, let method):
+        case .request(_, _, let method), .uploadImage(_, _, _, let method), .uploadData(_, _, let method):
             return method
         }
     }

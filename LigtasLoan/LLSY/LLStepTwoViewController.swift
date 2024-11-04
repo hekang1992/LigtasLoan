@@ -201,6 +201,8 @@ class LLStepTwoViewController: LLBaseViewController {
         return headView
     }()
     
+    var ksst = BehaviorRelay<String>(value: "")
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.estimatedRowHeight = 100
@@ -216,6 +218,8 @@ class LLStepTwoViewController: LLBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ksst.accept(LLSBTwoDict.getCurrentTime())
         
         view.addSubview(headView)
         headView.snp.makeConstraints { make in
@@ -360,11 +364,20 @@ extension LLStepTwoViewController: UITableViewDelegate {
             switch result {
             case .success(let success):
                 let gabbling = success.preferreda.hisgold?.gabbling ?? ""
+                self.mmonfi()
                 self.nextvc(form: gabbling, proid: lo.value)
                 break
-            case .failure(let failure):
+            case .failure(_):
                 break
             }
+        }
+    }
+    
+    private func mmonfi() {
+        let location = LLLocationConfig()
+        location.startUpdatingLocation { [weak self] model in
+            guard let self = self else { return }
+            LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "5")
         }
     }
     

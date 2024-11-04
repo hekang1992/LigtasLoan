@@ -9,6 +9,7 @@ import UIKit
 import GYSide
 import RxRelay
 import MJRefresh
+import CoreLocation
 
 class LLSYViewController: LLBaseViewController {
     
@@ -23,6 +24,8 @@ class LLSYViewController: LLBaseViewController {
         twoView.isHidden = true
         return twoView
     }()
+    
+    var ksSt = BehaviorRelay<String>(value: "")
     
     var homeModel = BehaviorRelay<preferredaModel?>(value: nil)
     
@@ -56,7 +59,7 @@ class LLSYViewController: LLBaseViewController {
             .tapGesture()
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
-                self?.apply(from: self?.homeModel.value?.nothave?.aviolence?.first?.cad ?? "")
+                self?.homeClick()
             }).disposed(by: disposeBag)
         
         oneView.scro.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
@@ -74,6 +77,7 @@ class LLSYViewController: LLBaseViewController {
             
         }).disposed(by: disposeBag)
         
+        ksSt.accept(LLSBTwoDict.getCurrentTime())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,4 +122,80 @@ extension LLSYViewController {
         }
     }
     
+    private func homeClick() {
+        //1yes，0no
+        let gck = self.homeModel.value?.consciousness ?? ""
+        let status = CLLocationManager.authorizationStatus()
+        if gck == "1" {
+            if status == .authorizedAlways || status == .authorizedWhenInUse {
+                lldwsc()
+            }else {
+                showLocaqlAlert()
+            }
+        }else {
+            lldwsc()
+        }
+    }
+    
+    private func lldwsc() {
+        let location = LLLocationConfig()
+        location.startUpdatingLocation { [weak self] model in
+            guard let self = self else { return }
+            loanInfo(model)
+            moneinfo(model)
+            sbscinfo(model)
+        }
+        self.apply(from: self.homeModel.value?.nothave?.aviolence?.first?.cad ?? "")
+    }
+    
+    private func showLocaqlAlert() {
+        let alert = UIAlertController(
+            title: "Location Access Necessary",
+            message: "To move forward, grant Location permissions in your Settings.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "To Settings", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        })
+        self.present(alert, animated: true)
+    }
+    
+    private func loanInfo(_ model: LLLModel) {
+        let man = LLRequestManager()
+        let dict = ["tosee": model.tosee,
+                    "unfeigned": model.unfeigned,
+                    "battalion": String(model.battalion),
+                    "library": model.library,
+                    "mocking": LLSBTwoDict.getCurrentTime(),
+                    "thatwas": model.thatwas,
+                    "strongest": String(model.strongest),
+                    "godis": model.godis,
+                    "remarked": "hand"]
+        man.requestAPI(params: dict, pageURL: "/ll/thatmatched/yourknee/would", method: .post) { result in
+            
+        }
+    }
+    
+    private func moneinfo(_ model: LLLModel) {
+        let ssbino = UserDefaults.standard.object(forKey: LLMAIO) as? String ?? ""
+        if ssbino.isEmpty {
+            LLMdMessInfo.bpOInfo(from: model, proloID: self.homeModel.value?.nothave?.aviolence?.first?.cad ?? "", st:ksSt.value, jd: LLSBTwoDict.getCurrentTime(), type: "1")
+        }
+    }
+    
+    private func sbscinfo(_ model: LLLModel) {
+        let man = LLRequestManager()
+        let jsonData = try? JSONSerialization.data(withJSONObject: LLAllDict.sheAllnfo())
+        let base64EncodedString = jsonData?.base64EncodedString() ?? ""
+        let dict = ["preferreda": base64EncodedString, "minfo": "mi", "global": "1"]
+        man.requestAPI(params: dict, pageURL: "/ll/sticking/wooddrill/again", method: .post) { result in
+            
+        }
+    }
+    
 }
+
+

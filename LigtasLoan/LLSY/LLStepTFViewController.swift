@@ -166,6 +166,8 @@ class LLStepTFViewController: LLBaseViewController {
     
     var type = BehaviorRelay<String>(value: "0")
     
+    var ksst = BehaviorRelay<String>(value: "")
+    
     lazy var headView: HeadView = {
         let headView = HeadView()
         headView.mlabel.text = "EMERGENCY CONTACT"
@@ -258,6 +260,8 @@ class LLStepTFViewController: LLBaseViewController {
                 }
             }
         }).disposed(by: disposeBag)
+        
+        ksst.accept(LLSBTwoDict.getCurrentTime())
     }
     
 }
@@ -408,6 +412,7 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
                     guard let self = self else { return }
                     switch result {
                     case .success(let success):
+                        self.lxwmeninfo()
                         let model = success.preferreda
                         if let gabbling = model.hisgold?.gabbling {
                             self.nextvc(form: gabbling, proid: self.lo.value)
@@ -420,7 +425,14 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
                 }
             }
         }
-        
+    }
+    
+    private func lxwmeninfo() {
+        let location = LLLocationConfig()
+        location.startUpdatingLocation { [weak self] model in
+            guard let self = self else { return }
+            LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "7")
+        }
     }
 }
 

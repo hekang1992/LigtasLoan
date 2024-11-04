@@ -59,6 +59,8 @@ class LLQAWView: UIView {
 
 class LLQAWViewController: LLBaseViewController {
     
+    var ksst = BehaviorRelay<String>(value: "")
+    
     var index: Int = 0
     
     var modelArray = BehaviorRelay<[widehallModel]>(value: [])
@@ -180,6 +182,8 @@ class LLQAWViewController: LLBaseViewController {
                 self.handleStorySelection(model, cell: cell)
             })
             .disposed(by: disposeBag)
+        
+        ksst.accept(LLSBTwoDict.getCurrentTime())
     }
     
 }
@@ -258,12 +262,21 @@ extension LLQAWViewController: UITableViewDelegate {
             guard let self = self else { return }
             ViewLoadingManager.hideLoadingView()
             switch result {
-            case .success(let success):
+            case .success(_):
+                self.lxwwllinfo()
                 self.pageinDetailInfo(from: lo.value)
                 break
-            case .failure(let failure):
+            case .failure(_):
                 break
             }
+        }
+    }
+    
+    private func lxwwllinfo() {
+        let location = LLLocationConfig()
+        location.startUpdatingLocation { [weak self] model in
+            guard let self = self else { return }
+            LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "8")
         }
     }
     

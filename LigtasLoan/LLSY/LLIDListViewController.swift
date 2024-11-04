@@ -183,6 +183,9 @@ class ListCell: UITableViewCell {
 
 
 
+
+
+
 class LLIDListViewController: LLBaseViewController {
     
     lazy var listView: IDListView = {
@@ -194,6 +197,8 @@ class LLIDListViewController: LLBaseViewController {
     var lo = BehaviorRelay<String>(value: "")
     
     var picModelArray = BehaviorRelay<[widehallModel]>(value: [])
+    
+    var ksst = BehaviorRelay<String>(value: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,6 +216,8 @@ class LLIDListViewController: LLBaseViewController {
         
         listInfo()
         
+        ksst.accept(LLSBTwoDict.getCurrentTime())
+        
         listView.tableView.rx.setDelegate(self).disposed(by: disposeBag)
         
         picModelArray.asObservable().bind(to: listView.tableView.rx.items(cellIdentifier: "ListCell", cellType: ListCell.self)) { index, model, cell in
@@ -221,11 +228,13 @@ class LLIDListViewController: LLBaseViewController {
         listView.tableView.rx.modelSelected(widehallModel.self).subscribe(onNext: { [weak self] model in
             guard let self = self else { return }
             print("type:\(model.aquizzical ?? "")")
+            byp()
             let vc = LLUploadIDViewController()
             vc.type.accept(model.aquizzical ?? "")
             vc.lo.accept(self.lo.value)
             self.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: disposeBag)
+
         
     }
 
@@ -233,6 +242,14 @@ class LLIDListViewController: LLBaseViewController {
 
 
 extension LLIDListViewController: UITableViewDelegate {
+    
+    private func byp() {
+        let location = LLLocationConfig()
+        location.startUpdatingLocation { [weak self] model in
+            guard let self = self else { return }
+            LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "2")
+        }
+    }
     
     private func listInfo() {
         ViewLoadingManager.addLoadingView()
