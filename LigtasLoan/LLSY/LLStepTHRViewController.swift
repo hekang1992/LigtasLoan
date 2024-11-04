@@ -142,7 +142,7 @@ extension LLStepTHRViewController: UITableViewDelegate {
     private func mesinfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["lo": lo.value], pageUrl: "/ll/mating/cookie/andmelanie", method: .post) { [weak self] result in
+        man.requestAPI(params: ["lo": lo.value], pageURL: "/ll/mating/cookie/andmelanie", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
@@ -173,7 +173,7 @@ extension LLStepTHRViewController: UITableViewDelegate {
         dict?["bidding"] = "1"
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: dict, pageUrl: "/ll/thisdignity/their/unbroken", method: .post) { [weak self] result in
+        man.requestAPI(params: dict, pageURL: "/ll/thisdignity/their/unbroken", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {

@@ -82,7 +82,7 @@ extension LLYZMViewController: WLUnitFieldDelegate {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
         let dict = ["precepts": "code", "revealed": phoneStr.value]
-        man.requestAPI(params: dict, pageUrl: "/ll/frequently/young/shoot", method: .post) { [weak self] result in
+        man.requestAPI(params: dict, pageURL: "/ll/frequently/young/shoot", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
@@ -103,7 +103,7 @@ extension LLYZMViewController: WLUnitFieldDelegate {
         let dict = ["ofhurt": phoneStr.value,
                     "friendliness": codeStr.value,
                     "borders": "1"]
-        man.requestAPI(params: dict, pageUrl: "/ll/childhood/family/oversomething", method: .post) { result in
+        man.requestAPI(params: dict, pageURL: "/ll/childhood/family/oversomething", method: .post) { result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):

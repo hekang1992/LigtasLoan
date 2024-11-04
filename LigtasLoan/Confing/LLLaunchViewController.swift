@@ -7,8 +7,10 @@
 
 import UIKit
 import Alamofire
-import Moya
 import Network
+import AppTrackingTransparency
+import KeychainAccess
+import AdSupport
 
 class LLLaunchViewController: LLBaseViewController {
     
@@ -44,7 +46,9 @@ extension LLLaunchViewController {
 }
 
 class NetworkManager {
+    
     static let shared = NetworkManager()
+    
     private var reachabilityManager: NetworkReachabilityManager?
 
     private init() {
@@ -52,17 +56,48 @@ class NetworkManager {
     }
 
     func startListening() {
-        reachabilityManager?.startListening(onUpdatePerforming: { status in
+        reachabilityManager?.startListening(onUpdatePerforming: { [weak self] status in
+            guard let self = self else { return }
             switch status {
             case .notReachable:
                 print("Network not reachable")
             case .reachable(.ethernetOrWiFi):
                 print("Network reachable via WiFi")
+                upgifno()
             case .reachable(.cellular):
                 print("Network reachable via Cellular")
+                upgifno()
             case .unknown:
                 print("Network status unknown")
             }
         })
+        
     }
+    
+    private func upgifno() {
+        DispatchQueue.main.async {
+            if #available(iOS 14.0, *) {
+                ATTrackingManager.requestTrackingAuthorization { status in
+                    switch status {
+                    case .authorized, .denied, .notDetermined:
+                        self.upshine()
+                        break
+                    case .restricted:
+                        break
+                    @unknown default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    private func upshine() {
+        let man = LLRequestManager()
+        let dict = ["heavily": "0", "quarrel": SaveIdentityConfig.huoquidfv() ?? "", "seldomthat": SaveIdentityConfig.getidfa()]
+        man.requestAPI(params: dict, pageURL: "/ll/gambling/rounded/scarlett", method: .post) { result in
+            
+        }
+    }
+    
 }

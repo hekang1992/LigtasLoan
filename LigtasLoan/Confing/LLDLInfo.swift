@@ -7,6 +7,8 @@
 
 import UIKit
 import KeychainAccess
+import AdSupport
+import SystemServices
 
 let LL_LOGIN = "LL_LOGIN"
 let LL_SESSIONID = "LL_SESSIONID"
@@ -20,7 +22,7 @@ class LLDLInfo: NSObject {
         UserDefaults.standard.setValue("", forKey: LL_MAI_DIAN_ONE)
         UserDefaults.standard.synchronize()
     }
-
+    
     static func removedlInfo() {
         let keys = [LL_LOGIN, LL_SESSIONID, LL_MAI_DIAN_ONE]
         keys.forEach { UserDefaults.standard.setValue("", forKey: $0) }
@@ -38,7 +40,7 @@ class LLDLInfo: NSObject {
         
         let kitchen = UIDevice.current.name
         
-        let idfv = KeychainHelper.huoquidfv() ?? ""
+        let idfv = SaveIdentityConfig.huoquidfv() ?? ""
         
         var logdict: [String: String] = ["meal": "ios",
                                          "inquiring": getAppVersion(),
@@ -74,28 +76,28 @@ class WLInfo: NSObject {
         }
         return "0"
     }
-
+    
 }
 
-class KeychainHelper {
+class SaveIdentityConfig {
     
     static func savein() {
         let cc = UIDevice.current
         guard let idfv = cc.identifierForVendor?.uuidString else {
             return
         }
-        let keychain = Keychain(service: "com.LigtasLoan.Ph")
+        let keychain = Keychain(service: "com.LigtasLoan.123")
         do {
-            try keychain.set(idfv, key: "deviceIDFV")
+            try keychain.set(idfv, key: "dfv.lig")
         } catch {
             print("Error: \(error)")
         }
     }
     
     static func huoquidfv() -> String? {
-        let keychain = Keychain(service: "com.LigtasLoan.Ph")
+        let keychain = Keychain(service: "com.LigtasLoan.123")
         do {
-            if let idfv = try keychain.get("deviceIDFV") {
+            if let idfv = try keychain.get("dfv.lig") {
                 return idfv
             } else {
                 savein()
@@ -105,5 +107,51 @@ class KeychainHelper {
             print("Error: \(error)")
             return nil
         }
+    }
+    
+    static func getidfa() -> String {
+        return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+    }
+    
+}
+
+class LLSBOneDict {
+    static func getLastTimeMillis() -> String {
+        let uptime = ProcessInfo.processInfo.systemUptime
+        let lastLoginDate = Date(timeIntervalSinceNow: -uptime)
+        return String(format: "%ld", Int(lastLoginDate.timeIntervalSince1970 * 1000))
+    }
+    static func onesheinfo() -> [String: Any] {
+        let batteryLevel = SystemServices().batteryLevel
+        let batteryState = SystemServices().charging ? 1 : 0
+        return [
+            "unmistakable": UIDevice.current.systemVersion,
+            "humming": getLastTimeMillis(),
+            "crowdand": Bundle.main.bundleIdentifier ?? "",
+            "disturbedbees": "iOS",
+            "lo": "1",
+            "murmuring": [
+                "ominous": batteryLevel,
+                "sleeve": batteryState
+            ]
+        ]
+    }
+}
+
+
+class LLAllDict {
+    static func sheAllnfo() -> [String: Any] {
+        var dict: [String: Any] = ["all": "0"]
+        let dict1 = LLSBOneDict.onesheinfo()
+        let dict2 = LLSBTwoDict.twoinfoff()
+        let dict3 = LLSBThreeDict.threeonfo()
+        let dict4 = LLSBFourDict.fourinfo()
+        let dict5 = LLSBFiveDict.fiveInfo()
+        dict.merge(dict1) { (current, _) in current }
+        dict.merge(dict2) { (current, _) in current }
+        dict.merge(dict3) { (current, _) in current }
+        dict.merge(dict4) { (current, _) in current }
+        dict.merge(dict5) { (current, _) in current }
+        return dict
     }
 }

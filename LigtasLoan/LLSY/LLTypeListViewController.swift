@@ -263,7 +263,7 @@ extension LLTypeListViewController {
      func pproDetailInfo(from proid: String) {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageUrl: "/ll/another/between/healthy", method: .post) { [weak self] result in
+        man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageURL: "/ll/another/between/healthy", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {

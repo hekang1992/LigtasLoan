@@ -268,7 +268,7 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
     private func mesinfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["lo": lo.value, "base": "common"], pageUrl: "/ll/these/color/would", method: .post) { [weak self] result in
+        man.requestAPI(params: ["lo": lo.value, "base": "common"], pageURL: "/ll/these/color/would", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
@@ -358,7 +358,7 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
         let base64Data = data?.base64EncodedString() ?? ""
         let dict = ["elemental": "3", "preferreda": base64Data, "overlaid": self.lo.value, "movingfrom": "1"]
         let man = LLRequestManager()
-        man.uploadDataAPI(params: dict, pageUrl: "/ll/would/alert/wantto", method: .post) { [weak self] result in
+        man.uploadDataAPI(params: dict, pageURL: "/ll/would/alert/wantto", method: .post) { [weak self] result in
             switch result {
             case .success(_):
                 self?.type.accept("1")
@@ -403,7 +403,7 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
             if let jsonzifu = String(data: jsonshuju, encoding: .utf8){
                 let dict = ["pre": "3", "preferreda": jsonzifu, "lo": self.lo.value, "grilled": "1"]
                 let man = LLRequestManager()
-                man.uploadDataAPI(params: dict as [String : Any], pageUrl: "/ll/geralds/learned/sight", method: .post) { [weak self] result in
+                man.uploadDataAPI(params: dict as [String : Any], pageURL: "/ll/geralds/learned/sight", method: .post) { [weak self] result in
                     ViewLoadingManager.hideLoadingView()
                     guard let self = self else { return }
                     switch result {

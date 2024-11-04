@@ -340,7 +340,7 @@ extension LLRightViewController {
     private func delInfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["del": "1", "cost": "cent"], pageUrl: "/ll/education/social/gather", method: .get) { result in
+        man.requestAPI(params: ["del": "1", "cost": "cent"], pageURL: "/ll/education/social/gather", method: .get) { result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
@@ -360,7 +360,7 @@ extension LLRightViewController {
     private func logInfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["thatstupid": "1", "silenceanything": "trump"], pageUrl: "/ll/mothers/spring/journeyed", method: .get) { result in
+        man.requestAPI(params: ["thatstupid": "1", "silenceanything": "trump"], pageURL: "/ll/mothers/spring/journeyed", method: .get) { result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):

@@ -207,72 +207,49 @@ class theirbeautyModel {
 
 
 
+let base_URL = "http://8.220.185.183:8081/llapi"
 
-
-
-
-
-
-
-let BASE_URL = "http://8.220.185.183:8081/llapi"
-
-let H5_URL = "http://8.220.185.183:8081"
+let h5_URL = "http://8.220.185.183:8081"
 
 enum APIService {
-    case requestAPI(params: [String: Any]?, pageUrl: String, method: Moya.Method)
-    case uploadImageAPI(params: [String: Any]?, pageUrl: String, data: Data, method: Moya.Method)
-    case uploadDataAPI(params: [String: Any]?, pageUrl: String, method: Moya.Method)
+    case request(params: [String: Any]?, pageURL: String, method: Moya.Method)
+    case uploadImage(params: [String: Any]?, pageURL: String, imageData: Data, method: Moya.Method)
+    case uploadData(params: [String: Any]?, pageURL: String, method: Moya.Method)
 }
 
 extension APIService: TargetType {
     var baseURL: URL {
-        let baseUrl = RePinJieURL.appendQueryParameters(urlString: BASE_URL, parameters: LLDLInfo.getLogiInfo()) ?? ""
-        return URL(string: baseUrl)!
+        guard let url = URL(string: base_URL) else { fatalError("Invalid base URL") }
+        let extendedURL = LLJieURL.appendters(url: url.absoluteString, parameters: LLDLInfo.getLogiInfo()) ?? ""
+        return URL(string: extendedURL)!
     }
     
     var path: String {
         switch self {
-        case .requestAPI(_, let pageUrl, _), .uploadImageAPI(_, let pageUrl, _, _), .uploadDataAPI(_, let pageUrl, _):
-            return pageUrl
+        case .request(_, let pageURL, _), .uploadImage(_, let pageURL, _, _), .uploadData(_, let pageURL, _):
+            return pageURL
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .requestAPI(_, _, let method),
-                .uploadImageAPI(_, _, _, let method),
-                .uploadDataAPI(_, _, let method):
+        case .request(_, _, let method),
+             .uploadImage(_, _, _, let method),
+             .uploadData(_, _, let method):
             return method
         }
     }
     
     var task: Task {
         switch self {
-        case .requestAPI(let params, _, _):
+        case .request(let params, _, _):
             return .requestParameters(parameters: params ?? [:], encoding: URLEncoding.default)
             
-        case .uploadImageAPI(let params, _, let data, _):
-            var formData = [MultipartFormData]()
-            formData.append(MultipartFormData(provider: .data(data), name: "tryst", fileName: "tryst.png", mimeType: "image/png"))
-            if let params = params {
-                for (key, value) in params {
-                    if let value = value as? String, let data = value.data(using: .utf8) {
-                        formData.append(MultipartFormData(provider: .data(data), name: key))
-                    }
-                }
-            }
-            return .uploadMultipart(formData)
+        case .uploadImage(let params, _, let imageData, _):
+            return .uploadMultipart(createMultipartFormData(params: params, imageData: imageData))
             
-        case .uploadDataAPI(let params, _, _):
-            var formData = [MultipartFormData]()
-            if let params = params {
-                for (key, value) in params {
-                    if let value = value as? String, let data = value.data(using: .utf8) {
-                        formData.append(MultipartFormData(provider: .data(data), name: key))
-                    }
-                }
-            }
-            return .uploadMultipart(formData)
+        case .uploadData(let params, _, _):
+            return .uploadMultipart(createMultipartFormData(params: params))
         }
     }
     
@@ -291,69 +268,81 @@ extension APIService: TargetType {
     var validationType: ValidationType {
         return .successCodes
     }
+    
+    private func createMultipartFormData(params: [String: Any]?, imageData: Data? = nil) -> [MultipartFormData] {
+        var formData = [MultipartFormData]()
+        
+        if let imageData = imageData {
+            formData.append(MultipartFormData(provider: .data(imageData), name: "tryst", fileName: "tryst.png", mimeType: "image/png"))
+        }
+        
+        params?.forEach { key, value in
+            if let stringValue = value as? String, let data = stringValue.data(using: .utf8) {
+                formData.append(MultipartFormData(provider: .data(data), name: key))
+            }
+        }
+        
+        return formData
+    }
 }
 
 class LLRequestManager: NSObject {
-    
     private let provider = MoyaProvider<APIService>()
     
     private func requestData(target: APIService, completion: @escaping (Result<CommonModel, Error>) -> Void) {
         provider.request(target) { result in
             switch result {
             case .success(let response):
-                do {
-                    let json = try JSON(data: response.data)
-                    let CommonModel = CommonModel(json: json)
-                    self.handleResponse(CommonModel: CommonModel, completion: completion)
-                } catch {
-                    completion(.failure(error))
-                }
+                self.handleResponse(response, completion: completion)
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
     
-    private func handleResponse(CommonModel: CommonModel, completion: @escaping (Result<CommonModel, Error>) -> Void) {
-        let frown = CommonModel.whey
-        if CommonModel.andmammy == 0 || CommonModel.andmammy == 00 {
-            completion(.success(CommonModel))
-        }else if CommonModel.andmammy == -2 {
-            let error = NSError(domain: "-2", code: -2)
+    private func handleResponse(_ response: Response, completion: @escaping (Result<CommonModel, Error>) -> Void) {
+        do {
+            let json = try JSON(data: response.data)
+            let commonModel = CommonModel(json: json)
+            if commonModel.andmammy == 0 {
+                completion(.success(commonModel))
+            } else {
+                ToastUtility.showToast(message: commonModel.whey)
+                throw createError(from: commonModel)
+            }
+        } catch {
             completion(.failure(error))
-            ToastUtility.showToast(message: frown)
-        }else {
-            let error = NSError(domain: "-2", code: -2)
-            completion(.failure(error))
-            ToastUtility.showToast(message: frown)
         }
     }
     
-    func requestAPI(params: [String: Any]?, pageUrl: String, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
-        requestData(target: .requestAPI(params: params, pageUrl: pageUrl, method: method), completion: completion)
+    private func createError(from commonModel: CommonModel) -> Error {
+        let errorDescription = commonModel.whey
+        return NSError(domain: "APIError", code: commonModel.andmammy, userInfo: [NSLocalizedDescriptionKey: errorDescription])
     }
     
-    func uploadDataAPI(params: [String: Any]?, pageUrl: String, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
-        requestData(target: .requestAPI(params: params, pageUrl: pageUrl, method: method), completion: completion)
+    func requestAPI(params: [String: Any]?, pageURL: String, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
+        requestData(target: .request(params: params, pageURL: pageURL, method: method), completion: completion)
     }
     
-    func uploadImageAPI(params: [String: Any]?, pageUrl: String, data: Data, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
-        requestData(target: .uploadImageAPI(params: params, pageUrl: pageUrl, data: data, method: method), completion: completion)
+    func uploadDataAPI(params: [String: Any]?, pageURL: String, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
+        requestData(target: .uploadData(params: params, pageURL: pageURL, method: method), completion: completion)
     }
     
+    func uploadImageAPI(params: [String: Any]?, pageURL: String, imageData: Data, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
+        requestData(target: .uploadImage(params: params, pageURL: pageURL, imageData: imageData, method: method), completion: completion)
+    }
 }
 
-class RePinJieURL {
-    static  func appendQueryParameters(urlString: String, parameters: [String: String]) -> String? {
-        guard var urlComponents = URLComponents(string: urlString) else {
+class LLJieURL {
+    static func appendters(url: String, parameters: [String: String]) -> String? {
+        guard var urlComponents = URLComponents(string: url) else {
             return nil
         }
         let queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
-        if urlComponents.queryItems == nil {
-            urlComponents.queryItems = queryItems
-        } else {
-            urlComponents.queryItems?.append(contentsOf: queryItems)
-        }
+        urlComponents.queryItems = (urlComponents.queryItems ?? []) + queryItems
         return urlComponents.url?.absoluteString
     }
 }
+
+
+

@@ -323,7 +323,7 @@ extension LLStepTwoViewController: UITableViewDelegate {
     private func mesinfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["lo": lo.value], pageUrl: "/ll/would/sitting/everyone", method: .post) { [weak self] result in
+        man.requestAPI(params: ["lo": lo.value], pageURL: "/ll/would/sitting/everyone", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
@@ -354,7 +354,7 @@ extension LLStepTwoViewController: UITableViewDelegate {
         dict?["bidding"] = "1"
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: dict, pageUrl: "/ll/yankees/tongue/groupof", method: .post) { [weak self] result in
+        man.requestAPI(params: dict, pageURL: "/ll/yankees/tongue/groupof", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {

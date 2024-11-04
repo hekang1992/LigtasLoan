@@ -66,7 +66,6 @@ class LLSYViewController: LLBaseViewController {
             self?.homeInfo()
         })
         
-        
         homeModel.subscribe(onNext: { [weak self] model in
             if let self = self {
                 self.twoView.model.accept(model)
@@ -97,7 +96,7 @@ extension LLSYViewController {
     private func homeInfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["home": "misdeeds", "ancestors": "purple"], pageUrl: "/ll/huntingsquire/enough/hishorses", method: .get) { [weak self] result in
+        man.requestAPI(params: ["home": "misdeeds", "ancestors": "purple"], pageURL: "/ll/huntingsquire/enough/hishorses", method: .get) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             self?.oneView.scro.mj_header?.endRefreshing()
             self?.twoView.tableView.mj_header?.endRefreshing()

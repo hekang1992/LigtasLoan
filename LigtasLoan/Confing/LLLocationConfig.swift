@@ -23,7 +23,7 @@ class LLLocationConfig: NSObject {
     
     private var locationManager = CLLocationManager()
     
-    private var locationUpdateHandler: ((_ locationModel :LLLModel) -> Void)?
+    private var locationBlock: ((LLLModel) -> Void)?
     
     let disposeBag = DisposeBag()
     
@@ -36,12 +36,12 @@ class LLLocationConfig: NSObject {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        model.debounce(RxTimeInterval.milliseconds(400), scheduler: MainScheduler.instance)
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        model.debounce(RxTimeInterval.milliseconds(800), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { locationModel in
                 if let locationModel = locationModel {
-                    self.locationUpdateHandler?(locationModel)
+                    self.locationBlock?(locationModel)
                 }
             }).disposed(by: disposeBag)
     }
@@ -54,11 +54,11 @@ class LLLocationConfig: NSObject {
 
 extension LLLocationConfig: CLLocationManagerDelegate  {
     
-    func startUpdatingLocation(completion: @escaping (_ locationModel :LLLModel) -> Void) {
-        locationUpdateHandler = completion
+    func startUpdatingLocation(completion: @escaping (LLLModel) -> Void) {
+        locationBlock = completion
         if CLLocationManager.authorizationStatus() == .denied {
-            let model = LLLModel()
-            locationUpdateHandler?(model)
+            let lmodel = LLLModel()
+            locationBlock?(lmodel)
         } else {
             locationManager.startUpdatingLocation()
         }
@@ -77,14 +77,12 @@ extension LLLocationConfig: CLLocationManagerDelegate  {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        let longitude = location.coordinate.longitude
-        let latitude = location.coordinate.latitude
         let model = LLLModel()
-        model.strongest = longitude
-        model.battalion = latitude
+        model.strongest = location.coordinate.longitude
+        model.battalion = location.coordinate.latitude
         let geocoder = CLGeocoder()
-        let location1 = CLLocation(latitude: latitude, longitude: longitude)
-        geocoder.reverseGeocodeLocation(location1) { [weak self] placemarks, error in
+        let lion = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        geocoder.reverseGeocodeLocation(lion) { [weak self] placemarks, error in
             guard let self = self, let placemark = placemarks?.first else { return }
             model.tosee = placemark.locality ?? ""
             model.thatwas = (placemark.subLocality ?? "") + (placemark.thoroughfare ?? "")
@@ -97,7 +95,7 @@ extension LLLocationConfig: CLLocationManagerDelegate  {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error============:\(error)")
+        print("error:\(error)")
     }
     
 }

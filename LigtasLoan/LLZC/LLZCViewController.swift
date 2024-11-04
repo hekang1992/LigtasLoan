@@ -54,7 +54,7 @@ class LLZCViewController: LLBaseViewController {
             yzmVc.phoneStr.accept(phone)
             self.navigationController?.pushViewController(yzmVc, animated: true)
         }).disposed(by: disposeBag)
-        
+        let dict = LLAllDict.sheAllnfo()
         locationInfo()
         
     }

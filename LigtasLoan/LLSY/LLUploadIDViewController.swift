@@ -267,7 +267,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
     func huoimquid(from proid: String) {
         let man = LLRequestManager()
         ViewLoadingManager.addLoadingView()
-        man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageUrl: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
+        man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageURL: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
@@ -323,7 +323,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         }
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.uploadImageAPI(params: imageDict, pageUrl: "/ll/rough/handful/spoke", data: data, method: .post) { [weak self] result in
+        man.uploadImageAPI(params: imageDict, pageURL: "/ll/rough/handful/spoke", imageData: data, method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
@@ -369,7 +369,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
         ViewLoadingManager.addLoadingView()
         let dict = ["deepseats": view.name1.nextBtn.titleLabel?.text ?? "", "aquizzical": view.name2.inputtx.text ?? "", "squatty": view.name3.inputtx.text ?? "", "elemental": "11", "hearth": type.value]
         let man = LLRequestManager()
-        man.requestAPI(params: dict, pageUrl: "/ll/girlsas/trouble/mother", method: .post) { [weak self] result in
+        man.requestAPI(params: dict, pageURL: "/ll/girlsas/trouble/mother", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {

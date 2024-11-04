@@ -237,7 +237,7 @@ extension LLIDListViewController: UITableViewDelegate {
     private func listInfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["card": "pp"], pageUrl: "ll/looked/either/ellen", method: .post) { [weak self] result in
+        man.requestAPI(params: ["card": "pp"], pageURL: "ll/looked/either/ellen", method: .post) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):

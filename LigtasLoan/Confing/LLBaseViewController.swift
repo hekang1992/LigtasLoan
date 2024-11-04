@@ -27,7 +27,7 @@ extension LLBaseViewController {
     func apply(from proid: String) {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["lo": proid, "knewdifferently": "1", "flirting": "love"], pageUrl: "/ll/tarletonwho/faces/straight", method: .post) { [weak self] result in
+        man.requestAPI(params: ["lo": proid, "knewdifferently": "1", "flirting": "love"], pageURL: "/ll/tarletonwho/faces/straight", method: .post) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let success):
@@ -59,7 +59,7 @@ extension LLBaseViewController {
     
     @objc func proDetailInfo(from proid: String) {
         let man = LLRequestManager()
-        man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageUrl: "/ll/another/between/healthy", method: .post) { [weak self] result in
+        man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageURL: "/ll/another/between/healthy", method: .post) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let success):
@@ -84,7 +84,7 @@ extension LLBaseViewController {
     func pageinDetailInfo(from proid: String) {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageUrl: "/ll/another/between/healthy", method: .post) { [weak self] result in
+        man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageURL: "/ll/another/between/healthy", method: .post) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let success):
@@ -188,7 +188,7 @@ extension LLBaseViewController {
     func huoquid(from proid: String) {
         let man = LLRequestManager()
         ViewLoadingManager.addLoadingView()
-        man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageUrl: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
+        man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageURL: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
@@ -253,7 +253,7 @@ extension LLBaseViewController {
     func fetchStoryData(for cell: LLBtnClickCell) {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["": ""], pageUrl: "/ll/after/tomcat/foreverrankled", method: .get) { result in
+        man.requestAPI(params: ["": ""], pageURL: "/ll/after/tomcat/foreverrankled", method: .get) { result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
@@ -271,7 +271,7 @@ extension LLBaseViewController {
     func ddtovc(from oid: String) {
         let odDict = ["comforting": "1", "finally": oid, "twinge": "owo", "marriedindia": "lg-sa"]
         let man = LLRequestManager()
-        man.requestAPI(params: odDict, pageUrl: "/ll/wonderedif/thenher/these", method: .post) { result in
+        man.requestAPI(params: odDict, pageURL: "/ll/wonderedif/thenher/these", method: .post) { result in
             ViewLoadingManager.hideLoadingView()
             switch result {
             case .success(let success):

@@ -41,10 +41,14 @@ target 'LigtasLoan' do
   
   pod 'MJRefresh', '~> 3.7.9'
   
+  pod 'DeviceKit', '~> 5.2.2'
+  
   pod 'FSPagerView', '~> 0.8.3'
   
   pod 'ActiveLabel', '~> 1.1.0'
   
   pod 'BRPickerView', '~> 2.9.1'
+  
+  pod 'SystemServices', '~> 2.0.1'
 
 end

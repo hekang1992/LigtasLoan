@@ -84,7 +84,7 @@ class PLAPhotoManager: NSObject {
         if sourceType == .camera {
             if isfront == "1" {
                 imagePicker.cameraDevice = .front
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                     self.hideCameraton(in: imagePicker.view)
                 }
             }else {

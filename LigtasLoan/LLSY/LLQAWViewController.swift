@@ -224,7 +224,7 @@ extension LLQAWViewController: UITableViewDelegate {
     private func hqwqinfo() {
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["withouthaving": "1", "hamper": "0", "bind": "0"], pageUrl: "/ll/which/stuart/andcolorful", method: .get) { [weak self] result in
+        man.requestAPI(params: ["withouthaving": "1", "hamper": "0", "bind": "0"], pageURL: "/ll/which/stuart/andcolorful", method: .get) { [weak self] result in
             ViewLoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
@@ -254,7 +254,7 @@ extension LLQAWViewController: UITableViewDelegate {
         dict?["hearth"] = index + 1
         ViewLoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: dict, pageUrl: "/ll/slave/evidence/characteristics", method: .post) { [weak self] result in
+        man.requestAPI(params: dict, pageURL: "/ll/slave/evidence/characteristics", method: .post) { [weak self] result in
             guard let self = self else { return }
             ViewLoadingManager.hideLoadingView()
             switch result {
