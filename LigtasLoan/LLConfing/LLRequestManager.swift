@@ -1,7 +1,7 @@
 //
 //  LLRequestManager.swift
 //  LigtasLoan
-//  
+//
 //  Created by LigtasLoan on 2024/10/16.
 //
 
@@ -13,9 +13,12 @@ class CommonModel {
     var andmammy: Int
     var preferreda: preferredaModel
     init(json: JSON) {
-        self.andmammy = json["andmammy"].intValue
-        self.whey = json["whey"].stringValue
-        self.preferreda = preferredaModel(json: json["preferreda"])
+        let andmammyValue = json["andmammy"].intValue
+        let wheyValue = json["whey"].stringValue
+        let preferredaValue = json["preferreda"]
+        self.andmammy = andmammyValue
+        self.whey = wheyValue
+        self.preferreda = preferredaModel(json: preferredaValue)
     }
 }
 
@@ -35,26 +38,25 @@ class preferredaModel {
     var andfalling: andfallingModel?
     var consternation: hisgoldModel?
     var herplacid: herplacidModel?
+    
     init(json: JSON) {
-        self.consciousness = json["consciousness"].stringValue
-        self.squatty = json["squatty"].stringValue
-        self.aquizzical = json["aquizzical"].stringValue
-        self.deepseats = json["deepseats"].stringValue
-        self.ofhurt = json["ofhurt"].stringValue
-        self.screamed = json["screamed"].stringValue
+        self.consciousness = json["consciousness"].string
+        self.squatty = json["squatty"].string
+        self.aquizzical = json["aquizzical"].string
+        self.deepseats = json["deepseats"].string
+        self.ofhurt = json["ofhurt"].string
+        self.screamed = json["screamed"].string
+        self.foryou = json["foryou"].string
+        
         self.nothave = nothaveModel(json: json["nothave"])
-        self.foryou = json["foryou"].stringValue
         self.hisgold = hisgoldModel(json: json["hisgold"])
         self.toremember = torememberModel(json: json["toremember"])
         self.consternation = hisgoldModel(json: json["consternation"])
-        self.unending = json["unending"].arrayValue.map {
-            widehallModel(json: $0)
-        }
-        self.widehall = json["widehall"].arrayValue.map {
-            widehallModel(json: $0)
-        }
         self.andfalling = andfallingModel(json: json["andfalling"])
         self.herplacid = herplacidModel(json: json["herplacid"])
+        
+        self.unending = json["unending"].arrayValue.map { widehallModel(json: $0) }
+        self.widehall = json["widehall"].arrayValue.map { widehallModel(json: $0) }
     }
 }
 
@@ -131,9 +133,9 @@ class aviolenceModel {
 class widehallModel {
     var hatred: String?
     var throwingher: String?
-    var andmammy: String? // key
-    var underthe: String? // type -- tx -- btn
-    var risked: String? // jianpanleixing
+    var andmammy: String?
+    var underthe: String?
+    var risked: String?
     var butshe: String?
     var elemental: String?
     var theirbeauty: [theirbeautyModel]?
@@ -224,11 +226,9 @@ class theirbeautyModel {
 
 
 
-
-
-
-
 //==================================================
+
+
 
 
 
