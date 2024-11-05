@@ -2,7 +2,7 @@
 //  LLWYViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/11/2.
+//  Created by LigtasLoan on 2024/11/2.
 //
 
 import UIKit
@@ -129,15 +129,15 @@ extension LLWYViewController: WKScriptMessageHandler, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        ViewLoadingManager.hideLoadingView()
+        LoadingManager.hideLoadingView()
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        ViewLoadingManager.hideLoadingView()
+        LoadingManager.hideLoadingView()
     }
     
     private func shouldOpenInExternalApp(_ urlStr: String) -> Bool {

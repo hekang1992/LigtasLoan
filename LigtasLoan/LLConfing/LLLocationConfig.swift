@@ -2,7 +2,7 @@
 //  LLLocationConfig.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/11/2.
+//  Created by LigtasLoan on 2024/11/2.
 //
 
 import CoreLocation

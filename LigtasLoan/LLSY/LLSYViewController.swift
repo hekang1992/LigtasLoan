@@ -2,7 +2,7 @@
 //  LLSYViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/22.
+//  Created by LigtasLoan on 2024/10/22.
 //
 
 import UIKit
@@ -98,10 +98,10 @@ extension LLSYViewController {
     }
     
     private func homeInfo() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["home": "misdeeds", "ancestors": "purple"], pageURL: "/ll/huntingsquire/enough/hishorses", method: .get) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             self?.oneView.scro.mj_header?.endRefreshing()
             self?.twoView.tableView.mj_header?.endRefreshing()
             switch result {

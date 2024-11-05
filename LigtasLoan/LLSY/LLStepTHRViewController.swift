@@ -2,7 +2,7 @@
 //  LLStepTHRViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/30.
+//  Created by LigtasLoan on 2024/10/30.
 //
 
 import UIKit
@@ -143,10 +143,10 @@ extension LLStepTHRViewController: UITableViewDelegate {
     }
     
     private func mesinfo() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": lo.value], pageURL: "/ll/mating/cookie/andmelanie", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 let model = success.preferreda
@@ -164,20 +164,22 @@ extension LLStepTHRViewController: UITableViewDelegate {
     private func bcinfo() {
         var dict: [String: Any]?
         dict = modelArray.value.reduce(into: [String: Any](), { preesult, model in
-            let underthe = model.underthe
-            if underthe == "story1" || underthe == "story4" {
-                preesult[model.andmammy!] = model.elemental
-            }else {
-                preesult[model.andmammy!] = model.butshe
+            guard let key = model.andmammy else { return }
+            let value: Any
+            if model.underthe == "story1" || model.underthe == "story4" {
+                value = model.elemental ?? ""
+            } else {
+                value = model.butshe ?? ""
             }
+            preesult[key] = value
         })
-        dict?["eat"] = "apple"
+        dict?["eat"] = "rice"
         dict?["lo"] = lo.value
         dict?["bidding"] = "1"
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: dict, pageURL: "/ll/thisdignity/their/unbroken", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):

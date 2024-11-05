@@ -2,7 +2,7 @@
 //  LLTypeListViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/25.
+//  Created by LigtasLoan on 2024/10/25.
 //
 
 import UIKit
@@ -261,10 +261,10 @@ extension LLTypeListViewController {
     }
     
      func pproDetailInfo(from proid: String) {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageURL: "/ll/another/between/healthy", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):

@@ -2,7 +2,7 @@
 //  LLStepTwoViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/27.
+//  Created by LigtasLoan on 2024/10/27.
 //
 
 import UIKit
@@ -325,10 +325,10 @@ extension LLStepTwoViewController: UITableViewDelegate {
     }
     
     private func mesinfo() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": lo.value], pageURL: "/ll/would/sitting/everyone", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 let model = success.preferreda
@@ -346,20 +346,23 @@ extension LLStepTwoViewController: UITableViewDelegate {
     private func bcinfo() {
         var dict: [String: Any]?
         dict = modelArray.value.reduce(into: [String: Any](), { preesult, model in
-            let type = model.underthe
-            if type == "story1" || type == "story4" {
-                preesult[model.andmammy!] = model.elemental
-            }else {
-                preesult[model.andmammy!] = model.butshe
+            guard let key = model.andmammy else { return }
+            let value: Any
+            if model.underthe == "story1" || model.underthe == "story4" {
+                value = model.elemental ?? ""
+            } else {
+                value = model.butshe ?? ""
             }
+            preesult[key] = value
         })
         dict?["eat"] = "apple"
         dict?["lo"] = lo.value
         dict?["bidding"] = "1"
-        ViewLoadingManager.addLoadingView()
+        dict?["shining"] = "bur"
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: dict, pageURL: "/ll/yankees/tongue/groupof", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):

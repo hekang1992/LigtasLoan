@@ -2,7 +2,7 @@
 //  LLYZMViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/22.
+//  Created by LigtasLoan on 2024/10/22.
 //
 
 import UIKit
@@ -79,11 +79,11 @@ extension LLYZMViewController: WLUnitFieldDelegate {
     }
     
     private func yzmhuoqu(_ btn: UIButton) {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         let dict = ["precepts": "code", "revealed": phoneStr.value]
         man.requestAPI(params: dict, pageURL: "/ll/frequently/young/shoot", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):
@@ -98,17 +98,17 @@ extension LLYZMViewController: WLUnitFieldDelegate {
     }
     
     private func tologin() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         let dict = ["ofhurt": phoneStr.value,
                     "friendliness": codeStr.value,
                     "borders": "1"]
         man.requestAPI(params: dict, pageURL: "/ll/childhood/family/oversomething", method: .post) { result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 let model = success.preferreda
-                LLDLInfo.savedlInfo(model.ofhurt ?? "", model.screamed ?? "")
+                LLDLInfo.savedlInfo(phone: model.ofhurt ?? "", sessionID: model.screamed ?? "")
                 NotificationCenter.default.post(name: NSNotification.Name(ROOT_VC), object: nil)
                 break
             case .failure(_):

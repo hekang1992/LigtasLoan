@@ -2,7 +2,7 @@
 //  LLQAWViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/11/2.
+//  Created by LigtasLoan on 2024/11/2.
 //
 
 import UIKit
@@ -226,10 +226,10 @@ extension LLQAWViewController: UITableViewDelegate {
     }
     
     private func hqwqinfo() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["withouthaving": "1", "hamper": "0", "bind": "0"], pageURL: "/ll/which/stuart/andcolorful", method: .get) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):
@@ -256,11 +256,11 @@ extension LLQAWViewController: UITableViewDelegate {
             }
         })
         dict?["hearth"] = index + 1
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: dict, pageURL: "/ll/slave/evidence/characteristics", method: .post) { [weak self] result in
             guard let self = self else { return }
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(_):
                 self.lxwwllinfo()

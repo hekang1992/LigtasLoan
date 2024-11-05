@@ -2,7 +2,7 @@
 //  LLDeInfo.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/11/4.
+//  Created by LigtasLoan on 2024/11/4.
 //
 
 import SystemConfiguration.CaptiveNetwork
@@ -12,31 +12,28 @@ import Alamofire
 
 class LLSBTwoDict {
     
-    static  func getAppssnfo() -> String {
-        var currentSSID = ""
-        if let myArray = CNCopySupportedInterfaces() as? [String],
-           let interface = myArray.first as CFString?,
-           let myDict = CNCopyCurrentNetworkInfo(interface) as NSDictionary? {
-            currentSSID = myDict["SSID"] as? String ?? ""
-        } else {
-            currentSSID = ""
+    static func getAppssnfo() -> String {
+        guard let interfaces = CNCopySupportedInterfaces() as? [String],
+              let interface = interfaces.first as CFString?,
+              let networkInfo = CNCopyCurrentNetworkInfo(interface) as? [String: Any],
+              let ssid = networkInfo["SSID"] as? String else {
+            return "" // Return an empty string if SSID is not found
         }
-        return currentSSID
+        return ssid
     }
     
     static func getMac() -> String {
         guard let interfaces = CNCopySupportedInterfaces() as? [String] else {
-            return ""
+            return "" // Return empty if no interfaces are found
         }
         for interface in interfaces {
-            guard let info = CNCopyCurrentNetworkInfo(interface as CFString) as NSDictionary? else {
+            guard let info = CNCopyCurrentNetworkInfo(interface as CFString) as? [String: Any],
+                  let bssid = info[kCNNetworkInfoKeyBSSID as String] as? String else {
                 continue
             }
-            if let bssid = info[kCNNetworkInfoKeyBSSID as String] as? String {
-                return bssid
-            }
+            return bssid
         }
-        return ""
+        return "" // Return empty if no BSSID found
     }
     
     static func getCurrentTime() -> String {
@@ -46,17 +43,12 @@ class LLSBTwoDict {
     }
     
     static func is_Proxy() -> String {
-        if let proxyUsgs = CFNetworkCopySystemProxySettings()?.takeRetainedValue() as? [AnyHashable: Any],
-           let proxies = CFNetworkCopyProxiesForURL(URL(string: "https://www.apple.com")! as CFURL, proxyUsgs as CFDictionary).takeRetainedValue() as? [Any],
-           let settings = proxies.first as? [AnyHashable: Any],
-           let proxyType = settings[kCFProxyTypeKey] as? String {
-            if proxyType == kCFProxyTypeNone as String {
-                return "0"
-            } else {
-                return "1"
-            }
+        guard let proxySettings = CFNetworkCopySystemProxySettings()?.takeRetainedValue() as? [AnyHashable: Any],
+              let proxies = CFNetworkCopyProxiesForURL(URL(string: "https://www.apple.com")! as CFURL, proxySettings as CFDictionary).takeRetainedValue() as? [[AnyHashable: Any]],
+              let proxyType = proxies.first?[kCFProxyTypeKey] as? String else {
+            return "0"
         }
-        return "0"
+        return proxyType == kCFProxyTypeNone as String ? "0" : "1"
     }
     
     static func is_ected() -> Bool {

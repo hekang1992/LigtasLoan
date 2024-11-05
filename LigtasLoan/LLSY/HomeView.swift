@@ -2,7 +2,7 @@
 //  HomeView.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/25.
+//  Created by LigtasLoan on 2024/10/25.
 //
 
 import RxSwift

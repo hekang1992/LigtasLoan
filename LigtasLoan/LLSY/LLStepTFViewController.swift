@@ -2,7 +2,7 @@
 //  LLStepTFViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/30.
+//  Created by LigtasLoan on 2024/10/30.
 //
 
 import UIKit
@@ -270,10 +270,10 @@ class LLStepTFViewController: LLBaseViewController {
 extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
     
     private func mesinfo() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": lo.value, "base": "common"], pageURL: "/ll/these/color/would", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 let model = success.preferreda
@@ -401,14 +401,14 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
                 "prettiest": model.prettiest ?? ""
             ]
         }
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         
         if let jsonshuju = try? JSONSerialization.data(withJSONObject: resultArray, options: []) {
             if let jsonzifu = String(data: jsonshuju, encoding: .utf8){
                 let dict = ["pre": "3", "preferreda": jsonzifu, "lo": self.lo.value, "grilled": "1"]
                 let man = LLRequestManager()
                 man.uploadDataAPI(params: dict as [String : Any], pageURL: "/ll/geralds/learned/sight", method: .post) { [weak self] result in
-                    ViewLoadingManager.hideLoadingView()
+                    LoadingManager.hideLoadingView()
                     guard let self = self else { return }
                     switch result {
                     case .success(let success):

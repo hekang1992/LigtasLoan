@@ -2,7 +2,7 @@
 //  LLLastInfo.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/11/4.
+//  Created by LigtasLoan on 2024/11/4.
 //
 
 import SystemServices

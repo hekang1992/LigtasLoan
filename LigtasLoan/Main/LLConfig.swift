@@ -2,7 +2,7 @@
 //  LLConfig.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/22.
+//  Created by LigtasLoan on 2024/10/22.
 //
 
 import UIKit
@@ -92,21 +92,19 @@ class LLLoadingView: UIView {
     
 }
 
-class ViewLoadingManager {
+class LoadingManager {
     
     static let loadView = LLLoadingView()
     
     static func addLoadingView() {
-        DispatchQueue.main.async {
-            if let keyWindow = UIApplication.shared.windows.first {
-                DispatchQueue.main.async {
-                    loadView.frame = keyWindow.bounds
-                    keyWindow.addSubview(loadView)
-                }
-            }
+        guard let keyWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
+            return
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-            hideLoadingView()
+        DispatchQueue.main.async {
+            loadView.frame = keyWindow.bounds
+            if !keyWindow.subviews.contains(loadView) {
+                keyWindow.addSubview(loadView)
+            }
         }
     }
     
@@ -115,44 +113,35 @@ class ViewLoadingManager {
             loadView.removeFromSuperview()
         }
     }
-    
 }
 
 
 class SanPopConfig {
     static func SanChengArray(dataArr: [Any]) -> [BRProvinceModel] {
-        var tempArr1 = [BRProvinceModel]()
-        for proviceDic in dataArr {
-            guard let proviceDic = proviceDic as? widehallModel else {
-                continue
-            }
+        return dataArr.compactMap { proviceDic in
+            guard let proviceDic = proviceDic as? widehallModel else { return nil }
             let proviceModel = BRProvinceModel()
             proviceModel.code = proviceDic.cad
             proviceModel.name = proviceDic.aquizzical
             proviceModel.index = dataArr.firstIndex(where: { $0 as AnyObject === proviceDic as AnyObject }) ?? 0
-            let cityList = proviceDic.unending ?? proviceDic.unending ?? []
-            var tempArr2 = [BRCityModel]()
-            for cityDic in cityList {
+            let cityList = proviceDic.unending ?? []
+            proviceModel.citylist = cityList.compactMap { cityDic in
                 let cityModel = BRCityModel()
                 cityModel.code = cityDic.cad
                 cityModel.name = cityDic.aquizzical
                 cityModel.index = cityList.firstIndex(where: { $0 as AnyObject === cityDic as AnyObject }) ?? 0
-                let areaList = cityDic.unending ?? cityDic.unending ?? []
-                var tempArr3 = [BRAreaModel]()
-                for areaDic in areaList {
+                let areaList = cityDic.unending ?? []
+                cityModel.arealist = areaList.compactMap { areaDic in
                     let areaModel = BRAreaModel()
                     areaModel.code = areaDic.cad
                     areaModel.name = areaDic.aquizzical
                     areaModel.index = areaList.firstIndex(where: { $0 as AnyObject === areaDic as AnyObject }) ?? 0
-                    tempArr3.append(areaModel)
+                    return areaModel
                 }
-                cityModel.arealist = tempArr3
-                tempArr2.append(cityModel)
+                return cityModel
             }
-            proviceModel.citylist = tempArr2
-            tempArr1.append(proviceModel)
+            return proviceModel
         }
-        return tempArr1
     }
 }
 
@@ -186,7 +175,7 @@ class OneTwoThreePopConfig {
         addressPickerView.pickerStyle = customStyle
         addressPickerView.show()
     }
-
+    
     private static func getAddressDetails(province: BRProvinceModel?, city: BRCityModel?, area: BRAreaModel?) -> (addressString: String, code: String) {
         let provinceName = province?.name ?? ""
         let cityName = city?.name ?? ""
@@ -212,51 +201,57 @@ class OneTwoThreePopConfig {
 
 class OnePopConfig {
     static func getOneDetails(dataSourceArr: [Any]) -> [BRProvinceModel] {
-        return dataSourceArr.compactMap { item in
-            guard let proviceDic = item as? theirbeautyModel else { return nil }
-            let proviceModel = BRProvinceModel()
-            proviceModel.name = proviceDic.aquizzical
-            proviceModel.code = proviceDic.elemental
-            proviceModel.index = dataSourceArr.firstIndex { $0 as AnyObject === proviceDic as AnyObject } ?? 0
-
-            return proviceModel
+        return dataSourceArr.enumerated().compactMap { (index, item) in
+            guard let province = item as? theirbeautyModel else { return nil }
+            let provinceModel = BRProvinceModel()
+            provinceModel.name = province.aquizzical
+            provinceModel.code = province.elemental
+            provinceModel.index = index
+            return provinceModel
         }
     }
 }
 
 class TPopConfig {
     static func getTDetails(dataSourceArr: [Any]) -> [BRProvinceModel] {
-        var tempArr1 = [BRProvinceModel]()
-        for proviceDic in dataSourceArr {
+        return dataSourceArr.compactMap { proviceDic in
             guard let proviceDic = proviceDic as? theirbeautyModel else {
-                continue
+                return nil
             }
             let proviceModel = BRProvinceModel()
             proviceModel.name = proviceDic.aquizzical
             proviceModel.code = proviceDic.elemental
-            proviceModel.index = dataSourceArr.firstIndex(where: { $0 as AnyObject === proviceDic as AnyObject }) ?? 0
-            let cityList = proviceDic.theirbeauty ?? proviceDic.theirbeauty ?? []
-            var tempArr2 = [BRCityModel]()
-            for cityDic in cityList {
-                let cityModel = BRCityModel()
-                cityModel.code = cityDic.elemental
-                cityModel.name = cityDic.aquizzical
-                cityModel.index = cityList.firstIndex(where: { $0 as AnyObject === cityDic as AnyObject }) ?? 0
-                let areaList = cityDic.theirbeauty ?? cityDic.theirbeauty ?? []
-                var tempArr3 = [BRAreaModel]()
-                for areaDic in areaList {
-                    let areaModel = BRAreaModel()
-                    areaModel.code = areaDic.elemental
-                    areaModel.name = areaDic.aquizzical
-                    areaModel.index = areaList.firstIndex(where: { $0 as AnyObject === areaDic as AnyObject }) ?? 0
-                    tempArr3.append(areaModel)
-                }
-                cityModel.arealist = tempArr3
-                tempArr2.append(cityModel)
-            }
-            proviceModel.citylist = tempArr2
-            tempArr1.append(proviceModel)
+            proviceModel.index = dataSourceArr.enumerated().first { $0.element as? theirbeautyModel === proviceDic }?.offset ?? 0
+            
+            // 城市列表
+            proviceModel.citylist = proviceDic.theirbeauty?.compactMap { cityDic in
+                createCityModel(from: cityDic, in: proviceDic.theirbeauty ?? [])
+            } ?? []
+            
+            return proviceModel
         }
-        return tempArr1
+    }
+
+    private static func createCityModel(from cityDic: theirbeautyModel, in cityList: [theirbeautyModel]) -> BRCityModel {
+        let cityModel = BRCityModel()
+        cityModel.name = cityDic.aquizzical
+        cityModel.code = cityDic.elemental
+        cityModel.index = cityList.enumerated().first { $0.element === cityDic }?.offset ?? 0
+        
+        cityModel.arealist = cityDic.theirbeauty?.compactMap { areaDic in
+            createAreaModel(from: areaDic, in: cityDic.theirbeauty ?? [])
+        } ?? []
+        
+        return cityModel
+    }
+    
+    private static func createAreaModel(from areaDic: theirbeautyModel, in areaList: [theirbeautyModel]) -> BRAreaModel {
+        let areaModel = BRAreaModel()
+        areaModel.name = areaDic.aquizzical
+        areaModel.code = areaDic.elemental
+        
+        areaModel.index = areaList.enumerated().first { $0.element === areaDic }?.offset ?? 0
+        
+        return areaModel
     }
 }

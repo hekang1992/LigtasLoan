@@ -2,7 +2,7 @@
 //  LLDLInfo.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/23.
+//  Created by LigtasLoan on 2024/10/23.
 //
 
 import UIKit
@@ -13,90 +13,116 @@ import SystemServices
 let LL_LOGIN = "LL_LOGIN"
 let LL_NID = "LL_NID"
 
-class LLDLInfo: NSObject {
+
+protocol Loggable {
+    var logDictionary: [String: String] { get }
+}
+
+enum LogInfoKey: String {
+    case meal, inquiring, kitchen, cheerless, php, code, language, screamed, duty, blazed, boyfine
+}
+
+extension UIDevice {
+    var systemInfo: (name: String, version: String) {
+        return (name: name, version: systemVersion)
+    }
+}
+
+extension UserDefaults {
+    var screamed: String {
+        return string(forKey: LL_NID) ?? ""
+    }
+}
+
+class LLDLInfo: NSObject, Loggable {
     
-    static func savedlInfo(_ phone: String, _ sessionID: String) {
-        UserDefaults.standard.setValue(sessionID, forKey: LL_NID)
-        UserDefaults.standard.setValue(phone, forKey: LL_LOGIN)
-        UserDefaults.standard.synchronize()
+    static func savedlInfo(phone: String, sessionID: String) {
+        UserDefaults.standard.set(sessionID, forKey: LL_NID)
+        UserDefaults.standard.set(phone, forKey: LL_LOGIN)
     }
     
     static func removedlInfo() {
-        let keys = [LL_LOGIN, LL_NID, LLMAIO]
-        keys.forEach { UserDefaults.standard.setValue("", forKey: $0) }
-        UserDefaults.standard.synchronize()
+        [LL_LOGIN, LL_NID, LLMAIO].forEach { UserDefaults.standard.removeObject(forKey: $0) }
     }
     
-    static func getLogiInfo() -> [String: String] {
-        let screamed = UserDefaults.standard.string(forKey: LL_NID) ?? ""
-        
-        let duty = UIDevice.current.systemVersion
-        
-        let kitchen = UIDevice.current.name
-        
+    var logDictionary: [String: String] {
         let idfv = SaveIdentityConfig.huoidfv() ?? ""
-        
-        var logdict: [String: String] = ["meal": "ios",
-                                         "inquiring": "1.0.0",
-                                         "kitchen": kitchen,
-                                         "cheerless": idfv,
-                                         "php": "peace"]
-        
-        let otherlInfo: [String: String] = ["code": "1",
-                                            "language": "swift",
-                                            "screamed": screamed,
-                                            "duty": duty,
-                                            "blazed": idfv,
-                                            "boyfine": "1"]
-        
-        logdict.merge(otherlInfo) { (_, new) in new }
-        
-        return logdict
+        let deviceInfo = UIDevice.current.systemInfo
+        let logInfo: [LogInfoKey: String] = [
+            .meal: "ios",
+            .inquiring: "1.0.0",
+            .kitchen: deviceInfo.name,
+            .cheerless: idfv,
+            .php: "peace",
+            .code: "1",
+            .language: "swift",
+            .screamed: UserDefaults.standard.screamed,
+            .duty: deviceInfo.version,
+            .blazed: idfv,
+            .boyfine: "1"
+        ]
+        return logInfo.reduce(into: [:]) { result, entry in
+            result[entry.key.rawValue] = entry.value
+        }
     }
-    
+    static func getLogiInfo() -> [String: String] {
+        return LLDLInfo().logDictionary
+    }
 }
+
+
+
 
 class WLInfo: NSObject {
     
     static func isVPNCd() -> String {
-        if let proxySettings = CFNetworkCopySystemProxySettings()?.takeUnretainedValue() as? [String: Any],
-           let scopes = proxySettings["__SCOPED__"] as? [String: Any] {
-            for key in scopes.keys {
-                if key.contains("tap") || key.contains("tun") || key.contains("ppp") {
-                    return "1"
-                }
+        guard let proxySettings = CFNetworkCopySystemProxySettings()?.takeUnretainedValue() as? [String: Any],
+              let scopes = proxySettings["__SCOPED__"] as? [String: Any] else {
+            return "0"
+        }
+        
+        let vpnKeywords = ["tap", "tun", "ppp"]
+        for key in scopes.keys {
+            if vpnKeywords.contains(where: key.lowercased().contains) {
+                return "1"
             }
         }
+        
         return "0"
     }
-    
 }
 
 class SaveIdentityConfig {
     
+    private static let keychainService = "com.LigtasLoan.123"
+    private static let idfvKey = "dfv.lig"
+    
     static func saveinfoAdc() {
         guard let idfv = UIDevice.current.identifierForVendor?.uuidString else {
+            print("Error: Unable to get IDFV.")
             return
         }
-        let keyin = Keychain(service: "com.LigtasLoan.123")
+        let keychain = Keychain(service: keychainService)
         do {
-            try keyin.set(idfv, key: "dfv.lig")
+            try keychain.set(idfv, key: idfvKey)
         } catch {
-            print("Error: \(error)")
+            print("Keychain save error: \(error.localizedDescription)")
         }
     }
     
     static func huoidfv() -> String? {
-        let keychain = Keychain(service: "com.LigtasLoan.123")
+        let keychain = Keychain(service: keychainService)
+        
         do {
-            if let idfv = try keychain.get("dfv.lig") {
+            if let idfv = try keychain.get(idfvKey) {
                 return idfv
             } else {
+                print("IDFV not found in Keychain, saving now.")
                 saveinfoAdc()
-                return huoidfv()
+                return try keychain.get(idfvKey)
             }
         } catch {
-            print("Error: \(error)")
+            print("Keychain retrieve error: \(error.localizedDescription)")
             return nil
         }
     }
@@ -104,7 +130,6 @@ class SaveIdentityConfig {
     static func getidfa() -> String {
         return ASIdentifierManager.shared().advertisingIdentifier.uuidString
     }
-    
 }
 
 class LLSBOneDict {
@@ -147,3 +172,5 @@ class LLAllDict {
         return dict
     }
 }
+
+

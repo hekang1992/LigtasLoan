@@ -2,7 +2,7 @@
 //  LLPhotoConfig.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/27.
+//  Created by LigtasLoan on 2024/10/27.
 //
 
 import UIKit

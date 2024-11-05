@@ -2,7 +2,7 @@
 //  LLBaseViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/12.
+//  Created by LigtasLoan on 2024/10/12.
 //
 
 import UIKit
@@ -28,7 +28,7 @@ class LLBaseViewController: UIViewController {
 extension LLBaseViewController {
     
     func apply(from proid: String) {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "knewdifferently": "1", "flirting": "love"], pageURL: "/ll/tarletonwho/faces/straight", method: .post) { [weak self] result in
             guard let self = self else { return }
@@ -47,7 +47,7 @@ extension LLBaseViewController {
     
     func genjuurltovc(from nextUrl: String) {
         if nextUrl.hasPrefix("http") {
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             let wv = LLWYViewController()
             wv.pageUrl.accept(nextUrl)
             self.navigationController?.pushViewController(wv, animated: true)
@@ -72,7 +72,7 @@ extension LLBaseViewController {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
                     if let hisgold = success.preferreda.hisgold, let gabbling = hisgold.gabbling, !gabbling.isEmpty {
-                        ViewLoadingManager.hideLoadingView()
+                        LoadingManager.hideLoadingView()
                         typeVc(form: gabbling, proid: proid)
                     }else {
                         if let trembling = success.preferreda.consternation?.trembling {
@@ -82,14 +82,14 @@ extension LLBaseViewController {
                 }
                 break
             case .failure(_):
-                ViewLoadingManager.hideLoadingView()
+                LoadingManager.hideLoadingView()
                 break
             }
         }
     }
     
     func pageinDetailInfo(from proid: String) {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageURL: "/ll/another/between/healthy", method: .post) { [weak self] result in
             guard let self = self else { return }
@@ -97,7 +97,7 @@ extension LLBaseViewController {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
                     if let hisgold = success.preferreda.hisgold, let gabbling = hisgold.gabbling, !gabbling.isEmpty {
-                        ViewLoadingManager.hideLoadingView()
+                        LoadingManager.hideLoadingView()
                         if gabbling == "eastern2" {
                             self.pageintypeVc(form: gabbling, proid: proid)
                         }
@@ -196,9 +196,9 @@ extension LLBaseViewController {
     
     func huoquid(from proid: String) {
         let man = LLRequestManager()
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageURL: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 let model = success.preferreda
@@ -260,10 +260,10 @@ extension LLBaseViewController {
     }
     
     func fetchStoryData(for cell: LLBtnClickCell) {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["": ""], pageURL: "/ll/after/tomcat/foreverrankled", method: .get) { result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 if let unending = success.preferreda.unending, let model = cell.model.value {
@@ -281,12 +281,12 @@ extension LLBaseViewController {
         let odDict = ["comforting": "1", "finally": oid, "twinge": "owo", "marriedindia": "lg-sa"]
         let man = LLRequestManager()
         man.requestAPI(params: odDict, pageURL: "/ll/wonderedif/thenher/these", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(let success):
                 self.nineinfo(form: oid)
-                ViewLoadingManager.hideLoadingView()
+                LoadingManager.hideLoadingView()
                 let nextUrl = success.preferreda.foryou ?? ""
                 let wv = LLWYViewController()
                 wv.pageUrl.accept(nextUrl)

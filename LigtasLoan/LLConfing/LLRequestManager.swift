@@ -2,7 +2,7 @@
 //  LLRequestManager.swift
 //  LigtasLoan
 //  
-//  Created by 何康 on 2024/10/16.
+//  Created by LigtasLoan on 2024/10/16.
 //
 
 import Moya
@@ -233,15 +233,21 @@ class theirbeautyModel {
 
 
 
-
-let base_URL = "http://8.220.185.183:8081/llapi"
-
 let h5_URL = "http://8.220.185.183:8081"
 
+let base_URL = "\(h5_URL)/llapi"
+
 enum APIService {
-    case request(params: [String: Any]?, pageURL: String, method: Moya.Method)
-    case uploadImage(params: [String: Any]?, pageURL: String, imageData: Data, method: Moya.Method)
-    case uploadData(params: [String: Any]?, pageURL: String, method: Moya.Method)
+    case request(params: [String: Any]?,
+                 pageURL: String,
+                 method: Moya.Method)
+    case uploadImage(params: [String: Any]?,
+                     pageURL: String,
+                     imageData: Data,
+                     method: Moya.Method)
+    case uploadData(params: [String: Any]?,
+                    pageURL: String,
+                    method: Moya.Method)
 }
 
 extension APIService: TargetType {
@@ -298,7 +304,10 @@ extension APIService: TargetType {
         var formData = [MultipartFormData]()
         
         if let imageData = imageData {
-            formData.append(MultipartFormData(provider: .data(imageData), name: "tryst", fileName: "tryst.png", mimeType: "image/png"))
+            formData.append(MultipartFormData(provider: .data(imageData),
+                                              name: "tryst",
+                                              fileName: "tryst.png",
+                                              mimeType: "image/png"))
         }
         
         params?.forEach { key, value in
@@ -342,19 +351,31 @@ class LLRequestManager: NSObject {
     
     private func createError(from commonModel: CommonModel) -> Error {
         let errorDescription = commonModel.whey
-        return NSError(domain: "APIError", code: commonModel.andmammy, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+        return NSError(domain: "APIError",
+                       code: commonModel.andmammy,
+                       userInfo: [NSLocalizedDescriptionKey: errorDescription])
     }
     
     func requestAPI(params: [String: Any]?, pageURL: String, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
-        requestData(target: .request(params: params, pageURL: pageURL, method: method), completion: completion)
+        requestData(target: .request(params: params,
+                                     pageURL: pageURL,
+                                     method: method),
+                    completion: completion)
     }
     
     func uploadDataAPI(params: [String: Any]?, pageURL: String, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
-        requestData(target: .uploadData(params: params, pageURL: pageURL, method: method), completion: completion)
+        requestData(target: .uploadData(params: params,
+                                        pageURL: pageURL,
+                                        method: method),
+                    completion: completion)
     }
     
     func uploadImageAPI(params: [String: Any]?, pageURL: String, imageData: Data, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
-        requestData(target: .uploadImage(params: params, pageURL: pageURL, imageData: imageData, method: method), completion: completion)
+        requestData(target: .uploadImage(params: params,
+                                         pageURL: pageURL,
+                                         imageData: imageData,
+                                         method: method),
+                    completion: completion)
     }
 }
 

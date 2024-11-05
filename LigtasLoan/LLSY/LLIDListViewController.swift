@@ -2,7 +2,7 @@
 //  LLIDListViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/26.
+//  Created by LigtasLoan on 2024/10/26.
 //
 
 import UIKit
@@ -232,6 +232,7 @@ class LLIDListViewController: LLBaseViewController {
             let vc = LLUploadIDViewController()
             vc.type.accept(model.aquizzical ?? "")
             vc.lo.accept(self.lo.value)
+            vc.picurl.accept(model.pic_url ?? "")
             self.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: disposeBag)
 
@@ -252,10 +253,10 @@ extension LLIDListViewController: UITableViewDelegate {
     }
     
     private func listInfo() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["card": "pp"], pageURL: "ll/looked/either/ellen", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 let model = success.preferreda

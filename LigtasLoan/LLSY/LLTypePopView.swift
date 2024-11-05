@@ -2,7 +2,7 @@
 //  LLTypePopView.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/27.
+//  Created by LigtasLoan on 2024/10/27.
 //
 
 import UIKit
@@ -36,8 +36,6 @@ class PopPhotoView: UIView {
     
     lazy var ctImageView: UIImageView = {
         let ctImageView = UIImageView()
-        ctImageView.image = UIImage(named: "Groumi")
-        ctImageView.contentMode = .scaleAspectFill
         return ctImageView
     }()
     

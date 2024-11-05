@@ -2,7 +2,7 @@
 //  LLSetingViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/11/4.
+//  Created by LigtasLoan on 2024/11/4.
 //
 
 import UIKit
@@ -122,10 +122,10 @@ class LLSetingViewController: LLBaseViewController {
 
     
     private func delInfo() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["del": "1", "cost": "cent"], pageURL: "/ll/education/social/gather", method: .get) { result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
@@ -231,7 +231,7 @@ class LLAllDianViewController: LLBaseViewController {
     }
     
     private func handleModelSelection(_ model: widehallModel) {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         print("Selected model: \(model.rejoining?.gazed ?? "")")
         genjuurltovc(from: model.rejoining?.gazed ?? "")
     }
@@ -367,10 +367,10 @@ class LLListDianViewController: LLBaseViewController {
 extension LLListDianViewController {
     
      func xdata(from blatantly: String) {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
          man.requestAPI(params: ["olist": "1", "blatantly": blatantly, "date": LLSBTwoDict.getCurrentTime()], pageURL: "/ll/bedchamber/because/tells", method: .post) { result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             self.listView.tableView.mj_header?.endRefreshing()
             switch result {
             case .success(let success):

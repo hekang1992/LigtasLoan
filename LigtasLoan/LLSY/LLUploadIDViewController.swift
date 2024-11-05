@@ -2,7 +2,7 @@
 //  LLUploadIDViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/27.
+//  Created by LigtasLoan on 2024/10/27.
 //
 
 import UIKit
@@ -44,6 +44,7 @@ class UploadView: UIView {
     
     lazy var cBtn: UIButton = {
         let cBtn = UIButton(type: .custom)
+        cBtn.alpha = 0.4
         cBtn.setImage(UIImage(named: "typeclikimage"), for: .normal)
         cBtn.adjustsImageWhenHighlighted = false
         return cBtn
@@ -152,7 +153,6 @@ class UploadView: UIView {
 
 class LLUploadIDViewController: LLBaseViewController {
     
-    
     var idtime = BehaviorRelay<String>(value: "")
     
     var rfaceTime = BehaviorRelay<String>(value: "")
@@ -184,6 +184,7 @@ class LLUploadIDViewController: LLBaseViewController {
     
     var isFace = BehaviorRelay<String>(value: "0")
     
+    var picurl = BehaviorRelay<String>(value: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,6 +200,7 @@ class LLUploadIDViewController: LLBaseViewController {
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(headView.snp.bottom)
         }
+        uploadView.cBtn.kf.setImage(with: URL(string: picurl.value), for: .normal)
         headView.backBtn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             self.pushlistvc()
@@ -234,6 +236,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
     private func idPinfo() {
         let alertVc = TYAlertController(alert: self.pop1, preferredStyle: .actionSheet)
         self.present(alertVc!, animated: true)
+        self.pop1.ctImageView.kf.setImage(with: URL(string: picurl.value))
         self.pop1.backBtn.rx.tap.subscribe(onNext: { [weak self] in
             self?.dismiss(animated: true)
         }).disposed(by: disposeBag)
@@ -272,9 +275,9 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func huoimquid(from proid: String) {
         let man = LLRequestManager()
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         man.requestAPI(params: ["lo": proid, "recallanything": "happy"], pageURL: "/ll/sitting/troop/affection", method: .get) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 let model = success.preferreda
@@ -299,7 +302,7 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage)!
-        if let data = Data.imageQuality(image: image, maxLength: 1024) {
+        if let data = Data.imageQuality(image: image, maxLength: 900) {
             picker.dismiss(animated: true) { [weak self] in
                 DispatchQueue.main.async {
                     self?.upimageData(from: data, image: image)
@@ -327,10 +330,10 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
             let dict = ["elemental": "10"]
             imageDict.merge(dict) { (_, new) in new }
         }
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.uploadImageAPI(params: imageDict, pageURL: "/ll/rough/handful/spoke", imageData: data, method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 if let self = self {
@@ -372,11 +375,11 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
     }
     
     private func bcnameInfo(form view: PopNameIDCardView) {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let dict = ["deepseats": view.name1.nextBtn.titleLabel?.text ?? "", "aquizzical": view.name2.inputtx.text ?? "", "squatty": view.name3.inputtx.text ?? "", "elemental": "11", "hearth": type.value]
         let man = LLRequestManager()
         man.requestAPI(params: dict, pageURL: "/ll/girlsas/trouble/mother", method: .post) { [weak self] result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
             case .success(_):

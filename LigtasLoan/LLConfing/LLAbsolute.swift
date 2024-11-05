@@ -2,7 +2,7 @@
 //  LLAbsolute.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/12.
+//  Created by LigtasLoan on 2024/10/12.
 //
 
 import UIKit

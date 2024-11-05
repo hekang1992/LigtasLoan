@@ -2,7 +2,7 @@
 //  LLRightViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/10/25.
+//  Created by LigtasLoan on 2024/10/25.
 //
 
 import UIKit
@@ -362,10 +362,10 @@ extension LLRightViewController {
     }
     
     private func delInfo() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["del": "1", "cost": "cent"], pageURL: "/ll/education/social/gather", method: .get) { result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
@@ -382,10 +382,10 @@ extension LLRightViewController {
     }
     
     private func logInfo() {
-        ViewLoadingManager.addLoadingView()
+        LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["thatstupid": "1", "silenceanything": "trump"], pageURL: "/ll/mothers/spring/journeyed", method: .get) { result in
-            ViewLoadingManager.hideLoadingView()
+            LoadingManager.hideLoadingView()
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
