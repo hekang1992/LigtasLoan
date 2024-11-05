@@ -21,6 +21,7 @@
 		732A7F4A2CBA526F0097B3FB /* LLBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */; };
 		732A7F4C2CBA52810097B3FB /* LLLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */; };
 		732A7F4F2CBA69DF0097B3FB /* LLAbsolute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */; };
+		7333D3332CD8F2A600FA829E /* LLRightListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333D3322CD8F2A600FA829E /* LLRightListViewController.swift */; };
 		73342AB92CC7D39A002EDA2B /* LLConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342AB82CC7D39A002EDA2B /* LLConfig.swift */; };
 		73342ABB2CC7D41B002EDA2B /* LLBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342ABA2CC7D41B002EDA2B /* LLBaseView.swift */; };
 		73342ABE2CC7D68B002EDA2B /* LLSYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342ABD2CC7D68B002EDA2B /* LLSYViewController.swift */; };
@@ -70,6 +71,7 @@
 		732A7F492CBA526F0097B3FB /* LLBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLBaseViewController.swift; sourceTree = "<group>"; };
 		732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLLaunchViewController.swift; sourceTree = "<group>"; };
 		732A7F4E2CBA69DF0097B3FB /* LLAbsolute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLAbsolute.swift; sourceTree = "<group>"; };
+		7333D3322CD8F2A600FA829E /* LLRightListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRightListViewController.swift; sourceTree = "<group>"; };
 		73342AB82CC7D39A002EDA2B /* LLConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLConfig.swift; sourceTree = "<group>"; };
 		73342ABA2CC7D41B002EDA2B /* LLBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLBaseView.swift; sourceTree = "<group>"; };
 		73342ABD2CC7D68B002EDA2B /* LLSYViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLSYViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				7338B9C02CCBCB99001CBAFE /* HomeView.swift */,
 				73342ABD2CC7D68B002EDA2B /* LLSYViewController.swift */,
 				7338B9C22CCBD7AA001CBAFE /* LLRightViewController.swift */,
+				7333D3322CD8F2A600FA829E /* LLRightListViewController.swift */,
 				7338B9C42CCBEFE7001CBAFE /* LLTypeListViewController.swift */,
 				73E1CA622CCD3E3000072597 /* LLIDListViewController.swift */,
 				73E1CA642CCD4B1F00072597 /* LLUploadIDViewController.swift */,
@@ -381,6 +384,7 @@
 				73342ABE2CC7D68B002EDA2B /* LLSYViewController.swift in Sources */,
 				73342AC72CC7E3D8002EDA2B /* LLDLView.swift in Sources */,
 				730CECF12CC92AEA002F96E0 /* WLUnitField.m in Sources */,
+				7333D3332CD8F2A600FA829E /* LLRightListViewController.swift in Sources */,
 				7338B9C32CCBD7AA001CBAFE /* LLRightViewController.swift in Sources */,
 				730CECF22CC92AEA002F96E0 /* WLUnitFieldTextPosition.m in Sources */,
 				730CECF82CC9363F002F96E0 /* LLDLInfo.swift in Sources */,
@@ -422,10 +426,17 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LigtasLoan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LigtasLoan;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSContactsUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -465,10 +476,17 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LigtasLoan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LigtasLoan;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSContactsUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

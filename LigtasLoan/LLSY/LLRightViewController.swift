@@ -266,6 +266,26 @@ class LLRightItemView: UIView {
     
 }
 
+
+
+
+
+
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+#warning("")
+
+
+
+
+
+
+
+
+
 class LLRightViewController: LLBaseViewController {
     
     lazy var rightView: LLRightView = {
@@ -292,20 +312,24 @@ class LLRightViewController: LLBaseViewController {
 extension LLRightViewController {
     
     private func tap() {
-        rightView.itemView1.btn.rx.tap.subscribe(onNext: {
-            
+        rightView.itemView1.btn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let setVc = LLAllDianViewController()
+            self.gy_sidePushViewController(viewController: setVc)
         }).disposed(by: disposeBag)
         
-        rightView.itemView2.btn.rx.tap.subscribe(onNext: {
-            
+        rightView.itemView2.btn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
         }).disposed(by: disposeBag)
         
-        rightView.itemView3.btn.rx.tap.subscribe(onNext: {
-            
+        rightView.itemView3.btn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
         }).disposed(by: disposeBag)
         
-        rightView.itemView4.btn.rx.tap.subscribe(onNext: {
-            
+        rightView.itemView4.btn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let setVc = LLSetingViewController()
+            self.gy_sidePushViewController(viewController: setVc)
         }).disposed(by: disposeBag)
         
         rightView.itemView5.btn.rx.tap.subscribe(onNext: { [weak self] in

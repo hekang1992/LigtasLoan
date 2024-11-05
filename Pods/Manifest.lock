@@ -32,6 +32,7 @@ PODS:
   - FSPagerView (0.8.3)
   - GYSide (0.0.5)
   - IQKeyboardManagerSwift (6.5.16)
+  - JXSegmentedView (1.4.1)
   - KeychainAccess (4.2.2)
   - Kingfisher (7.11.0)
   - lottie-ios (4.5.0)
@@ -67,6 +68,7 @@ DEPENDENCIES:
   - FSPagerView (~> 0.8.3)
   - GYSide (~> 0.0.5)
   - IQKeyboardManagerSwift (~> 6.5.16)
+  - JXSegmentedView (~> 1.4.1)
   - KeychainAccess (~> 4.2.2)
   - Kingfisher (~> 7.11.0)
   - lottie-ios (~> 4.5.0)
@@ -92,6 +94,7 @@ SPEC REPOS:
     - FSPagerView
     - GYSide
     - IQKeyboardManagerSwift
+    - JXSegmentedView
     - KeychainAccess
     - Kingfisher
     - lottie-ios
@@ -117,6 +120,7 @@ SPEC CHECKSUMS:
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   GYSide: 672895491bf7a809f0631dd8a122ab5d1d601aae
   IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
+  JXSegmentedView: cd73555ce2134d1656db2cb383ba9c2f36fb5078
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   lottie-ios: a881093fab623c467d3bce374367755c272bdd59
@@ -133,6 +137,6 @@ SPEC CHECKSUMS:
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
   TYAlertController: c121090edb0bea7426f987da94cdddd81eef4231
 
-PODFILE CHECKSUM: 2faa972d21bba8616339840a579ed3fd3eaf00e3
+PODFILE CHECKSUM: 3cd5d35c32e20db5066b0735b714752b6a0eb068
 
 COCOAPODS: 1.15.2

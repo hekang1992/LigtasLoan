@@ -36,26 +36,30 @@ extension LLBaseViewController {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
                     let nextUrl = success.preferreda.foryou ?? ""
-                    if nextUrl.hasPrefix("http") {
-                        ViewLoadingManager.hideLoadingView()
-                        let wv = LLWYViewController()
-                        wv.pageUrl.accept(nextUrl)
-                        self.navigationController?.pushViewController(wv, animated: true)
-                    }else if nextUrl.hasPrefix(schemeurl) {
-                        if let url = URL(string: nextUrl) {
-                            let path = url.path
-                            if path.contains("/mountainOnio") {
-                                guard let query = url.query else { return }
-                                let arrList = query.components(separatedBy: "=")
-                                let lo = arrList.last ?? ""
-                                proDetailInfo(from: lo)
-                            }
-                        }
-                    }
+                    self.genjuurltovc(from: nextUrl)
                 }
                 break
             case .failure(_):
                 break
+            }
+        }
+    }
+    
+    func genjuurltovc(from nextUrl: String) {
+        if nextUrl.hasPrefix("http") {
+            ViewLoadingManager.hideLoadingView()
+            let wv = LLWYViewController()
+            wv.pageUrl.accept(nextUrl)
+            self.navigationController?.pushViewController(wv, animated: true)
+        }else if nextUrl.hasPrefix(schemeurl) {
+            if let url = URL(string: nextUrl) {
+                let path = url.path
+                if path.contains("/mountainOnio") {
+                    guard let query = url.query else { return }
+                    let arrList = query.components(separatedBy: "=")
+                    let lo = arrList.last ?? ""
+                    proDetailInfo(from: lo)
+                }
             }
         }
     }
@@ -147,6 +151,7 @@ extension LLBaseViewController {
         let listVc = LLTypeListViewController()
         listVc.lo.accept(proid)
         self.navigationController?.pushViewController(listVc, animated: true)
+        print("")
     }
     
     func pushlistvc() {

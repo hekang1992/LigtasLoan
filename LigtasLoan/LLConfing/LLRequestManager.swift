@@ -148,7 +148,16 @@ class widehallModel {
     var losing: [theirbeautyModel]
     var relationText: String?
     var widehall: [widehallModel]?
+    var abow: String?
+    var blot: String?
+    var rejoining: rejoiningModel?
+    var herseat: String?
+    var tiredly: String?
     init(json: JSON) {
+        self.tiredly = json["tiredly"].stringValue
+        self.herseat = json["herseat"].stringValue
+        self.blot = json["blot"].stringValue
+        self.abow = json["abow"].stringValue
         self.relationText = json["relationText"].stringValue
         self.hatred = json["hatred"].stringValue
         self.throwingher = json["throwingher"].stringValue
@@ -176,6 +185,22 @@ class widehallModel {
         self.losing = json["losing"].arrayValue.map {
             theirbeautyModel(json: $0)
         }
+        self.rejoining = rejoiningModel(json: json["rejoining"])
+    }
+}
+
+class rejoiningModel {
+    var shareday: String?
+    var followday: String?
+    var distinctionday: String?
+    var makeyou: String?
+    var gazed: String?
+    init(json: JSON) {
+        self.makeyou = json["makeyou"].stringValue
+        self.gazed = json["gazed"].stringValue
+        self.distinctionday = json["distinctionday"].stringValue
+        self.followday = json["followday"].stringValue
+        self.shareday = json["shareday"].stringValue
     }
 }
 

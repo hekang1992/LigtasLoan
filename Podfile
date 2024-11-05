@@ -33,6 +33,8 @@ target 'LigtasLoan' do
   
   pod 'SwiftyJSON', '~> 5.0.2'
   
+  pod 'JXSegmentedView', '~> 1.4.1'
+  
   pod 'KeychainAccess', '~> 4.2.2'
   
   pod 'DeviceKit', '~> 5.2.2'
