@@ -101,7 +101,7 @@ class LLBtnClickCell: UITableViewCell {
     
     lazy var mlabel1: UILabel = {
         let mlabel1 = UILabel()
-        mlabel1.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.2)
+        mlabel1.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.2)
         mlabel1.textAlignment = .left
         mlabel1.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel1
@@ -197,7 +197,7 @@ class LLStepTwoViewController: LLBaseViewController {
     
     lazy var headView: HeadView = {
         let headView = HeadView()
-        headView.mlabel.text = "ID CARD INFORMATION"
+        headView.mlabel.text = "PERSONAL INFORMATION"
         return headView
     }()
     
@@ -377,8 +377,8 @@ extension LLStepTwoViewController: UITableViewDelegate {
     }
     
     private func mmonfi() {
-        let location = LLLocationConfig()
-        location.startUpdatingLocation { [weak self] model in
+        locationConfig = LLLocationConfig()
+        locationConfig?.startUpdatingLocation { [weak self] model in
             guard let self = self else { return }
             LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "5")
         }

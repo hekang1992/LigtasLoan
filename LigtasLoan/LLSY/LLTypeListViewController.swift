@@ -109,7 +109,7 @@ class ListView: UIView {
     lazy var clickLabel: ActiveLabel = {
         let clickLabel = ActiveLabel()
         clickLabel.textAlignment = .center
-        clickLabel.textColor = UIColor.init(cssStr: "#050505").withAlphaComponent(0.4)
+        clickLabel.textColor = UIColor.init(cssStr: "#050505")?.withAlphaComponent(0.4)
         clickLabel.font = UIFont(name: Regular_SFDisplay, size: 14)
         clickLabel.text = "For a detailed overview of how we manage and process data, kindly refer to our Privacy Policy."
         clickLabel.numberOfLines = 0
@@ -121,9 +121,9 @@ class ListView: UIView {
         }
         let attributedString = NSMutableAttributedString(string: clickLabel.text!)
         let redUnderlineAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.init(cssStr: "#2CD7BB"),
+            .foregroundColor: UIColor.init(cssStr: "#2CD7BB") as Any,
             .underlineStyle: NSUnderlineStyle.single.rawValue,
-            .underlineColor: UIColor.init(cssStr: "#2CD7BB"),
+            .underlineColor: UIColor.init(cssStr: "#2CD7BB") as Any,
         ]
         let privacyPolicyRange = (clickLabel.text! as NSString).range(of: "Privacy Policy")
         attributedString.addAttributes(redUnderlineAttributes, range: privacyPolicyRange)
@@ -152,9 +152,9 @@ class ListView: UIView {
             make.height.equalTo(334)
         }
         backBtn.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(StatusBarHelper.getStatusBarHeight())
+            make.top.equalToSuperview().offset(StatusBarHelper.getStatusBarHeight() - 10)
             make.left.equalToSuperview().offset(10)
-            make.size.equalTo(CGSize(width: 60, height: 60))
+            make.size.equalTo(CGSize(width: 80, height: 80))
         }
         listView1.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -236,6 +236,64 @@ class LLTypeListViewController: LLBaseViewController {
         listView.backBtn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             self.navigationController?.popViewController(animated: true)
+        }).disposed(by: disposeBag)
+        
+        listView.listView1.backBtn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let nextStr = self.nextStr.value
+            if nextStr >= "eastern1" {
+                self.huoquid(from: lo.value)
+            }else {
+                self.nextvc(form: self.nextStr.value, proid: self.lo.value)
+            }
+        }).disposed(by: disposeBag)
+        
+        listView.listView2.backBtn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let nextStr = self.nextStr.value
+            if nextStr >= "eastern2" {
+                let ne = LLStepTwoViewController()
+                ne.lo.accept(lo.value)
+                self.navigationController?.pushViewController(ne, animated: true)
+            }else {
+                self.nextvc(form: self.nextStr.value, proid: self.lo.value)
+            }
+        }).disposed(by: disposeBag)
+        
+        listView.listView3.backBtn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let nextStr = self.nextStr.value
+            if nextStr >= "eastern3" {
+                let ne = LLStepTHRViewController()
+                ne.lo.accept(lo.value)
+                self.navigationController?.pushViewController(ne, animated: true)
+            }else {
+                self.nextvc(form: self.nextStr.value, proid: self.lo.value)
+            }
+        }).disposed(by: disposeBag)
+        
+        listView.listView4.backBtn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let nextStr = self.nextStr.value
+            if nextStr >= "eastern4" {
+                let ne = LLStepTFViewController()
+                ne.lo.accept(lo.value)
+                self.navigationController?.pushViewController(ne, animated: true)
+            }else {
+                self.nextvc(form: self.nextStr.value, proid: self.lo.value)
+            }
+        }).disposed(by: disposeBag)
+        
+        listView.listView5.backBtn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let nextStr = self.nextStr.value
+            if nextStr >= "eastern5" {
+                let ne = LLQAWViewController()
+                ne.lo.accept(lo.value)
+                self.navigationController?.pushViewController(ne, animated: true)
+            }else {
+                self.nextvc(form: self.nextStr.value, proid: self.lo.value)
+            }
         }).disposed(by: disposeBag)
         
         tapClick()

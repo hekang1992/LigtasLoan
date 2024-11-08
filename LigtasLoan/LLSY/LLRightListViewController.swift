@@ -103,6 +103,27 @@ class LLSetingViewController: LLBaseViewController {
             make.height.equalTo(48)
         }
         
+        itemView1.btn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let webvc = LLWYViewController()
+            webvc.pageUrl.accept("\(h5_URL)/hibiscusJa")
+            self.navigationController?.pushViewController(webvc, animated: true)
+        }).disposed(by: disposeBag)
+        
+        itemView2.btn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let webvc = LLWYViewController()
+            webvc.pageUrl.accept("\(h5_URL)/zucchiniTa")
+            self.navigationController?.pushViewController(webvc, animated: true)
+        }).disposed(by: disposeBag)
+        
+        itemView3.btn.rx.tap.subscribe(onNext: {
+            LoadingManager.addLoadingView()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                LoadingManager.hideLoadingView()
+                ToastUtility.showToast(message: "Current version is already the latest.")
+            }
+        }).disposed(by: disposeBag)
         
         nextBtn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
@@ -260,8 +281,8 @@ class LLAllDianViewController: LLBaseViewController {
         segmurce.isTitleColorGradientEnabled = true
         segmurce.titleSelectedFont = UIFont(name: Bold_SFDisplay, size: 15)!
         segmurce.titleNormalFont = UIFont(name: Bold_SFDisplay, size: 15)!
-        segmurce.titleNormalColor = UIColor(cssStr: "#000000").withAlphaComponent(0.5)
-        segmurce.titleSelectedColor = UIColor(cssStr: "#000000")
+        segmurce.titleNormalColor = UIColor(cssStr: "#000000")?.withAlphaComponent(0.5) ?? UIColor.black
+        segmurce.titleSelectedColor = UIColor.black
         
         segmentedView.dataSource = segmurce
         let indicator = createSegmentedIndicator()
@@ -276,7 +297,7 @@ class LLAllDianViewController: LLBaseViewController {
         indicator.indicatorWidth = JXSegmentedViewAutomaticDimension
         indicator.indicatorHeight = 2
         indicator.lineStyle = .lengthen
-        indicator.indicatorColor = UIColor(cssStr: "#1EFB91").withAlphaComponent(0.8)
+        indicator.indicatorColor = UIColor(cssStr: "#1EFB91")?.withAlphaComponent(0.8) ?? UIColor.black
         return indicator
     }
     
@@ -430,7 +451,7 @@ class LLOrderListView: UIView {
         
         modelArray.asObservable().bind(to: tableView.rx.items(cellIdentifier: "LLOrderListCell", cellType: LLOrderListCell.self)) { index, model, cell in
             cell.selectionStyle = .none
-            cell.backgroundColor = .systemPink
+            cell.backgroundColor = .clear
             cell.model.accept(model)
         }.disposed(by: disposeBag)
         
@@ -494,13 +515,12 @@ class LLOrderListCell: UITableViewCell {
     
     lazy var ctImageView: UIImageView = {
         let ctImageView = UIImageView()
-        ctImageView.backgroundColor = .purple
         return ctImageView
     }()
     
     lazy var mlabel: UILabel = {
         let mlabel = UILabel()
-        mlabel.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
+        mlabel.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel.textAlignment = .left
         mlabel.font = UIFont(name: Bold_SFDisplay, size: 15)
         return mlabel
@@ -528,6 +548,20 @@ class LLOrderListCell: UITableViewCell {
         return item2
     }()
     
+    lazy var lineView: UIView = {
+        let lineView = UIView()
+        lineView.backgroundColor = UIColor.init(cssStr: "#F3F3F3")
+        return lineView
+    }()
+    
+    lazy var desclabel: UILabel = {
+        let desclabel = UILabel()
+        desclabel.textColor = UIColor.black.withAlphaComponent(0.5)
+        desclabel.textAlignment = .left
+        desclabel.font = UIFont(name: Bold_SFDisplay, size: 15)
+        return desclabel
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(bgView)
@@ -536,6 +570,8 @@ class LLOrderListCell: UITableViewCell {
         bgView.addSubview(tlabel)
         bgView.addSubview(item1)
         bgView.addSubview(item2)
+        bgView.addSubview(lineView)
+        bgView.addSubview(desclabel)
         bgView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
             make.centerX.equalToSuperview()
@@ -562,13 +598,25 @@ class LLOrderListCell: UITableViewCell {
         }
         item1.snp.makeConstraints { make in
             make.left.equalTo(ctImageView.snp.right).offset(13)
-            make.size.equalTo(CGSize(width: 125, height: 45))
+            make.size.equalTo(CGSize(width: 115, height: 45))
             make.top.equalTo(tlabel.snp.bottom).offset(12)
         }
         item2.snp.makeConstraints { make in
             make.left.equalTo(item1.snp.right)
-            make.size.equalTo(CGSize(width: 125, height: 45))
+            make.size.equalTo(CGSize(width: 115, height: 45))
             make.top.equalTo(tlabel.snp.bottom).offset(12)
+        }
+        lineView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
+            make.height.equalTo(0.5)
+            make.top.equalTo(item2.snp.bottom).offset(8)
+        }
+        desclabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.top.equalTo(lineView.snp.top)
+            make.left.equalToSuperview().offset(10)
+            make.centerX.equalToSuperview()
         }
         model.asObservable().subscribe(onNext: { [weak self] model in
             guard let self = self, let model = model else { return }
@@ -579,6 +627,7 @@ class LLOrderListCell: UITableViewCell {
             item1.m1label.text = model.tiredly ?? ""
             item2.mlabel.text = model.rejoining?.followday ?? ""
             item2.m1label.text = model.rejoining?.distinctionday ?? ""
+            desclabel.text = model.belonging ?? ""
         }).disposed(by: disposeBag)
         
     }
@@ -597,7 +646,7 @@ class OListItemView: UIView {
     
     lazy var mlabel: UILabel = {
         let mlabel = UILabel()
-        mlabel.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
+        mlabel.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel.textAlignment = .center
         mlabel.font = UIFont(name: Regular_SFDisplay, size: 12)
         return mlabel

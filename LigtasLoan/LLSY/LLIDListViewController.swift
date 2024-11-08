@@ -228,7 +228,7 @@ class LLIDListViewController: LLBaseViewController {
         listView.tableView.rx.modelSelected(widehallModel.self).subscribe(onNext: { [weak self] model in
             guard let self = self else { return }
             print("type:\(model.aquizzical ?? "")")
-            byp()
+            self.byp()
             let vc = LLUploadIDViewController()
             vc.type.accept(model.aquizzical ?? "")
             vc.lo.accept(self.lo.value)
@@ -245,9 +245,8 @@ class LLIDListViewController: LLBaseViewController {
 extension LLIDListViewController: UITableViewDelegate {
     
     private func byp() {
-        let location = LLLocationConfig()
-        location.startUpdatingLocation { [weak self] model in
-            guard let self = self else { return }
+        locationConfig = LLLocationConfig()
+        locationConfig?.startUpdatingLocation { model in
             LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "2")
         }
     }

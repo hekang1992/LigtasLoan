@@ -286,11 +286,16 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
                         self.uploadView.cBtn.isEnabled = true
                         self.uploadView.cameaBtn.isEnabled = false
                     }else {
+                        let foryou = model.foryou ?? ""
                         self.uploadView.cBtn.kf.setImage(with: URL(string: model.toremember?.foryou ?? ""), for: .normal)
                         self.uploadView.typelabel.text = model.toremember?.hearth ?? ""
                         self.uploadView.changeBtn.isHidden = true
                         self.uploadView.cBtn.isEnabled = false
                         self.uploadView.cameaBtn.isEnabled = true
+                        if !foryou.isEmpty {
+                            self.uploadView.cameaBtn.isEnabled = false
+                            self.uploadView.cameaBtn.kf.setImage(with: URL(string: foryou), for: .normal)
+                        }
                     }
                 }
                 break
@@ -431,16 +436,16 @@ extension LLUploadIDViewController: UIImagePickerControllerDelegate, UINavigatio
     }
     
     private func bcmcc() {
-        let location = LLLocationConfig()
-        location.startUpdatingLocation { [weak self] model in
+        locationConfig = LLLocationConfig()
+        locationConfig?.startUpdatingLocation { [weak self] model in
             guard let self = self else { return }
             LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.idtime.value, jd: LLSBTwoDict.getCurrentTime(), type: "3")
         }
     }
     
     private func bcrencc() {
-        let location = LLLocationConfig()
-        location.startUpdatingLocation { [weak self] model in
+        locationConfig = LLLocationConfig()
+        locationConfig?.startUpdatingLocation { [weak self] model in
             guard let self = self else { return }
             LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.rfaceTime.value, jd: LLSBTwoDict.getCurrentTime(), type: "4")
         }

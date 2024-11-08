@@ -14,35 +14,28 @@ let Regular_SFDisplay = "SFDisplay-Light"
 
 let ROOT_VC = "ROOT_VC"
 
+typealias complete = () -> Void
+
 var is_login: Bool {
-    if let sessionID = UserDefaults.standard.object(forKey: LL_NID) as? String {
-        return !sessionID.isEmpty
-    } else {
-        return false
-    }
+    return (UserDefaults.standard.object(forKey: LL_NID) as? String)?.isEmpty == false
 }
 
 class StatusBarHelper {
     class func getStatusBarHeight() -> CGFloat {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            return windowScene.statusBarManager?.statusBarFrame.height ?? 0
-        }
-        return 0
+        return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.statusBarManager?.statusBarFrame.height ?? 0
     }
 }
 
 extension UIColor {
-    convenience init(cssStr: String) {
-        var hexString: String = cssStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        if hexString.hasPrefix("#") {
-            hexString.remove(at: hexString.startIndex)
+    convenience init?(cssStr: String) {
+        let hexString = cssStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        guard hexString.hasPrefix("#") else {
+            return nil
         }
-        if hexString.count != 6 {
-            self.init(white: 0.0, alpha: 0.0)
-            return
+        let hexCode = hexString.dropFirst()
+        guard hexCode.count == 6, let rgbValue = UInt64(hexCode, radix: 16) else {
+            return nil
         }
-        var rgbValue: UInt64 = 0
-        Scanner(string: hexString).scanHexInt64(&rgbValue)
         let red = CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0
         let green = CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0
         let blue = CGFloat(rgbValue & 0x0000FF) / 255.0
@@ -60,7 +53,7 @@ class LLLoadingView: UIView {
     
     lazy var hudView: LottieAnimationView = {
         let hudView = LottieAnimationView(name: "juhuajiaz.json", bundle: Bundle.main)
-        hudView.backgroundColor = UIColor.init(cssStr: "#D6FBE7").withAlphaComponent(0.6)
+        hudView.backgroundColor = UIColor.init(cssStr: "#D6FBE7")?.withAlphaComponent(0.6)
         hudView.layer.cornerRadius = 8
         hudView.animationSpeed = 1.5
         hudView.loopMode = .loop
@@ -144,8 +137,6 @@ class SanPopConfig {
         }
     }
 }
-
-typealias complete = () -> Void
 
 class OneTwoThreePopConfig {
     static func popLastEnum<T: widehallModel>(_ model: BRAddressPickerMode, _ label: UILabel, _ provinces: [BRProvinceModel], _ modelData: T, complete: @escaping complete) {
@@ -231,7 +222,7 @@ class TPopConfig {
             return proviceModel
         }
     }
-
+    
     private static func createCityModel(from cityDic: theirbeautyModel, in cityList: [theirbeautyModel]) -> BRCityModel {
         let cityModel = BRCityModel()
         cityModel.name = cityDic.aquizzical
@@ -253,5 +244,17 @@ class TPopConfig {
         areaModel.index = areaList.enumerated().first { $0.element === areaDic }?.offset ?? 0
         
         return areaModel
+    }
+}
+
+
+class LLJieURL {
+    static func appendters(url: String, parameters: [String: String]) -> String? {
+        guard var urlComponents = URLComponents(string: url) else {
+            return nil
+        }
+        let queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
+        urlComponents.queryItems = (urlComponents.queryItems ?? []) + queryItems
+        return urlComponents.url?.absoluteString
     }
 }

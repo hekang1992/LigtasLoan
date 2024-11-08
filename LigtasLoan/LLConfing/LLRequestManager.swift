@@ -33,14 +33,13 @@ class preferredaModel {
     var squatty: String?
     var aquizzical: String?
     var deepseats: String?
-    var consciousness: String?
+    var consciousness: Int?
     var widehall: [widehallModel]?
     var andfalling: andfallingModel?
     var consternation: hisgoldModel?
     var herplacid: herplacidModel?
-    
     init(json: JSON) {
-        self.consciousness = json["consciousness"].string
+        self.consciousness = json["consciousness"].intValue
         self.squatty = json["squatty"].string
         self.aquizzical = json["aquizzical"].string
         self.deepseats = json["deepseats"].string
@@ -155,7 +154,9 @@ class widehallModel {
     var rejoining: rejoiningModel?
     var herseat: String?
     var tiredly: String?
+    var belonging: String?
     init(json: JSON) {
+        self.belonging = json["belonging"].stringValue
         self.tiredly = json["tiredly"].stringValue
         self.herseat = json["herseat"].stringValue
         self.blot = json["blot"].stringValue
@@ -321,7 +322,17 @@ extension APIService: TargetType {
 }
 
 class LLRequestManager: NSObject {
-    private let provider = MoyaProvider<APIService>()
+    
+    let session: Session = {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 90
+        configuration.timeoutIntervalForResource = 90
+        return Session(configuration: configuration)
+    }()
+    
+    private lazy var provider: MoyaProvider<APIService> = {
+        return MoyaProvider<APIService>(session: session)
+    }()
     
     private func requestData(target: APIService, completion: @escaping (Result<CommonModel, Error>) -> Void) {
         provider.request(target) { result in
@@ -379,16 +390,6 @@ class LLRequestManager: NSObject {
     }
 }
 
-class LLJieURL {
-    static func appendters(url: String, parameters: [String: String]) -> String? {
-        guard var urlComponents = URLComponents(string: url) else {
-            return nil
-        }
-        let queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
-        urlComponents.queryItems = (urlComponents.queryItems ?? []) + queryItems
-        return urlComponents.url?.absoluteString
-    }
-}
 
 
 

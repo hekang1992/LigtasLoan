@@ -19,7 +19,7 @@ protocol Loggable {
 }
 
 enum LogInfoKey: String {
-    case meal, inquiring, kitchen, cheerless, php, code, language, screamed, duty, blazed, boyfine
+    case meal, inquiring, kitchen, cheerless, php, codebaby, luage, screamed, duty, blazed, boyfine
 }
 
 extension UIDevice {
@@ -54,8 +54,8 @@ class LLDLInfo: NSObject, Loggable {
             .kitchen: deviceInfo.name,
             .cheerless: idfv,
             .php: "peace",
-            .code: "1",
-            .language: "swift",
+            .codebaby: "old",
+            .luage: "swift",
             .screamed: UserDefaults.standard.screamed,
             .duty: deviceInfo.version,
             .blazed: idfv,

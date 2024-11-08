@@ -53,7 +53,7 @@ class PopPhotoView: UIView {
         nextBtn.backgroundColor = .white
         nextBtn.layer.borderWidth = 2
         nextBtn.setTitleColor(UIColor.init(cssStr: "#222222"), for: .normal)
-        nextBtn.layer.borderColor = UIColor.init(cssStr: "#222222").cgColor
+        nextBtn.layer.borderColor = UIColor.init(cssStr: "#222222")?.cgColor
         return nextBtn
     }()
     
@@ -278,7 +278,7 @@ class PopNameIDCardView: UIView {
     lazy var inputtx: UITextField = {
         let inputtx = UITextField()
         inputtx.font = UIFont(name: Bold_SFDisplay, size: 16)
-        inputtx.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
+        inputtx.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         inputtx.backgroundColor = .purple
         return inputtx
     }()
@@ -377,14 +377,14 @@ class LLNameView: UIView {
     lazy var inputtx: UITextField = {
         let inputtx = UITextField()
         inputtx.font = UIFont(name: Bold_SFDisplay, size: 16)
-        inputtx.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
+        inputtx.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         return inputtx
     }()
     
     lazy var nextBtn: UIButton = {
         let nextBtn = UIButton(type: .custom)
         nextBtn.contentHorizontalAlignment = .left
-        nextBtn.setTitleColor(UIColor.init(cssStr: "#000000").withAlphaComponent(0.5), for: .normal)
+        nextBtn.setTitleColor(UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5), for: .normal)
         nextBtn.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 16)
         return nextBtn
     }()

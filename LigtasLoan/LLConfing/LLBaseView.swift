@@ -78,7 +78,7 @@ class LLBaseView: UIView {
         let phoneTx = UITextField()
         phoneTx.keyboardType = .numberPad
         let attrString = NSMutableAttributedString(string: "Enter phone number", attributes: [
-            .foregroundColor: UIColor.init(cssStr: "#000000").withAlphaComponent(0.2) as Any,
+            .foregroundColor: UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.2) as Any,
             .font: UIFont(name: Bold_SFDisplay, size: 12)!
         ])
         phoneTx.attributedPlaceholder = attrString

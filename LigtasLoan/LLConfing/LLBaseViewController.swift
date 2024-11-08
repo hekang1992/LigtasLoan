@@ -17,6 +17,8 @@ class LLBaseViewController: UIViewController {
     
     var ksshjinof = BehaviorRelay<String>(value: "")
     
+    var locationConfig: LLLocationConfig?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,7 +78,7 @@ extension LLBaseViewController {
                         typeVc(form: gabbling, proid: proid)
                     }else {
                         if let trembling = success.preferreda.consternation?.trembling {
-                            self.ddtovc(from: trembling)
+                            self.ddtovc(from: trembling, pro: proid)
                         }
                     }
                 }
@@ -104,7 +106,7 @@ extension LLBaseViewController {
                     }else {
                         if let trembling = success.preferreda.consternation?.trembling {
                             ksshjinof.accept(LLSBTwoDict.getCurrentTime())
-                            self.ddtovc(from: trembling)
+                            self.ddtovc(from: trembling, pro: proid)
                         }
                     }
                 }
@@ -277,7 +279,7 @@ extension LLBaseViewController {
         }
     }
     
-    func ddtovc(from oid: String) {
+    func ddtovc(from oid: String, pro: String) {
         let odDict = ["comforting": "1", "finally": oid, "twinge": "owo", "marriedindia": "lg-sa"]
         let man = LLRequestManager()
         man.requestAPI(params: odDict, pageURL: "/ll/wonderedif/thenher/these", method: .post) { [weak self] result in
@@ -285,7 +287,9 @@ extension LLBaseViewController {
             guard let self = self else { return }
             switch result {
             case .success(let success):
-                self.nineinfo(form: oid)
+                DispatchQueue.main.async {
+                    self.nineinfo(form: pro)
+                }
                 LoadingManager.hideLoadingView()
                 let nextUrl = success.preferreda.foryou ?? ""
                 let wv = LLWYViewController()
@@ -299,8 +303,8 @@ extension LLBaseViewController {
     }
     
     private func nineinfo(form prod: String) {
-        let location = LLLocationConfig()
-        location.startUpdatingLocation { [weak self] model in
+        locationConfig = LLLocationConfig()
+        locationConfig?.startUpdatingLocation { [weak self] model in
             guard let self = self else { return }
             LLMdMessInfo.bpOInfo(from: model, proloID: prod, st:self.ksshjinof.value, jd: LLSBTwoDict.getCurrentTime(), type: "9")
         }

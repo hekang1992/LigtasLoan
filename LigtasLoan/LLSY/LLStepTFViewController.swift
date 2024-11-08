@@ -41,7 +41,7 @@ class LLPhontClickCell: UITableViewCell {
     
     lazy var mlabel1: UILabel = {
         let mlabel1 = UILabel()
-        mlabel1.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.2)
+        mlabel1.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.2)
         mlabel1.textAlignment = .left
         mlabel1.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel1
@@ -49,7 +49,7 @@ class LLPhontClickCell: UITableViewCell {
     
     lazy var mlabel2: UILabel = {
         let mlabel2 = UILabel()
-        mlabel2.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.2)
+        mlabel2.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.2)
         mlabel2.textAlignment = .left
         mlabel2.font = UIFont(name: Bold_SFDisplay, size: 16)
         return mlabel2
@@ -120,8 +120,14 @@ class LLPhontClickCell: UITableViewCell {
         
         model.subscribe(onNext: { [weak self] imodel in
             guard let self = self, let imodel = imodel else { return }
-            mlabel.text = imodel.hatred ?? ""
-            mlabel1.text = imodel.throwingher ?? ""
+            mlabel.text = imodel.haddreamed ?? ""
+            let relationText = imodel.relationText ?? ""
+            let waslooking = imodel.waslooking ?? ""
+            let aquizzical = imodel.aquizzical ?? ""
+            mlabel1.text = relationText.isEmpty ? "Relation" : relationText
+            mlabel2.text = waslooking.isEmpty ? "Name and phone" : "\(aquizzical) - \(waslooking)"
+            mlabel1.textColor = relationText.isEmpty ? UIColor.black.withAlphaComponent(0.2) : UIColor.black
+            mlabel2.textColor = waslooking.isEmpty ? UIColor.black.withAlphaComponent(0.2) : UIColor.black
         }).disposed(by: disposeBag)
     }
     
@@ -219,9 +225,7 @@ class LLStepTFViewController: LLBaseViewController {
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         
         modelArray.asObservable().bind(to: tableView.rx.items(cellIdentifier: "LLPhontClickCell", cellType: LLPhontClickCell.self)) { index, model, cell in
-            cell.mlabel.text = model.haddreamed ?? ""
-            cell.mlabel1.text = "Relationship"
-            cell.mlabel2.text = "Name and phone"
+            cell.model.accept(model)
             cell.selectionStyle = .none
             cell.backgroundColor = .clear
         }.disposed(by: disposeBag)
@@ -428,8 +432,8 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
     }
     
     private func lxwmeninfo() {
-        let location = LLLocationConfig()
-        location.startUpdatingLocation { [weak self] model in
+        locationConfig = LLLocationConfig()
+        locationConfig?.startUpdatingLocation { [weak self] model in
             guard let self = self else { return }
             LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "7")
         }

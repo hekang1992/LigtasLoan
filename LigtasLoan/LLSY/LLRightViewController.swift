@@ -320,10 +320,16 @@ extension LLRightViewController {
         
         rightView.itemView2.btn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
+            let webvc = LLWYViewController()
+            webvc.pageUrl.accept("\(h5_URL)")
+            self.gy_sidePushViewController(viewController: webvc)
         }).disposed(by: disposeBag)
         
         rightView.itemView3.btn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
+            let webvc = LLWYViewController()
+            webvc.pageUrl.accept("\(h5_URL)/mountainKa")
+            self.gy_sidePushViewController(viewController: webvc)
         }).disposed(by: disposeBag)
         
         rightView.itemView4.btn.rx.tap.subscribe(onNext: { [weak self] in

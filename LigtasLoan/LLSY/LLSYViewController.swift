@@ -10,6 +10,7 @@ import GYSide
 import RxRelay
 import MJRefresh
 import CoreLocation
+import RxSwift
 
 class LLSYViewController: LLBaseViewController {
     
@@ -78,6 +79,19 @@ class LLSYViewController: LLBaseViewController {
         }).disposed(by: disposeBag)
         
         ksSt.accept(LLSBTwoDict.getCurrentTime())
+        
+        twoView.tableView.rx.modelSelected(aviolenceModel.self).subscribe(onNext: { [weak self] model in
+            guard let self = self else { return }
+            if let cad = model.cad {
+                self.apply(from: cad)
+            }
+        }).disposed(by: disposeBag)
+        
+        twoView.block = { [weak self] url in
+            self?.genjuurltovc(from: url)
+        }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,9 +138,9 @@ extension LLSYViewController {
     
     private func homeClick() {
         //1yes，0no
-        let gck = self.homeModel.value?.consciousness ?? ""
+        let gck = self.homeModel.value?.consciousness ?? 0
         let status = CLLocationManager.authorizationStatus()
-        if gck == "1" {
+        if gck == 1 {
             if status == .authorizedAlways || status == .authorizedWhenInUse {
                 lldwsc()
             }else {
@@ -138,8 +152,8 @@ extension LLSYViewController {
     }
     
     private func lldwsc() {
-        let location = LLLocationConfig()
-        location.startUpdatingLocation { [weak self] model in
+        locationConfig = LLLocationConfig()
+        locationConfig?.startUpdatingLocation { [weak self] model in
             guard let self = self else { return }
             loanInfo(model)
             moneinfo(model)

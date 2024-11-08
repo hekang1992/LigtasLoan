@@ -7,6 +7,7 @@
 
 import UIKit
 import RxRelay
+import StoreKit
 @preconcurrency import WebKit
 
 class LLWYViewController: LLBaseViewController {
@@ -74,7 +75,8 @@ class LLWYViewController: LLBaseViewController {
             make.height.equalTo(0.5)
         }
         
-        if let url = URL(string: pageUrl.value) {
+        let extendedURL = LLJieURL.appendters(url: pageUrl.value, parameters: LLDLInfo.getLogiInfo()) ?? "".replacingOccurrences(of: " ", with: "%20")
+        if let url = URL(string: extendedURL) {
             webView.load(URLRequest(url: url))
         }
         
@@ -107,7 +109,27 @@ class LLWYViewController: LLBaseViewController {
 extension LLWYViewController: WKScriptMessageHandler, WKNavigationDelegate {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print("message:\(message.body)")
+        print("message:\(message.name)")
+        let name = message.name
+        if name == "garlicKiw" {
+            self.navigationController?.popToRootViewController(animated: true)
+        } else if name == "mangoHibi" {
+            topjapp()
+        } else if name == "jacketYam" {
+            self.navigationController?.popViewController(animated: true)
+        } else if name == "guitarGar" {
+            if let array = message.body as? [String] {
+                locationConfig = LLLocationConfig()
+                locationConfig?.startUpdatingLocation(completion: { model in
+                    LLMdMessInfo.bpOInfo(from: model, proloID: array.first ?? "0", st:array.last ?? "0", jd: LLSBTwoDict.getCurrentTime(), type: "10")
+                })
+            }
+        } else if name == "monkeyUgl" {
+            let array = message.body as? [String]
+            if let array = message.body as? [String] {
+                
+            }
+        }
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -149,6 +171,16 @@ extension LLWYViewController: WKScriptMessageHandler, WKNavigationDelegate {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else if urlStr.hasPrefix("whatsapp:") {
             ToastUtility.showToast(message: "To continue, please install WhatsApp.")
+        }
+    }
+    
+    private func topjapp() {
+        if #available(iOS 14.0, *) {
+            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                SKStoreReviewController.requestReview(in: scene)
+            }
+        } else {
+            SKStoreReviewController.requestReview()
         }
     }
     

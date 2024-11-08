@@ -273,8 +273,8 @@ extension LLQAWViewController: UITableViewDelegate {
     }
     
     private func lxwwllinfo() {
-        let location = LLLocationConfig()
-        location.startUpdatingLocation { [weak self] model in
+        locationConfig = LLLocationConfig()
+        locationConfig?.startUpdatingLocation { [weak self] model in
             guard let self = self else { return }
             LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "8")
         }

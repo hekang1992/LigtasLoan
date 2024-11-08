@@ -43,7 +43,7 @@ class OneView: UIView {
         let mlabel = UILabel()
         mlabel.text = "1.Continuously make timely payments to demonstrate your reliability and creditworthiness."
         mlabel.numberOfLines = 0
-        mlabel.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
+        mlabel.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel.textAlignment = .left
         mlabel.font = UIFont(name: Bold_SFDisplay, size: 12)
         return mlabel
@@ -53,7 +53,7 @@ class OneView: UIView {
         let mlabel1 = UILabel()
         mlabel1.text = "2.Update your income information with your credit provider to demonstrate your increased earning potential."
         mlabel1.numberOfLines = 0
-        mlabel1.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
+        mlabel1.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel1.textAlignment = .left
         mlabel1.font = UIFont(name: Bold_SFDisplay, size: 12)
         return mlabel1
@@ -86,7 +86,7 @@ class OneView: UIView {
         let mlabel = UILabel()
         mlabel.text = "1.A stable work history can make you appear more reliable in the eyes of lenders."
         mlabel.numberOfLines = 0
-        mlabel.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
+        mlabel.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel.textAlignment = .left
         mlabel.font = UIFont(name: Bold_SFDisplay, size: 12)
         return mlabel
@@ -96,7 +96,7 @@ class OneView: UIView {
         let mlabel1 = UILabel()
         mlabel1.text = "2.A higher income can improve your financial standing, making you eligible for more favorable interest rates."
         mlabel1.numberOfLines = 0
-        mlabel1.textColor = UIColor.init(cssStr: "#000000").withAlphaComponent(0.5)
+        mlabel1.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel1.textAlignment = .left
         mlabel1.font = UIFont(name: Bold_SFDisplay, size: 12)
         return mlabel1
@@ -184,6 +184,8 @@ class OneView: UIView {
 
 class TwoView: UIView {
     
+    var block: ((String) -> Void)?
+    
     let disposeBag = DisposeBag()
     
     var model = BehaviorRelay<preferredaModel?>(value: nil)
@@ -226,22 +228,15 @@ class TwoView: UIView {
         lunboView.isInfinite = true
         lunboView.delegate = self
         lunboView.dataSource = self
-        lunboView.backgroundColor = .white
-        lunboView.automaticSlidingInterval = 2.0
+        lunboView.backgroundColor = .clear
         lunboView.register(LLGunCell.self, forCellWithReuseIdentifier: "LLGunCell")
         return lunboView
     }()
     
-    lazy var clickone: LLHeadBtnClickView = {
-        let clickone = LLHeadBtnClickView()
-        clickone.mlabel.text = "List Of Products"
-        return clickone
-    }()
-    
-    lazy var clicktwo: LLHeadBtnClickView = {
-        let clicktwo = LLHeadBtnClickView()
-        clicktwo.mlabel.text = "Recommend Products"
-        return clicktwo
+    lazy var clickone: UIImageView = {
+        let ctImageView = UIImageView()
+        ctImageView.image = UIImage(named: "procadimagea")
+        return ctImageView
     }()
     
     override init(frame: CGRect) {
@@ -307,17 +302,11 @@ extension TwoView: UITableViewDelegate, FSPagerViewDataSource, FSPagerViewDelega
         }
         
         headView.addSubview(clickone)
-        headView.addSubview(clicktwo)
         
         clickone.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.left.equalToSuperview().offset(17)
-            make.size.equalTo(CGSize(width: 165, height: 30))
-        }
-        clicktwo.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.left.equalTo(clickone.snp.right).offset(10)
-            make.size.equalTo(CGSize(width: 165, height: 30))
+            make.size.equalTo(CGSize(width: 116, height: 30))
         }
         
         return headView
@@ -329,8 +318,14 @@ extension TwoView: UITableViewDelegate, FSPagerViewDataSource, FSPagerViewDelega
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         guard let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "LLGunCell", at: index) as? LLGunCell else { return FSPagerViewCell() }
-        let model = model.value?.herplacid?.aviolence[index]
+        let arrayimage = model.value?.herplacid?.aviolence
+        let model = arrayimage?[index]
         cell.icon.kf.setImage(with: URL(string: model?.caring ?? ""))
+        if arrayimage?.count ?? 0 > 1 {
+            lunboView.automaticSlidingInterval = 2
+        }else {
+            lunboView.automaticSlidingInterval = 0
+        }
         return cell
     }
     
@@ -338,7 +333,7 @@ extension TwoView: UITableViewDelegate, FSPagerViewDataSource, FSPagerViewDelega
         let model = model.value?.herplacid?.aviolence[index]
         let foryou = model?.foryou ?? ""
         if !foryou.isEmpty {
-            
+            self.block?(foryou)
         }
     }
     
