@@ -125,9 +125,12 @@ extension LLWYViewController: WKScriptMessageHandler, WKNavigationDelegate {
                 })
             }
         } else if name == "monkeyUgl" {
-            let array = message.body as? [String]
             if let array = message.body as? [String] {
                 
+            }
+        } else if name == "tangerine" {
+            if let array = message.body as? [String] {
+                self.genjuurltovc(from: array.first ?? "")
             }
         }
     }

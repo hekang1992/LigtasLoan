@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import GYSide
+import RxSwift
 import RxRelay
 import MJRefresh
 import CoreLocation
-import RxSwift
 
 class LLSYViewController: LLBaseViewController {
     
@@ -43,19 +42,7 @@ class LLSYViewController: LLBaseViewController {
         twoView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        oneView.rightBtn.rx
-            .tap
-            .subscribe(onNext: { [weak self] in
-            self?.rightVc()
-        }).disposed(by: disposeBag)
-        
-        twoView.backBtn.rx
-            .tap
-            .subscribe(onNext: { [weak self] in
-            self?.rightVc()
-        }).disposed(by: disposeBag)
-        
+      
         oneView.ctImageView.rx
             .tapGesture()
             .when(.recognized)
@@ -103,14 +90,6 @@ class LLSYViewController: LLBaseViewController {
 
 extension LLSYViewController {
     
-    private func rightVc() {
-        let vc = LLRightViewController()
-        gy_showSide({ (config) in
-            config.direction = .right
-            config.animationType = .translationMask
-        }, vc)
-    }
-    
     private func homeInfo() {
         LoadingManager.addLoadingView()
         let man = LLRequestManager()
@@ -122,7 +101,7 @@ extension LLSYViewController {
             case .success(let success):
                 let model = success.preferreda
                 self?.homeModel.accept(model)
-                if model.nothave?.elemental == "apprehend2" {
+                if model.greaterone?.elemental != "apprehend5" {
                     self?.oneView.isHidden = false
                     self?.twoView.isHidden = true
                 } else {
@@ -196,7 +175,7 @@ extension LLSYViewController {
     private func moneinfo(_ model: LLLModel) {
         let ssbino = UserDefaults.standard.object(forKey: LLMAIO) as? String ?? ""
         if ssbino.isEmpty {
-            LLMdMessInfo.bpOInfo(from: model, proloID: self.homeModel.value?.nothave?.aviolence?.first?.cad ?? "", st:ksSt.value, jd: LLSBTwoDict.getCurrentTime(), type: "1")
+            LLMdMessInfo.bpOInfo(from: model, proloID: self.homeModel.value?.greaterone?.aviolence?.first?.cad ?? "", st:ksSt.value, jd: LLSBTwoDict.getCurrentTime(), type: "1")
         }
     }
     

@@ -31,13 +31,15 @@
 		73342ACB2CC7F65B002EDA2B /* LLYZMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73342ACA2CC7F65B002EDA2B /* LLYZMViewController.swift */; };
 		733465392CCA7A5F00856E02 /* juhuajiaz.json in Resources */ = {isa = PBXBuildFile; fileRef = 733465382CCA7A5F00856E02 /* juhuajiaz.json */; };
 		7338B9C12CCBCBA2001CBAFE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7338B9C02CCBCB99001CBAFE /* HomeView.swift */; };
-		7338B9C32CCBD7AA001CBAFE /* LLRightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7338B9C22CCBD7AA001CBAFE /* LLRightViewController.swift */; };
 		7338B9C52CCBEFE7001CBAFE /* LLTypeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7338B9C42CCBEFE7001CBAFE /* LLTypeListViewController.swift */; };
 		733EF7142CD8A2F70016EA67 /* LLDeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EF7132CD8A2E80016EA67 /* LLDeInfo.swift */; };
 		733EF7162CD8A3200016EA67 /* LLDeTTInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EF7152CD8A3150016EA67 /* LLDeTTInfo.swift */; };
 		733EF7182CD8A3430016EA67 /* LLLastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EF7172CD8A33C0016EA67 /* LLLastInfo.swift */; };
 		733EF71D2CD8C7A00016EA67 /* LLMdMessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733EF71C2CD8C7A00016EA67 /* LLMdMessInfo.swift */; };
 		738ED1462CBFB45A0085C713 /* LLRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738ED1452CBFB45A0085C713 /* LLRequestManager.swift */; };
+		739685D62CE38CC0007D41D0 /* LLTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739685D52CE38CC0007D41D0 /* LLTabBarViewController.swift */; };
+		739685D82CE38D7A007D41D0 /* LLCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739685D72CE38D7A007D41D0 /* LLCenterViewController.swift */; };
+		739685DA2CE3A2B7007D41D0 /* LLAddBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739685D92CE3A2B7007D41D0 /* LLAddBankViewController.swift */; };
 		73A6F6FC2CCE8C8F0081DF5C /* LLStepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A6F6FB2CCE8C8F0081DF5C /* LLStepTwoViewController.swift */; };
 		73B728192CD68057006CBAA7 /* LLLocationConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B728182CD68057006CBAA7 /* LLLocationConfig.swift */; };
 		73B7281C2CD69781006CBAA7 /* sflight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73B7281A2CD69781006CBAA7 /* sflight.ttf */; };
@@ -81,7 +83,6 @@
 		73342ACA2CC7F65B002EDA2B /* LLYZMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLYZMViewController.swift; sourceTree = "<group>"; };
 		733465382CCA7A5F00856E02 /* juhuajiaz.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = juhuajiaz.json; sourceTree = "<group>"; };
 		7338B9C02CCBCB99001CBAFE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		7338B9C22CCBD7AA001CBAFE /* LLRightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRightViewController.swift; sourceTree = "<group>"; };
 		7338B9C42CCBEFE7001CBAFE /* LLTypeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLTypeListViewController.swift; sourceTree = "<group>"; };
 		733EF7132CD8A2E80016EA67 /* LLDeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLDeInfo.swift; sourceTree = "<group>"; };
 		733EF7152CD8A3150016EA67 /* LLDeTTInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLDeTTInfo.swift; sourceTree = "<group>"; };
@@ -89,6 +90,9 @@
 		733EF7192CD8B8740016EA67 /* LigtasLoan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LigtasLoan.entitlements; sourceTree = "<group>"; };
 		733EF71C2CD8C7A00016EA67 /* LLMdMessInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMdMessInfo.swift; sourceTree = "<group>"; };
 		738ED1452CBFB45A0085C713 /* LLRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLRequestManager.swift; sourceTree = "<group>"; };
+		739685D52CE38CC0007D41D0 /* LLTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLTabBarViewController.swift; sourceTree = "<group>"; };
+		739685D72CE38D7A007D41D0 /* LLCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLCenterViewController.swift; sourceTree = "<group>"; };
+		739685D92CE3A2B7007D41D0 /* LLAddBankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLAddBankViewController.swift; sourceTree = "<group>"; };
 		73A6F6FB2CCE8C8F0081DF5C /* LLStepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLStepTwoViewController.swift; sourceTree = "<group>"; };
 		73B728182CD68057006CBAA7 /* LLLocationConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLLocationConfig.swift; sourceTree = "<group>"; };
 		73B7281A2CD69781006CBAA7 /* sflight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sflight.ttf; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				732A7F4B2CBA52810097B3FB /* LLLaunchViewController.swift */,
 				73342AC22CC7D9DA002EDA2B /* LLBaseNavViewController.swift */,
 				733EF71C2CD8C7A00016EA67 /* LLMdMessInfo.swift */,
+				739685D52CE38CC0007D41D0 /* LLTabBarViewController.swift */,
 			);
 			path = LLConfing;
 			sourceTree = "<group>";
@@ -207,7 +212,6 @@
 				73E1CA662CCD54AB00072597 /* LLTypePopView.swift */,
 				7338B9C02CCBCB99001CBAFE /* HomeView.swift */,
 				73342ABD2CC7D68B002EDA2B /* LLSYViewController.swift */,
-				7338B9C22CCBD7AA001CBAFE /* LLRightViewController.swift */,
 				7333D3322CD8F2A600FA829E /* LLRightListViewController.swift */,
 				7338B9C42CCBEFE7001CBAFE /* LLTypeListViewController.swift */,
 				73E1CA622CCD3E3000072597 /* LLIDListViewController.swift */,
@@ -216,7 +220,9 @@
 				7326BCF62CD26DEF00432E44 /* LLStepTHRViewController.swift */,
 				7326BCF82CD2701200432E44 /* LLStepTFViewController.swift */,
 				730C41262CD5566A0011E4EB /* LLQAWViewController.swift */,
+				739685D72CE38D7A007D41D0 /* LLCenterViewController.swift */,
 				730C41282CD6260E0011E4EB /* LLWYViewController.swift */,
+				739685D92CE3A2B7007D41D0 /* LLAddBankViewController.swift */,
 			);
 			path = LLSY;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				7338B9C12CCBCBA2001CBAFE /* HomeView.swift in Sources */,
 				73E1CA632CCD3E3000072597 /* LLIDListViewController.swift in Sources */,
 				73342AC32CC7D9DA002EDA2B /* LLBaseNavViewController.swift in Sources */,
+				739685D62CE38CC0007D41D0 /* LLTabBarViewController.swift in Sources */,
 				732A7F4C2CBA52810097B3FB /* LLLaunchViewController.swift in Sources */,
 				73342ACB2CC7F65B002EDA2B /* LLYZMViewController.swift in Sources */,
 				7326BCF92CD2701200432E44 /* LLStepTFViewController.swift in Sources */,
@@ -384,11 +391,12 @@
 				73342ABE2CC7D68B002EDA2B /* LLSYViewController.swift in Sources */,
 				73342AC72CC7E3D8002EDA2B /* LLDLView.swift in Sources */,
 				730CECF12CC92AEA002F96E0 /* WLUnitField.m in Sources */,
+				739685D82CE38D7A007D41D0 /* LLCenterViewController.swift in Sources */,
 				7333D3332CD8F2A600FA829E /* LLRightListViewController.swift in Sources */,
-				7338B9C32CCBD7AA001CBAFE /* LLRightViewController.swift in Sources */,
 				730CECF22CC92AEA002F96E0 /* WLUnitFieldTextPosition.m in Sources */,
 				730CECF82CC9363F002F96E0 /* LLDLInfo.swift in Sources */,
 				730CECF32CC92AEA002F96E0 /* WLUnitFieldTextRange.m in Sources */,
+				739685DA2CE3A2B7007D41D0 /* LLAddBankViewController.swift in Sources */,
 				73E1CA672CCD54BD00072597 /* LLTypePopView.swift in Sources */,
 				73342AB92CC7D39A002EDA2B /* LLConfig.swift in Sources */,
 				73B728192CD68057006CBAA7 /* LLLocationConfig.swift in Sources */,
@@ -426,12 +434,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LigtasLoan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LigtasLoan;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSContactsUsageDescription = "";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Identity verification is required for loan applications. You can use the camera on your device to take clear photos of identity documents such as ID cards, driver's licenses, and passports. These photos will be securely transmitted to our system through the application.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "When setting up a loan account, we request access to your contacts list to make it convenient for you to add emergency contacts. In case of any issues during the loan process, we can communicate with them to ensure the smooth progress of the loan business.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location information is used for risk assessment and ensuring the security of transactions when you apply for a loan. When applying for a loan in a new area, we can evaluate the local risks based on this information and also prevent fraud to ensure the authenticity and security of the transactions.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location information is used for risk assessment and ensuring the security of transactions when you apply for a loan. When applying for a loan in a new area, we can evaluate the local risks based on this information and also prevent fraud to ensure the authenticity and security of the transactions.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We request access to your photo album so that you can directly upload the existing photos of your identity documents for the identity verification of the loan application, saving you time and making the process smoother.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We analyze your behaviors and preferences related to financial products through the Advertising Identifier (IDFA) on your device, so as to customize suitable loan recommendations for you. Just like a dedicated financial advisor, it enables you to easily find the matching loan options.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -476,12 +484,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LigtasLoan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = LigtasLoan;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSContactsUsageDescription = "";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Identity verification is required for loan applications. You can use the camera on your device to take clear photos of identity documents such as ID cards, driver's licenses, and passports. These photos will be securely transmitted to our system through the application.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "When setting up a loan account, we request access to your contacts list to make it convenient for you to add emergency contacts. In case of any issues during the loan process, we can communicate with them to ensure the smooth progress of the loan business.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Your location information is used for risk assessment and ensuring the security of transactions when you apply for a loan. When applying for a loan in a new area, we can evaluate the local risks based on this information and also prevent fraud to ensure the authenticity and security of the transactions.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location information is used for risk assessment and ensuring the security of transactions when you apply for a loan. When applying for a loan in a new area, we can evaluate the local risks based on this information and also prevent fraud to ensure the authenticity and security of the transactions.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We request access to your photo album so that you can directly upload the existing photos of your identity documents for the identity verification of the loan application, saving you time and making the process smoother.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We analyze your behaviors and preferences related to financial products through the Advertising Identifier (IDFA) on your device, so as to customize suitable loan recommendations for you. Just like a dedicated financial advisor, it enables you to easily find the matching loan options.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

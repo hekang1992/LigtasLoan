@@ -1,8 +1,8 @@
 //
-//  LLRightViewController.swift
+//  LLCenterViewController.swift
 //  LigtasLoan
 //
-//  Created by LigtasLoan on 2024/10/25.
+//  Created by 何康 on 2024/11/12.
 //
 
 import UIKit
@@ -84,8 +84,7 @@ class LLRightView: UIView {
     
     lazy var ctImageView: UIImageView = {
         let ctImageView = UIImageView()
-        ctImageView.image = UIImage(named: "iconim")
-        ctImageView.contentMode = .scaleAspectFit
+        ctImageView.image = UIImage(named: "bgimagecen")
         return ctImageView
     }()
     
@@ -135,28 +134,36 @@ class LLRightView: UIView {
         return itemView6
     }()
     
+    lazy var itemView7: LLRightItemView = {
+        let itemView7 = LLRightItemView()
+        itemView7.mlabel.text = "CHANGE ACCOUNT"
+        return itemView7
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(scrollView)
         scrollView.addSubview(ctImageView)
-        scrollView.addSubview(mlabel)
+        ctImageView.addSubview(mlabel)
         scrollView.addSubview(itemView1)
         scrollView.addSubview(itemView2)
         scrollView.addSubview(itemView3)
         scrollView.addSubview(itemView4)
         scrollView.addSubview(itemView5)
         scrollView.addSubview(itemView6)
+        scrollView.addSubview(itemView7)
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         ctImageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(StatusBarHelper.getStatusBarHeight() + 10)
-            make.size.equalTo(CGSize(width: 106, height: 106))
+            make.height.equalTo(334)
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.width.equalTo(sc_width)
         }
         mlabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(ctImageView.snp.bottom).offset(9)
+            make.top.equalTo(ctImageView.snp.top).offset(169)
             make.height.equalTo(36)
         }
         itemView1.snp.makeConstraints { make in
@@ -167,7 +174,7 @@ class LLRightView: UIView {
         }
         itemView2.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(itemView1.snp.bottom).offset(24)
+            make.top.equalTo(itemView1.snp.bottom).offset(46)
             make.left.equalToSuperview().offset(15)
             make.height.equalTo(50)
         }
@@ -183,9 +190,17 @@ class LLRightView: UIView {
             make.left.equalToSuperview().offset(15)
             make.height.equalTo(50)
         }
+        
+        itemView7.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(itemView4.snp.bottom).offset(24)
+            make.left.equalToSuperview().offset(15)
+            make.height.equalTo(50)
+        }
+        
         itemView5.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(itemView4.snp.bottom).offset(150)
+            make.top.equalTo(itemView4.snp.bottom).offset(120)
             make.left.equalToSuperview().offset(15)
             make.height.equalTo(50)
         }
@@ -273,21 +288,20 @@ class LLRightItemView: UIView {
 
 
 
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-#warning("")
 
 
 
+//##################################
 
 
 
 
 
 
-class LLRightViewController: LLBaseViewController {
-    
+
+
+class LLCenterViewController: LLBaseViewController {
+
     lazy var rightView: LLRightView = {
         let rightView = LLRightView()
         return rightView
@@ -306,36 +320,37 @@ class LLRightViewController: LLBaseViewController {
         }
         tap()
     }
-    
+
 }
 
-extension LLRightViewController {
+
+extension LLCenterViewController {
     
     private func tap() {
         rightView.itemView1.btn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             let setVc = LLAllDianViewController()
-            self.gy_sidePushViewController(viewController: setVc)
+            self.navigationController?.pushViewController(setVc, animated: true)
         }).disposed(by: disposeBag)
         
         rightView.itemView2.btn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             let webvc = LLWYViewController()
             webvc.pageUrl.accept("\(h5_URL)")
-            self.gy_sidePushViewController(viewController: webvc)
+            self.navigationController?.pushViewController(webvc, animated: true)
         }).disposed(by: disposeBag)
         
         rightView.itemView3.btn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             let webvc = LLWYViewController()
             webvc.pageUrl.accept("\(h5_URL)/mountainKa")
-            self.gy_sidePushViewController(viewController: webvc)
+            self.navigationController?.pushViewController(webvc, animated: true)
         }).disposed(by: disposeBag)
         
         rightView.itemView4.btn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             let setVc = LLSetingViewController()
-            self.gy_sidePushViewController(viewController: setVc)
+            self.navigationController?.pushViewController(setVc, animated: true)
         }).disposed(by: disposeBag)
         
         rightView.itemView5.btn.rx.tap.subscribe(onNext: { [weak self] in
@@ -365,6 +380,14 @@ extension LLRightViewController {
                 self.dismiss(animated: true)
             }
         }).disposed(by: disposeBag)
+        
+        
+        rightView.itemView7.btn.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let setVc = LLAddBankViewController()
+            self.navigationController?.pushViewController(setVc, animated: true)
+        }).disposed(by: disposeBag)
+        
     }
     
     private func delInfo() {
@@ -406,5 +429,6 @@ extension LLRightViewController {
             }
         }
     }
+    
     
 }

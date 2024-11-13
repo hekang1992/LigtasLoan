@@ -31,11 +31,19 @@ class HeadView: UIView {
         return bgView
     }()
     
+    lazy var addBtn: UIButton = {
+        let addBtn = UIButton(type: .custom)
+        addBtn.isHidden = true
+        addBtn.setImage(UIImage(named: "Sliaddinge"), for: .normal)
+        return addBtn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgView)
         bgView.addSubview(backBtn)
         bgView.addSubview(mlabel)
+        bgView.addSubview(addBtn)
         
         bgView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -49,6 +57,11 @@ class HeadView: UIView {
             make.centerX.equalToSuperview()
             make.centerY.equalTo(backBtn.snp.centerY)
             make.height.equalTo(17)
+        }
+        addBtn.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(StatusBarHelper.getStatusBarHeight() + 14)
+            make.right.equalToSuperview().offset(-21)
+            make.size.equalTo(CGSize(width: 24, height: 24))
         }
     }
     

@@ -1,6 +1,0 @@
-framework module GYSide {
-  umbrella header "GYSide-umbrella.h"
-
-  export *
-  module * { export * }
-}

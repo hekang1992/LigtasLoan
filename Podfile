@@ -27,8 +27,6 @@ target 'LigtasLoan' do
   
   pod 'RxDataSources', '~> 5.0.0'
   
-  pod 'GYSide', '~> 0.0.5'
-  
   pod 'IQKeyboardManagerSwift', '~> 6.5.16'
   
   pod 'SwiftyJSON', '~> 5.0.2'

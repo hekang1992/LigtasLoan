@@ -25,6 +25,7 @@ class CommonModel {
 class preferredaModel {
     var ofhurt: String?
     var screamed: String?
+    var greaterone: nothaveModel?
     var nothave: nothaveModel?
     var foryou: String?
     var hisgold: hisgoldModel?
@@ -46,8 +47,8 @@ class preferredaModel {
         self.ofhurt = json["ofhurt"].string
         self.screamed = json["screamed"].string
         self.foryou = json["foryou"].string
-        
         self.nothave = nothaveModel(json: json["nothave"])
+        self.greaterone = nothaveModel(json: json["greaterone"])
         self.hisgold = hisgoldModel(json: json["hisgold"])
         self.toremember = torememberModel(json: json["toremember"])
         self.consternation = hisgoldModel(json: json["consternation"])
@@ -117,7 +118,9 @@ class aviolenceModel {
     var itseemed: String?
     var toanyone: String?
     var makeyou: String?
+    var distinctionnnn: String?
     init(json: JSON) {
+        self.distinctionnnn = json["distinctionnnn"].stringValue
         self.cad = json["cad"].stringValue
         self.foryou = json["foryou"].stringValue
         self.caring = json["caring"].stringValue

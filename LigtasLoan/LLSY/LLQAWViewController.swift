@@ -152,14 +152,6 @@ class LLQAWViewController: LLBaseViewController {
                     cell.backgroundColor = .clear
                     cell.selectionStyle = .none
                     cell.model.accept(model)
-                    if model.risked == "1" {
-                        cell.inputtx.keyboardType = .numberPad
-                    }else {
-                        cell.inputtx.keyboardType = .default
-                    }
-                    cell.inputtx.rx.text.orEmpty.subscribe(onNext: { text in
-                        model.butshe = text
-                    }).disposed(by: disposeBag)
                     return cell
                 }
             }else {

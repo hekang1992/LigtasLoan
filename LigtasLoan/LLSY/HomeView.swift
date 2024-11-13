@@ -249,7 +249,7 @@ class TwoView: UIView {
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
         
         model
-            .compactMap { $0?.nothave?.aviolence }
+            .compactMap { $0?.greaterone?.aviolence }
             .asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: "LLProductCell", cellType: LLProductCell.self)) { row, model, cell in
                 cell.backgroundColor = .clear

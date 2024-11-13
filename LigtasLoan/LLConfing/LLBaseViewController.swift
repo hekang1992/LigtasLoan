@@ -42,6 +42,7 @@ extension LLBaseViewController {
                 }
                 break
             case .failure(_):
+                LoadingManager.hideLoadingView()
                 break
             }
         }
@@ -49,20 +50,52 @@ extension LLBaseViewController {
     
     func genjuurltovc(from nextUrl: String) {
         if nextUrl.hasPrefix("http") {
-            LoadingManager.hideLoadingView()
-            let wv = LLWYViewController()
-            wv.pageUrl.accept(nextUrl)
-            self.navigationController?.pushViewController(wv, animated: true)
-        }else if nextUrl.hasPrefix(schemeurl) {
-            if let url = URL(string: nextUrl) {
-                let path = url.path
-                if path.contains("/mountainOnio") {
-                    guard let query = url.query else { return }
-                    let arrList = query.components(separatedBy: "=")
-                    let lo = arrList.last ?? ""
-                    proDetailInfo(from: lo)
-                }
-            }
+            handleWebView(url: nextUrl)
+            return
+        }
+        
+        guard nextUrl.hasPrefix(schemeurl), let url = URL(string: nextUrl) else { return }
+        
+        switch url.path {
+        case "/mountainOnio":
+            handleMountainOnio(url: url)
+            
+        case "/lemonLemonJa":
+            handleLemonLemonJa(url: url)
+            
+        default:
+            break
+        }
+    }
+    
+    private func handleWebView(url: String) {
+        LoadingManager.hideLoadingView()
+        let wv = LLWYViewController()
+        wv.pageUrl.accept(url)
+        self.navigationController?.pushViewController(wv, animated: true)
+    }
+
+    private func handleMountainOnio(url: URL) {
+        guard let query = url.query,
+              let lo = query.components(separatedBy: "=").last else { return }
+        proDetailInfo(from: lo)
+    }
+
+    private func handleLemonLemonJa(url: URL) {
+        guard let query = url.query,
+              let productID = extractQueryParameter(query, key: "increased"),
+              let orderID = extractQueryParameter(query, key: "acute") else { return }
+        
+        print("Product ID: \(productID), Order ID: \(orderID)")
+    }
+
+    private func extractQueryParameter(_ query: String, key: String) -> String? {
+        guard let rangeStart = query.range(of: "\(key)=")?.upperBound else { return nil }
+        let substring = query[rangeStart...]
+        if let rangeEnd = substring.range(of: "&")?.lowerBound {
+            return String(substring[..<rangeEnd])
+        } else {
+            return String(substring)
         }
     }
     
@@ -77,6 +110,10 @@ extension LLBaseViewController {
                         LoadingManager.hideLoadingView()
                         typeVc(form: gabbling, proid: proid)
                     }else {
+                        if let foryou = success.preferreda.foryou, !foryou.isEmpty {
+                            self.genjuurltovc(from: foryou)
+                            return
+                        }
                         if let trembling = success.preferreda.consternation?.trembling {
                             self.ddtovc(from: trembling, pro: proid)
                         }
@@ -112,6 +149,7 @@ extension LLBaseViewController {
                 }
                 break
             case .failure(_):
+                LoadingManager.hideLoadingView()
                 break
             }
         }

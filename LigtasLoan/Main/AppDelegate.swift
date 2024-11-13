@@ -40,7 +40,7 @@ extension AppDelegate {
     
     @objc private func setUpRootVc(_ notification: Notification) {
         if is_login {
-            window?.rootViewController = LLBaseNavViewController(rootViewController: LLSYViewController())
+            window?.rootViewController = LLBaseNavViewController(rootViewController: LLTabBarViewController())
         }else {
             window?.rootViewController = LLBaseNavViewController(rootViewController: LLZCViewController())
         }

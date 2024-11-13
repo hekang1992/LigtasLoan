@@ -67,6 +67,22 @@ class LLInputCell: UITableViewCell {
             let butshe = imodel.butshe ?? ""
             inputtx.placeholder = imodel.throwingher ?? ""
             inputtx.text = !butshe.isEmpty ? butshe : ""
+
+            if imodel.risked == "1" {
+                inputtx.keyboardType = .numberPad
+            }else {
+                inputtx.keyboardType = .default
+            }
+            
+        }).disposed(by: disposeBag)
+        
+        inputtx.rx.text.orEmpty.bind(onNext: { [weak self] text in
+            guard let self = self else { return }
+            if let model = self.model.value {
+                model.butshe = text
+            }else {
+                model.value?.butshe = text
+            }
         }).disposed(by: disposeBag)
         
     }
