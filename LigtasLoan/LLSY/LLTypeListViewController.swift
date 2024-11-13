@@ -8,6 +8,7 @@
 import UIKit
 import RxRelay
 import ActiveLabel
+import MJRefresh
 
 class SelListView: UIView {
     
@@ -45,6 +46,8 @@ class SelListView: UIView {
 
 
 class ListView: UIView {
+    
+    var block: (() -> Void)?
     
     lazy var scro: UIScrollView = {
         let scro = UIScrollView()
@@ -117,7 +120,7 @@ class ListView: UIView {
         clickLabel.enabledTypes.append(customType1)
         clickLabel.customColor[customType1] = UIColor.init(cssStr: "#050505")
         clickLabel.handleCustomTap(for: customType1) { [weak self] element in
-            ToastUtility.showToast(message: "Privacy")
+            self?.block?()
         }
         let attributedString = NSMutableAttributedString(string: clickLabel.text!)
         let redUnderlineAttributes: [NSAttributedString.Key: Any] = [
@@ -133,6 +136,7 @@ class ListView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         addSubview(scro)
         scro.addSubview(ctImageView)
         ctImageView.addSubview(backBtn)
@@ -141,10 +145,11 @@ class ListView: UIView {
         scro.addSubview(listView3)
         scro.addSubview(listView4)
         scro.addSubview(listView5)
-        scro.addSubview(nextBtn)
-        scro.addSubview(clickLabel)
+        addSubview(clickLabel)
+        addSubview(nextBtn)
         scro.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(sc_height - 120)
         }
         ctImageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview()
@@ -185,12 +190,7 @@ class ListView: UIView {
             make.width.equalTo(sc_width)
             make.height.equalTo(92)
             make.top.equalTo(listView4.snp.bottom).offset(1)
-        }
-        nextBtn.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(12)
-            make.top.equalTo(listView5.snp.bottom).offset(21)
-            make.height.equalTo(56)
-            make.width.equalTo(sc_width - 25)
+            make.bottom.equalToSuperview().offset(-20)
         }
         clickLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(21)
@@ -198,6 +198,13 @@ class ListView: UIView {
             make.top.equalTo(nextBtn.snp.bottom).offset(32)
             make.bottom.equalToSuperview().offset(-30)
         }
+        nextBtn.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(12)
+            make.bottom.equalTo(clickLabel.snp.top).offset(-20)
+            make.height.equalTo(56)
+            make.width.equalTo(sc_width - 25)
+        }
+        
     }
     
     required init?(coder: NSCoder) {
@@ -298,6 +305,19 @@ class LLTypeListViewController: LLBaseViewController {
         
         tapClick()
         
+        
+        self.listView.scro.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            self.pproDetailInfo(from: self.lo.value)
+        })
+        
+        listView.block = { [weak self] in
+            guard let self = self else { return }
+            let webvc = LLWYViewController()
+            webvc.pageUrl.accept("\(h5_URL)/zucchiniTa")
+            self.navigationController?.pushViewController(webvc, animated: true)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -322,6 +342,7 @@ extension LLTypeListViewController {
         LoadingManager.addLoadingView()
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageURL: "/ll/another/between/healthy", method: .post) { [weak self] result in
+            self?.listView.scro.mj_header?.endRefreshing()
             LoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {

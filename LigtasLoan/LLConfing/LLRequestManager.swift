@@ -23,6 +23,7 @@ class CommonModel {
 }
 
 class preferredaModel {
+    var faultif: String?
     var ofhurt: String?
     var screamed: String?
     var greaterone: nothaveModel?
@@ -39,7 +40,11 @@ class preferredaModel {
     var andfalling: andfallingModel?
     var consternation: hisgoldModel?
     var herplacid: herplacidModel?
+    var toldyou: toldyouModel?
+    var exchange: String?
     init(json: JSON) {
+        self.exchange = json["exchange"].string
+        self.faultif = json["faultif"].string
         self.consciousness = json["consciousness"].intValue
         self.squatty = json["squatty"].string
         self.aquizzical = json["aquizzical"].string
@@ -57,6 +62,18 @@ class preferredaModel {
         
         self.unending = json["unending"].arrayValue.map { widehallModel(json: $0) }
         self.widehall = json["widehall"].arrayValue.map { widehallModel(json: $0) }
+        self.toldyou = toldyouModel(json: json["toldyou"])
+    }
+}
+
+class toldyouModel {
+    var elemental: String?
+    var aviolence: [aviolenceModel]?
+    init(json: JSON) {
+        self.elemental = json["elemental"].string
+        self.aviolence = json["aviolence"].arrayValue.map {
+            aviolenceModel(json: $0)
+        }
     }
 }
 
@@ -119,7 +136,19 @@ class aviolenceModel {
     var toanyone: String?
     var makeyou: String?
     var distinctionnnn: String?
+    var crumbs: String?
+    var outunder: String?
+    var elemental: String?
+    var exchange: String?
+    var whey: String?
+    var unawareof: String?
     init(json: JSON) {
+        self.unawareof = json["unawareof"].stringValue
+        self.whey = json["whey"].stringValue
+        self.exchange = json["exchange"].stringValue
+        self.crumbs = json["crumbs"].stringValue
+        self.outunder = json["outunder"].stringValue
+        self.elemental = json["elemental"].stringValue
         self.distinctionnnn = json["distinctionnnn"].stringValue
         self.cad = json["cad"].stringValue
         self.foryou = json["foryou"].stringValue
@@ -158,7 +187,13 @@ class widehallModel {
     var herseat: String?
     var tiredly: String?
     var belonging: String?
+    var hearth: Int?
+    var aviolence: [aviolenceModel]?
     init(json: JSON) {
+        self.aviolence = json["aviolence"].arrayValue.map {
+            aviolenceModel(json: $0)
+        }
+        self.hearth = json["hearth"].intValue
         self.belonging = json["belonging"].stringValue
         self.tiredly = json["tiredly"].stringValue
         self.herseat = json["herseat"].stringValue
@@ -237,7 +272,14 @@ class theirbeautyModel {
 
 
 
-let h5_URL = "http://8.220.185.183:8081"
+
+
+
+
+
+
+//let h5_URL = "http://8.220.185.183:8081"
+let h5_URL = "https://tamanglandasin.com"
 
 let base_URL = "\(h5_URL)/llapi"
 
@@ -355,7 +397,7 @@ class LLRequestManager: NSObject {
             if commonModel.andmammy == 0 {
                 completion(.success(commonModel))
             } else {
-                ToastUtility.showToast(message: commonModel.whey)
+                ToastViewConfig.showToast(message: commonModel.whey)
                 throw createError(from: commonModel)
             }
         } catch {
@@ -368,6 +410,14 @@ class LLRequestManager: NSObject {
         return NSError(domain: "APIError",
                        code: commonModel.andmammy,
                        userInfo: [NSLocalizedDescriptionKey: errorDescription])
+    }
+    
+    func uploadImageAPI(params: [String: Any]?, pageURL: String, imageData: Data, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
+        requestData(target: .uploadImage(params: params,
+                                         pageURL: pageURL,
+                                         imageData: imageData,
+                                         method: method),
+                    completion: completion)
     }
     
     func requestAPI(params: [String: Any]?, pageURL: String, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
@@ -384,13 +434,6 @@ class LLRequestManager: NSObject {
                     completion: completion)
     }
     
-    func uploadImageAPI(params: [String: Any]?, pageURL: String, imageData: Data, method: Moya.Method, completion: @escaping (Result<CommonModel, Error>) -> Void) {
-        requestData(target: .uploadImage(params: params,
-                                         pageURL: pageURL,
-                                         imageData: imageData,
-                                         method: method),
-                    completion: completion)
-    }
 }
 
 

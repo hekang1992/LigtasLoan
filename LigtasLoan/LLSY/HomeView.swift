@@ -41,7 +41,7 @@ class OneView: UIView {
     
     lazy var mlabel: UILabel = {
         let mlabel = UILabel()
-        mlabel.text = "1.Continuously make timely payments to demonstrate your reliability and creditworthiness."
+        mlabel.text = "1, Register and log in with your mobile phone number."
         mlabel.numberOfLines = 0
         mlabel.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel.textAlignment = .left
@@ -51,7 +51,7 @@ class OneView: UIView {
     
     lazy var mlabel1: UILabel = {
         let mlabel1 = UILabel()
-        mlabel1.text = "2.Update your income information with your credit provider to demonstrate your increased earning potential."
+        mlabel1.text = "2, Complete the information filling and identity verification.\n3, Confirm the loan plan generated for you.\n4, Wait for the approval of the review.\n5, Receive the loan amount."
         mlabel1.numberOfLines = 0
         mlabel1.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel1.textAlignment = .left
@@ -84,7 +84,7 @@ class OneView: UIView {
     
     lazy var mlabel3: UILabel = {
         let mlabel = UILabel()
-        mlabel.text = "1.A stable work history can make you appear more reliable in the eyes of lenders."
+        mlabel.text = "1, Enter the details page of the orders to be repaid in the application, and click the repayment button or the deferred repayment button at the bottom."
         mlabel.numberOfLines = 0
         mlabel.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel.textAlignment = .left
@@ -94,7 +94,7 @@ class OneView: UIView {
     
     lazy var mlabel4: UILabel = {
         let mlabel1 = UILabel()
-        mlabel1.text = "2.A higher income can improve your financial standing, making you eligible for more favorable interest rates."
+        mlabel1.text = "2, Confirm the repayment information.\n3, Select the repayment method.\n4, Obtain the repayment code and make the repayment according to the repayment instructions."
         mlabel1.numberOfLines = 0
         mlabel1.textColor = UIColor.init(cssStr: "#000000")?.withAlphaComponent(0.5)
         mlabel1.textAlignment = .left
@@ -141,12 +141,12 @@ class OneView: UIView {
         mlabel1.snp.makeConstraints { make in
             make.width.equalTo(sc_width - 64)
             make.left.equalToSuperview().offset(32)
-            make.top.equalTo(mlabel.snp.bottom).offset(12)
+            make.top.equalTo(mlabel.snp.bottom)
         }
         mlabel2.snp.makeConstraints { make in
             make.width.equalTo(sc_width - 64)
             make.left.equalToSuperview().offset(32)
-            make.top.equalTo(mlabel1.snp.bottom).offset(30)
+            make.top.equalTo(mlabel1.snp.bottom).offset(20)
         }
         ctImageView1.snp.makeConstraints { make in
             make.right.equalTo(ctImageView.snp.right).offset(-32)
@@ -166,7 +166,7 @@ class OneView: UIView {
         mlabel4.snp.makeConstraints { make in
             make.width.equalTo(sc_width - 64)
             make.left.equalToSuperview().offset(32)
-            make.top.equalTo(mlabel3.snp.bottom).offset(12)
+            make.top.equalTo(mlabel3.snp.bottom)
             make.bottom.equalToSuperview().offset(-40)
         }
         rightBtn.snp.makeConstraints { make in
@@ -210,16 +210,10 @@ class TwoView: UIView {
         return ctImageView
     }()
     
-    lazy var backBtn: UIButton = {
-        let backBtn = UIButton(type: .custom)
-        backBtn.setImage(UIImage(named: "iconim"), for: .normal)
-        return backBtn
-    }()
-    
-    lazy var whitwView: UIView = {
-        let whitwView = UIView()
-        whitwView.backgroundColor = .white
-        whitwView.layer.cornerRadius = 20
+    lazy var whitwView: UIImageView = {
+        let whitwView = UIImageView()
+        whitwView.isUserInteractionEnabled = true
+        whitwView.image = UIImage(named: "repagemen")
         return whitwView
     }()
     
@@ -231,6 +225,16 @@ class TwoView: UIView {
         lunboView.backgroundColor = .clear
         lunboView.register(LLGunCell.self, forCellWithReuseIdentifier: "LLGunCell")
         return lunboView
+    }()
+    
+    lazy var lunboTeiView: FSPagerView = {
+        let lunboTeiView = FSPagerView()
+        lunboTeiView.isInfinite = true
+        lunboTeiView.delegate = self
+        lunboTeiView.dataSource = self
+        lunboTeiView.backgroundColor = .clear
+        lunboTeiView.register(LLTitleCell.self, forCellWithReuseIdentifier: "LLTitleCell")
+        return lunboTeiView
     }()
     
     lazy var clickone: UIImageView = {
@@ -278,19 +282,21 @@ extension TwoView: UITableViewDelegate, FSPagerViewDataSource, FSPagerViewDelega
             make.top.left.right.equalToSuperview()
             make.height.equalTo(360)
         }
-        ctImageView.addSubview(backBtn)
-        backBtn.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(StatusBarHelper.getStatusBarHeight() + 15)
-            make.right.equalToSuperview().offset(-15)
-            make.size.equalTo(CGSize(width: 40, height: 40))
-        }
         
         ctImageView.addSubview(whitwView)
         whitwView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.left.equalToSuperview().offset(18)
-            make.top.equalTo(backBtn.snp.bottom).offset(35)
+            make.top.equalToSuperview().offset(137)
             make.height.equalTo(40)
+        }
+        
+        whitwView.addSubview(lunboTeiView)
+        lunboTeiView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
+            make.height.equalTo(40)
+            make.right.equalToSuperview().offset(-110)
         }
         
         ctImageView.addSubview(lunboView)
@@ -317,24 +323,48 @@ extension TwoView: UITableViewDelegate, FSPagerViewDataSource, FSPagerViewDelega
     }
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
-        guard let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "LLGunCell", at: index) as? LLGunCell else { return FSPagerViewCell() }
-        let arrayimage = model.value?.herplacid?.aviolence
-        let model = arrayimage?[index]
-        cell.icon.kf.setImage(with: URL(string: model?.caring ?? ""))
-        if arrayimage?.count ?? 0 > 1 {
-            lunboView.automaticSlidingInterval = 2
+        if pagerView == lunboView {
+            guard let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "LLGunCell", at: index) as? LLGunCell else { return FSPagerViewCell() }
+            let arrayimage = model.value?.herplacid?.aviolence
+            let model = arrayimage?[index]
+            cell.icon.kf.setImage(with: URL(string: model?.caring ?? ""))
+            if arrayimage?.count ?? 0 > 1 {
+                lunboView.automaticSlidingInterval = 2
+            }else {
+                lunboView.automaticSlidingInterval = 0
+            }
+            return cell
         }else {
-            lunboView.automaticSlidingInterval = 0
+            guard let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "LLTitleCell", at: index) as? LLTitleCell else { return FSPagerViewCell() }
+            let arrayimage = model.value?.toldyou?.aviolence
+            let model = arrayimage?[index]
+            cell.mlabel.text = model?.whey ?? ""
+            cell.mlabel.textColor = UIColor.init(cssStr: model?.unawareof ?? "#000000")
+            if arrayimage?.count ?? 0 > 1 {
+                lunboTeiView.automaticSlidingInterval = 2
+            }else {
+                lunboTeiView.automaticSlidingInterval = 0
+            }
+            return cell
         }
-        return cell
+        
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        let model = model.value?.herplacid?.aviolence[index]
-        let foryou = model?.foryou ?? ""
-        if !foryou.isEmpty {
-            self.block?(foryou)
+        if pagerView == lunboView {
+            let model = model.value?.herplacid?.aviolence[index]
+            let foryou = model?.foryou ?? ""
+            if !foryou.isEmpty {
+                self.block?(foryou)
+            }
+        }else {
+            let model = model.value?.toldyou?.aviolence?[index]
+            let foryou = model?.foryou ?? ""
+            if !foryou.isEmpty {
+                self.block?(foryou)
+            }
         }
+        
     }
     
 }
@@ -342,12 +372,12 @@ extension TwoView: UITableViewDelegate, FSPagerViewDataSource, FSPagerViewDelega
 class LLGunCell: FSPagerViewCell {
     
     let disposeBag = DisposeBag()
-
+    
     lazy var icon: UIImageView = {
         let icon = UIImageView()
         return icon
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(icon)
@@ -361,6 +391,34 @@ class LLGunCell: FSPagerViewCell {
     }
     
 }
+
+class LLTitleCell: FSPagerViewCell {
+    
+    let disposeBag = DisposeBag()
+    
+    lazy var mlabel: UILabel = {
+        let mlabel = UILabel()
+        mlabel.textColor = UIColor.init(cssStr: "#000000")
+        mlabel.textAlignment = .left
+        mlabel.numberOfLines = 2
+        mlabel.font = UIFont(name: Bold_SFDisplay, size: 15)
+        return mlabel
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(mlabel)
+        mlabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
 
 class LLHeadBtnClickView: UIView {
     
@@ -446,13 +504,13 @@ class LLProductCell: UITableViewCell {
         return deslabel
     }()
     
-    lazy var nextBtn: UIButton = {
-        let nextBtn = UIButton(type: .custom)
-        nextBtn.setTitleColor(UIColor.init(cssStr: "#000000"), for: .normal)
-        nextBtn.backgroundColor = UIColor.init(cssStr: "#21FB91")
-        nextBtn.titleLabel?.font = UIFont(name: Bold_SFDisplay, size: 18)
-        nextBtn.layer.cornerRadius = 4
-        return nextBtn
+    lazy var nextlabel: UILabel = {
+        let nextlabel = UILabel()
+        nextlabel.textColor = UIColor.init(cssStr: "#000000")
+        nextlabel.textAlignment = .center
+        nextlabel.font = UIFont(name: Bold_SFDisplay, size: 18)
+        nextlabel.backgroundColor = UIColor.init(cssStr: "#21FB91")
+        return nextlabel
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -462,7 +520,7 @@ class LLProductCell: UITableViewCell {
         bgView.addSubview(ctImageView)
         bgView.addSubview(mylabel)
         bgView.addSubview(deslabel)
-        bgView.addSubview(nextBtn)
+        bgView.addSubview(nextlabel)
         
         bgView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
@@ -492,7 +550,7 @@ class LLProductCell: UITableViewCell {
             make.height.equalTo(21)
             make.left.equalTo(ctImageView.snp.right).offset(12)
         }
-        nextBtn.snp.makeConstraints { make in
+        nextlabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().offset(-12)
             make.size.equalTo(CGSize(width: 89, height: 45))
@@ -505,9 +563,9 @@ class LLProductCell: UITableViewCell {
             self.deslabel.text = mmo.toanyone ?? ""
             self.ctImageView.kf.setImage(with: URL(string: mmo.makeyou ?? ""))
             let thenyou = mmo.thenyou ?? ""
-            self.nextBtn.isHidden = thenyou.isEmpty
+            self.nextlabel.isHidden = thenyou.isEmpty
             if !thenyou.isEmpty {
-                self.nextBtn.setTitle(mmo.thenyou ?? "", for: .normal)
+                self.nextlabel.text = mmo.thenyou ?? ""
             }
         }).disposed(by: disposeBag)
         
@@ -521,13 +579,13 @@ class LLProductCell: UITableViewCell {
 
 class PaddedLabel: UILabel {
     var padding: UIEdgeInsets = .zero
-
+    
     override func drawText(in rect: CGRect) {
         let insets = UIEdgeInsets(top: padding.top, left: padding.left, bottom: padding.bottom, right: padding.right)
         let paddedRect = rect.inset(by: insets)
         super.drawText(in: paddedRect)
     }
-
+    
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
         let widthWithPadding = size.width + padding.left + padding.right

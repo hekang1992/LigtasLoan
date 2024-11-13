@@ -61,6 +61,7 @@ class LLSYViewController: LLBaseViewController {
             if let self = self {
                 self.twoView.model.accept(model)
                 self.twoView.lunboView.reloadData()
+                self.twoView.lunboTeiView.reloadData()
             }
             
         }).disposed(by: disposeBag)

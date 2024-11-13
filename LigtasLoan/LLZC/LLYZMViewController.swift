@@ -87,7 +87,7 @@ extension LLYZMViewController: WLUnitFieldDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let success):
-                ToastUtility.showToast(message: success.whey)
+                ToastViewConfig.showToast(message: success.whey)
                 btn.isEnabled = false
                 codeTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
                 break

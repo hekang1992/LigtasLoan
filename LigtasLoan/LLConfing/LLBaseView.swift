@@ -149,7 +149,7 @@ class LLBaseView: UIView {
 }
 
 
-class ToastUtility {
+class ToastViewConfig {
     static func showToast(message: String) {
         ToastView.appearance().font = UIFont(name: Bold_SFDisplay, size: 20)
         let toast = Toast(text: message, duration: 1.0)

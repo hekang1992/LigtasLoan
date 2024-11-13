@@ -121,7 +121,7 @@ class LLSetingViewController: LLBaseViewController {
             LoadingManager.addLoadingView()
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 LoadingManager.hideLoadingView()
-                ToastUtility.showToast(message: "Current version is already the latest.")
+                ToastViewConfig.showToast(message: "Current version is already the latest.")
             }
         }).disposed(by: disposeBag)
         
@@ -358,16 +358,10 @@ class LLListDianViewController: LLBaseViewController {
     
     var blatantly = BehaviorRelay<String>(value: "")
     
-    lazy var emptyView: LLemptyView = {
-        let emptyView = LLemptyView()
-        return emptyView
-    }()
-    
     lazy var listView: LLOrderListView = {
         let listView = LLOrderListView()
         return listView
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

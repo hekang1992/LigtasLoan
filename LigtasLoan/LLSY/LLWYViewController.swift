@@ -125,8 +125,30 @@ extension LLWYViewController: WKScriptMessageHandler, WKNavigationDelegate {
                 })
             }
         } else if name == "monkeyUgl" {
-            if let array = message.body as? [String] {
-                
+            if let array = message.body as? [String], let urlString = array.first {
+                if urlString.hasPrefix("LigtaSloanMail://") {
+                    if let range = urlString.range(of: "//") {
+                        let substring = urlString[range.upperBound...]
+                        if let mailURL = URL(string: "mailto:\(substring)") {
+                            if UIApplication.shared.canOpenURL(mailURL) {
+                                UIApplication.shared.open(mailURL, options: [:], completionHandler: nil)
+                            } else {
+                                
+                            }
+                        }
+                    }
+                }else {
+                    if let range = urlString.range(of: "//") {
+                        let phoneNumber = urlString[range.upperBound...]
+                        if let phoneURL = URL(string: "tel://\(phoneNumber)") {
+                            if UIApplication.shared.canOpenURL(phoneURL) {
+                                UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+                            } else {
+                                
+                            }
+                        }
+                    }
+                }
             }
         } else if name == "tangerine" {
             if let array = message.body as? [String] {
@@ -173,7 +195,7 @@ extension LLWYViewController: WKScriptMessageHandler, WKNavigationDelegate {
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else if urlStr.hasPrefix("whatsapp:") {
-            ToastUtility.showToast(message: "To continue, please install WhatsApp.")
+            ToastViewConfig.showToast(message: "To continue, please install WhatsApp.")
         }
     }
     

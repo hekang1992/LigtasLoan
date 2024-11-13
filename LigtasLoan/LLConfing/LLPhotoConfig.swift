@@ -58,24 +58,24 @@ class PLAPhotoManager: NSObject {
     func presentPhoto(from viewController: UIViewController) {
         checkPhotoLibraryPermissions { [weak self] granted in
             guard granted else {
-                self?.showSettingsAlert(from: viewController, for: "Photo Album")
+                self?.showLLsAlert(from: viewController, for: "Album")
                 return
             }
-            self?.showImagePicker(from: viewController, sourceType: .photoLibrary, isfront: "")
+            self?.showLLIPicker(from: viewController, sourceType: .photoLibrary, isfront: "")
         }
     }
     
     func presentCamera(from viewController: UIViewController, isfront: String) {
         checkCameraPermissions { [weak self] granted in
             guard granted else {
-                self?.showSettingsAlert(from: viewController, for: "Camera")
+                self?.showLLsAlert(from: viewController, for: "Camera")
                 return
             }
-            self?.showImagePicker(from: viewController, sourceType: .camera, isfront: isfront)
+            self?.showLLIPicker(from: viewController, sourceType: .camera, isfront: isfront)
         }
     }
     
-    private func showImagePicker(from viewController: UIViewController, sourceType: UIImagePickerController.SourceType, isfront: String) {
+    private func showLLIPicker(from viewController: UIViewController, sourceType: UIImagePickerController.SourceType, isfront: String) {
         guard UIImagePickerController.isSourceTypeAvailable(sourceType) else {
             return
         }
@@ -95,7 +95,7 @@ class PLAPhotoManager: NSObject {
         viewController.present(imagePicker, animated: true, completion: nil)
     }
     
-    private func showSettingsAlert(from viewController: UIViewController, for feature: String) {
+    private func showLLsAlert(from viewController: UIViewController, for feature: String) {
         let alert = UIAlertController(
             title: "\(feature) Access has been disabled",
             message: "Please enable it in settings \(feature) Permission to use this feature",
@@ -129,7 +129,7 @@ extension Data {
             return imageData
         }
         var min: CGFloat = 0.0
-        var max: CGFloat = 0.9
+        var max: CGFloat = 0.8
         let targetSize = Int(Double(maxLength) * 0.7)
         for _ in 0..<5 {
             compression = (max + min) / 2

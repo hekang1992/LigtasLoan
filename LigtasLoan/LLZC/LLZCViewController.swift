@@ -54,7 +54,6 @@ class LLZCViewController: LLBaseViewController {
             yzmVc.phoneStr.accept(phone)
             self.navigationController?.pushViewController(yzmVc, animated: true)
         }).disposed(by: disposeBag)
-        locationInfo()
         
     }
     
@@ -67,18 +66,5 @@ class LLZCViewController: LLBaseViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
-}
-
-extension LLZCViewController {
-    
-    private func locationInfo() {
-        let location = LLLocationConfig()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-        location.startUpdatingLocation { model in
-            print("model========:\(model.strongest)====\(dateFormatter.string(from: Date()))")
-        }
-    }
     
 }

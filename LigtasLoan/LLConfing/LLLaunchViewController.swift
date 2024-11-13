@@ -63,10 +63,10 @@ class NetworkManager {
                 print("Network not reachable")
             case .reachable(.ethernetOrWiFi):
                 print("Network reachable via WiFi")
-                upgifno()
+                self.locationInfo()
             case .reachable(.cellular):
                 print("Network reachable via Cellular")
-                upgifno()
+                self.locationInfo()
             case .unknown:
                 print("Network status unknown")
             }
@@ -74,15 +74,25 @@ class NetworkManager {
         
     }
     
-    private func upgifno() {
-        DispatchQueue.main.async {
+    private func locationInfo() {
+        let location = LLLocationConfig()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        location.startUpdatingLocation { [weak self] model in
+            print("model========:\(model.strongest)====\(dateFormatter.string(from: Date()))")
+            self?.upgifno()
+        }
+    }
+    
+    public func upgifno() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
             if #available(iOS 14.0, *) {
                 ATTrackingManager.requestTrackingAuthorization { status in
                     switch status {
+                    case .restricted:
+                        break
                     case .authorized, .denied, .notDetermined:
                         self.upshine()
-                        break
-                    case .restricted:
                         break
                     @unknown default:
                         break

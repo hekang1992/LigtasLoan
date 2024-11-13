@@ -22,7 +22,7 @@ var is_login: Bool {
 
 class StatusBarHelper {
     class func getStatusBarHeight() -> CGFloat {
-        return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.statusBarManager?.statusBarFrame.height ?? 0
+        return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.statusBarManager?.statusBarFrame.height ?? 30
     }
 }
 
@@ -177,12 +177,12 @@ class OneTwoThreePopConfig {
             addressString += provinceName
             code += province?.code ?? ""
             if !cityName.isEmpty {
-                addressString += "|\(cityName)"
-                code += "|\(city?.code ?? "")"
+                addressString += "-\(cityName)"
+                code += "-\(city?.code ?? "")"
                 
                 if !areaName.isEmpty {
-                    addressString += "|\(areaName)"
-                    code += "|\(area?.code ?? "")"
+                    addressString += "-\(areaName)"
+                    code += "-\(area?.code ?? "")"
                 }
             }
         }

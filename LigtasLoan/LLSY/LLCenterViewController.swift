@@ -134,12 +134,6 @@ class LLRightView: UIView {
         return itemView6
     }()
     
-    lazy var itemView7: LLRightItemView = {
-        let itemView7 = LLRightItemView()
-        itemView7.mlabel.text = "CHANGE ACCOUNT"
-        return itemView7
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(scrollView)
@@ -151,7 +145,6 @@ class LLRightView: UIView {
         scrollView.addSubview(itemView4)
         scrollView.addSubview(itemView5)
         scrollView.addSubview(itemView6)
-        scrollView.addSubview(itemView7)
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -191,16 +184,9 @@ class LLRightView: UIView {
             make.height.equalTo(50)
         }
         
-        itemView7.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(itemView4.snp.bottom).offset(24)
-            make.left.equalToSuperview().offset(15)
-            make.height.equalTo(50)
-        }
-        
         itemView5.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(itemView4.snp.bottom).offset(120)
+            make.top.equalTo(itemView4.snp.bottom).offset(24)
             make.left.equalToSuperview().offset(15)
             make.height.equalTo(50)
         }
@@ -343,7 +329,7 @@ extension LLCenterViewController {
         rightView.itemView3.btn.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             let webvc = LLWYViewController()
-            webvc.pageUrl.accept("\(h5_URL)/mountainKa")
+            webvc.pageUrl.accept("\(h5_URL)/raccoonQui")
             self.navigationController?.pushViewController(webvc, animated: true)
         }).disposed(by: disposeBag)
         
@@ -379,13 +365,6 @@ extension LLCenterViewController {
             self.delView.block1 = {
                 self.dismiss(animated: true)
             }
-        }).disposed(by: disposeBag)
-        
-        
-        rightView.itemView7.btn.rx.tap.subscribe(onNext: { [weak self] in
-            guard let self = self else { return }
-            let setVc = LLAddBankViewController()
-            self.navigationController?.pushViewController(setVc, animated: true)
         }).disposed(by: disposeBag)
         
     }

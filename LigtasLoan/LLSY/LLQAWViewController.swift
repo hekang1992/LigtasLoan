@@ -71,6 +71,12 @@ class LLQAWViewController: LLBaseViewController {
     
     var lo = BehaviorRelay<String>(value: "")
     
+    var numArray = BehaviorRelay<[String]?>(value: [])
+    
+    var hamper: String = "0"
+    
+    var proid: String = ""
+    
     lazy var headView: HeadView = {
         let headView = HeadView()
         headView.mlabel.text = "E-WALLET & BANK"
@@ -220,7 +226,11 @@ extension LLQAWViewController: UITableViewDelegate {
     private func hqwqinfo() {
         LoadingManager.addLoadingView()
         let man = LLRequestManager()
-        man.requestAPI(params: ["withouthaving": "1", "hamper": "0", "bind": "0"], pageURL: "/ll/which/stuart/andcolorful", method: .get) { [weak self] result in
+        let numArray = self.numArray.value
+        if let numArray = numArray {
+            hamper = numArray.isEmpty ? "0" : "1"
+        }
+        man.requestAPI(params: ["withouthaving": "1", "hamper": hamper, "bind": "0"], pageURL: "/ll/which/stuart/andcolorful", method: .get) { [weak self] result in
             LoadingManager.hideLoadingView()
             guard let self = self else { return }
             switch result {
@@ -238,6 +248,7 @@ extension LLQAWViewController: UITableViewDelegate {
     }
     
     private func bcinfo() {
+        proid = lo.value.isEmpty ? (self.numArray.value?.last ?? "") : lo.value
         var dict: [String: Any]?
         dict = modelArray.value.reduce(into: [String: Any](), { preesult, model in
             let underthe = model.underthe
@@ -254,9 +265,14 @@ extension LLQAWViewController: UITableViewDelegate {
             guard let self = self else { return }
             LoadingManager.hideLoadingView()
             switch result {
-            case .success(_):
-                self.lxwwllinfo()
-                self.pageinDetailInfo(from: lo.value)
+            case .success(let success):
+                if numArray.value?.last == "1" {
+                    let model = success.preferreda
+                    self.changebbinfo(from: model.exchange ?? "")
+                }else {
+                    self.lxwwllinfo()
+                    self.pageinDetailInfo(from: proid)
+                }
                 break
             case .failure(_):
                 break
@@ -270,6 +286,27 @@ extension LLQAWViewController: UITableViewDelegate {
             guard let self = self else { return }
             LLMdMessInfo.bpOInfo(from: model, proloID: self.lo.value, st:self.ksst.value, jd: LLSBTwoDict.getCurrentTime(), type: "8")
         }
+    }
+    
+    private func changebbinfo(from ex: String) {
+        let modelArray = self.numArray.value
+        let dict = ["exchange": ex, "finally": modelArray?[1] ?? "0", "lo": modelArray?[0] ?? "0"]
+        let man = LLRequestManager()
+        man.requestAPI(params: dict, pageURL: "/ll/itwas/springs/mother", method: .post) { [weak self] result in
+            guard let self = self else { return }
+            LoadingManager.hideLoadingView()
+            switch result {
+            case .success(let success):
+                let model = success.preferreda
+                if let faultif = model.faultif {
+                    genjuurltovc(from: faultif)
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
+        
     }
     
 }

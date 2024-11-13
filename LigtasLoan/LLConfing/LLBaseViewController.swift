@@ -11,7 +11,13 @@ import RxRelay
 
 let schemeurl = "loan://app.ligtas.ios/"
 
+
 class LLBaseViewController: UIViewController {
+    
+    lazy var emptyView: LLemptyView = {
+        let emptyView = LLemptyView()
+        return emptyView
+    }()
     
     let disposeBag = DisposeBag()
     
@@ -22,7 +28,8 @@ class LLBaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.init(cssStr: "#F6F7F6")
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = !self.isKind(of: LLWYViewController.self)
     }
     
 }
@@ -83,9 +90,11 @@ extension LLBaseViewController {
 
     private func handleLemonLemonJa(url: URL) {
         guard let query = url.query,
-              let productID = extractQueryParameter(query, key: "increased"),
+              let productID = extractQueryParameter(query, key: "lo"),
               let orderID = extractQueryParameter(query, key: "acute") else { return }
-        
+        let bbVc = LLAddBankViewController()
+        bbVc.numArray.accept([productID, orderID, "1"])
+        self.navigationController?.pushViewController(bbVc, animated: true)
         print("Product ID: \(productID), Order ID: \(orderID)")
     }
 
@@ -132,17 +141,17 @@ extension LLBaseViewController {
         let man = LLRequestManager()
         man.requestAPI(params: ["lo": proid, "sooddly": "1", "shoothim": "0"], pageURL: "/ll/another/between/healthy", method: .post) { [weak self] result in
             guard let self = self else { return }
+            ksshjinof.accept(LLSBTwoDict.getCurrentTime())
             switch result {
             case .success(let success):
                 if success.andmammy == 0 || success.andmammy == 00 {
-                    if let hisgold = success.preferreda.hisgold, let gabbling = hisgold.gabbling, !gabbling.isEmpty {
+                    if let hisgold = success.preferreda.hisgold, let gabbling = hisgold.gabbling, !gabbling.isEmpty, gabbling != "eastern6" {
                         LoadingManager.hideLoadingView()
                         if gabbling == "eastern2" {
                             self.pageintypeVc(form: gabbling, proid: proid)
                         }
                     }else {
                         if let trembling = success.preferreda.consternation?.trembling {
-                            ksshjinof.accept(LLSBTwoDict.getCurrentTime())
                             self.ddtovc(from: trembling, pro: proid)
                         }
                     }
