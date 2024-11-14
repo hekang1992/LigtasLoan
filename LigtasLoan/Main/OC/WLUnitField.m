@@ -1,10 +1,4 @@
-//
-//  WLUnitField.m
-//  WLUnitField
-//
-//  Created by wayne on 16/11/22.
-//  Copyright © 2016年 wayne. All rights reserved.
-//
+
 
 #import "WLUnitField.h"
 #import "WLUnitFieldTextRange.h"
@@ -355,9 +349,7 @@
 
 
 - (void)drawRect:(CGRect)rect {
-    /*
-     *  绘制的线条具有宽度，因此在绘制时需要考虑该因素对绘制效果的影响。
-     */
+    
     CGSize unitSize = CGSizeMake((rect.size.width + _unitSpace) / _inputUnitCount - _unitSpace, rect.size.height);
     mCtx = UIGraphicsGetCurrentContext();
     
@@ -369,21 +361,11 @@
 
 #pragma mark- Private
 
-/**
- 在 AutoLayout 环境下重新指定控件本身的固有尺寸
- 
- `-drawRect:`方法会计算控件完成自身的绘制所需的合适尺寸，完成一次绘制后会通知 AutoLayout 系统更新尺寸。
- */
 - (void)_resize {
     [self invalidateIntrinsicContentSize];
 }
 
 
-/**
- 绘制背景色，以及剪裁绘制区域
-
- @param rect 控件绘制的区域
- */
 - (void)_fillRect:(CGRect)rect unitSize:(CGSize)unitSize {
     [mBackgroundColor setFill];
     CGFloat radius = _style == WLUnitFieldStyleBorder ? _borderRadius : 0;
@@ -407,18 +389,6 @@
 }
 
 
-/**
- 绘制边框
- 
- 边框的绘制分为两种模式：连续和不连续。其模式的切换由`unitSpace`属性决定。
- 当`unitSpace`值小于 2 时，采用的是连续模式，即每个 input unit 之间没有间隔。
- 反之，每个 input unit 会被边框包围。
- 
- @see unitSpace
- 
- @param rect 控件绘制的区域
- @param unitSize 单个 input unit 占据的尺寸
- */
 - (void)_drawBorder:(CGRect)rect unitSize:(CGSize)unitSize {
     
     CGRect bounds = CGRectInset(rect, _borderWidth * 0.5, _borderWidth * 0.5);
@@ -468,14 +438,6 @@
 }
 
 
-/**
- 绘制文本
- 
- 当处于密文输入模式时，会用圆圈替代文本。
-
- @param rect 控件绘制的区域
- @param unitSize 单个 input unit 占据的尺寸
- */
 - (void)_drawText:(CGRect)rect unitSize:(CGSize)unitSize {
     if ([self hasText] == NO) return;
     
@@ -513,13 +475,6 @@
     
 }
 
-
-/**
- 绘制跟踪框，如果指定的`trackTintColor`为 nil 则不绘制
-
- @param rect 控件绘制的区域
- @param unitSize 单个 input unit 占据的尺寸
- */
 - (void)_drawTrackBorder:(CGRect)rect unitSize:(CGSize)unitSize {
     if (_trackTintColor == nil) return;
     

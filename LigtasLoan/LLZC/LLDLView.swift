@@ -6,8 +6,50 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class LLDLView: LLBaseView {
+    
+    var block: (() -> Void)?
+    
+    lazy var clickLabel: ActiveLabel = {
+        let clickLabel = ActiveLabel()
+        clickLabel.textAlignment = .left
+        clickLabel.textColor = UIColor.init(cssStr: "#050505")?.withAlphaComponent(0.4)
+        clickLabel.font = UIFont(name: Regular_SFDisplay, size: 14)
+        clickLabel.text = "For a detailed overview of how we manage and process data, kindly refer to our Privacy Policy."
+        clickLabel.numberOfLines = 0
+        let customType1 = ActiveType.custom(pattern: "\\bPrivacy Policy\\b")
+        clickLabel.enabledTypes.append(customType1)
+        clickLabel.customColor[customType1] = UIColor.init(cssStr: "#050505")
+        clickLabel.handleCustomTap(for: customType1) { [weak self] element in
+            self?.block?()
+        }
+        let attributedString = NSMutableAttributedString(string: clickLabel.text!)
+        let redUnderlineAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.init(cssStr: "#2CD7BB") as Any,
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .underlineColor: UIColor.init(cssStr: "#2CD7BB") as Any,
+        ]
+        let privacyPolicyRange = (clickLabel.text! as NSString).range(of: "Privacy Policy")
+        attributedString.addAttributes(redUnderlineAttributes, range: privacyPolicyRange)
+        clickLabel.attributedText = attributedString
+        return clickLabel
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(clickLabel)
+        clickLabel.snp.makeConstraints { make in
+            make.top.equalTo(phoneTx.snp.bottom).offset(5)
+            make.left.equalToSuperview().offset(32)
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }
 

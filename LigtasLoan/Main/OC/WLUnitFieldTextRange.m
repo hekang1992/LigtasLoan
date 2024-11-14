@@ -1,10 +1,3 @@
-//
-//  WLUnitFieldTextRange.m
-//  WLUnitField
-//
-//  Created by 张尉 on 2019/4/3.
-//  Copyright © 2019 wayne. All rights reserved.
-//
 
 #import "WLUnitFieldTextRange.h"
 

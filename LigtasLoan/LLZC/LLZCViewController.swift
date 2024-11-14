@@ -55,6 +55,13 @@ class LLZCViewController: LLBaseViewController {
             self.navigationController?.pushViewController(yzmVc, animated: true)
         }).disposed(by: disposeBag)
         
+        loginView.block = { [weak self] in
+            guard let self = self else { return }
+            let webvc = LLWYViewController()
+            webvc.pageUrl.accept("\(h5_URL)/zucchiniTa")
+            self.navigationController?.pushViewController(webvc, animated: true)
+        }
+        
     }
     
     /*

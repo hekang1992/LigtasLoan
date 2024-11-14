@@ -2,7 +2,7 @@
 //  LLCenterViewController.swift
 //  LigtasLoan
 //
-//  Created by 何康 on 2024/11/12.
+//  Created by LigtasLoan on 2024/11/12.
 //
 
 import UIKit

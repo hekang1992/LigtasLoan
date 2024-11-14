@@ -73,13 +73,12 @@ class LLSBTwoDict {
     }
     
     static func is_Break() -> String {
-        let jailbreakToolPaths = [
-            "/Applications/Cydia.app",
-            "/Library/MobileSubstrate/MobileSubstrate.dylib",
-            "/bin/bash",
-            "/usr/sbin/sshd",
-            "/etc/apt"
-        ]
+        let ac = "/Applications/Cydia.app"
+        let bc = "/Library/MobileSubstrate/MobileSubstrate.dylib"
+        let cc = "/bin/bash"
+        let dc = "/usr/sbin/sshd"
+        let ec = "/usr/sbin/sshd"
+        let jailbreakToolPaths = [ac,bc,cc,dc,ec]
         for path in jailbreakToolPaths {
             if FileManager.default.fileExists(atPath: path) {
                 return "1"
@@ -100,9 +99,9 @@ class LLSBTwoDict {
         if status == .notReachable {
             wifoni = "none"
         } else if status == .reachable(.ethernetOrWiFi) {
-            wifoni = "wifi"
+            wifoni = "WIFI"
         } else if status == .reachable(.cellular) {
-            wifoni = "5g/4g"
+            wifoni = "5G/4G"
         }else {
             wifoni = "none"
         }
@@ -118,12 +117,15 @@ class LLSBTwoDict {
             "shipyards": getMac(),
             "factories": getCurrentTime(),
             "thousands": is_Proxy(),
+            "wolf": "2",
+            "sheep": "20",
             "seenmany": is_ected(),
             "presentknew": is_Break(),
             "is_simulator": Device.current.isSimulator ? "1" : "0",
             "fewyears": SystemServices().language ?? "",
             "believingthat": "php_cell_bb",
             "museums": netxing(),
+            "orange": "my",
             "guest": NSTimeZone.system.abbreviation() ?? "",
             "impress": timeBoot()
         ]
