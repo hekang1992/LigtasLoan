@@ -351,11 +351,12 @@ extension LLStepTFViewController: UITableViewDelegate, CNContactPickerDelegate {
                     let phhonArrar = phoneNumbers.isEmpty ? "" : phoneNumbers.joined(separator: ",")
                     let emailStr = emailAddresses.isEmpty ? "" : emailAddresses.joined(separator: ",")
                     let kContact: [String: Any] = [
-                        "quench": "box911",
-                        "smaller": contact.givenName + contact.familyName,
-                        "vaguely": phhonArrar,
-                        "encouragingly": emailStr,
-                        "partitioned": "amd_yes",
+                        "quench": "boush_911",
+                        "aquizzical": contact.givenName + contact.familyName,
+                        "revealed": phhonArrar,
+                        "twi": "999",
+                        "prettiest": emailStr,
+                        "wasempty": "books",
                         "selection": "x"
                     ]
                     lianxirenArray.append(kContact)

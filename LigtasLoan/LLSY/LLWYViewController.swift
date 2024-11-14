@@ -110,51 +110,77 @@ extension LLWYViewController: WKScriptMessageHandler, WKNavigationDelegate {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("message:\(message.name)")
-        let name = message.name
-        if name == "garlicKiw" {
+        
+        switch message.name {
+        case "garlicKiw":
             self.navigationController?.popToRootViewController(animated: true)
-        } else if name == "mangoHibi" {
-            topjapp()
-        } else if name == "jacketYam" {
+            
+        case "mangoHibi":
+            tcshowapp()
+            
+        case "jacketYam":
             self.navigationController?.popViewController(animated: true)
-        } else if name == "guitarGar" {
-            if let array = message.body as? [String] {
-                locationConfig = LLLocationConfig()
-                locationConfig?.startUpdatingLocation(completion: { model in
-                    LLMdMessInfo.bpOInfo(from: model, proloID: array.first ?? "0", st:array.last ?? "0", jd: LLSBTwoDict.getCurrentTime(), type: "10")
-                })
-            }
-        } else if name == "monkeyUgl" {
-            if let array = message.body as? [String], let urlString = array.first {
-                if urlString.hasPrefix("LigtaSloanMail://") {
-                    if let range = urlString.range(of: "//") {
-                        let substring = urlString[range.upperBound...]
-                        if let mailURL = URL(string: "mailto:\(substring)") {
-                            if UIApplication.shared.canOpenURL(mailURL) {
-                                UIApplication.shared.open(mailURL, options: [:], completionHandler: nil)
-                            } else {
-                                
-                            }
-                        }
-                    }
-                }else {
-                    if let range = urlString.range(of: "//") {
-                        let phoneNumber = urlString[range.upperBound...]
-                        if let phoneURL = URL(string: "tel://\(phoneNumber)") {
-                            if UIApplication.shared.canOpenURL(phoneURL) {
-                                UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
-                            } else {
-                                
-                            }
-                        }
-                    }
-                }
-            }
-        } else if name == "tangerine" {
-            if let array = message.body as? [String] {
-                self.genjuurltovc(from: array.first ?? "")
+            
+        case "guitarGar":
+            handleLocationUpdate(with: message.body)
+            
+        case "monkeyUgl":
+            handleMonkeyUglMessage(with: message.body)
+            
+        case "tangerine":
+            handleTangerineMessage(with: message.body)
+            
+        default:
+            break
+        }
+    }
+    
+    private func handleLocationUpdate(with body: Any) {
+        guard let array = body as? [String], let first = array.first, let last = array.last else { return }
+        locationConfig = LLLocationConfig()
+        locationConfig?.startUpdatingLocation { model in
+            LLMdMessInfo.bpOInfo(from: model, proloID: first, st: last, jd: LLSBTwoDict.getCurrentTime(), type: "10")
+        }
+    }
+    
+    private func handleMonkeyUglMessage(with body: Any) {
+        guard let array = body as? [String], let urlString = array.first else { return }
+        
+        if urlString.hasPrefix("LigtaSloanMail://") {
+            handleEmailURL(urlString)
+        } else {
+            handlePhoneURL(urlString)
+        }
+    }
+    
+    private func handleEmailURL(_ urlString: String) {
+        guard let range = urlString.range(of: "//") else { return }
+        let email = urlString[range.upperBound...]
+        
+        if let mailURL = URL(string: "mailto:\(email)") {
+            let phoneStr = UserDefaults.standard.string(forKey: LL_LOGIN) ?? ""
+            let bodyContent = "LigtaSloan: \(phoneStr)"
+            var emailString = "\(mailURL)?body=\(bodyContent)"
+            emailString = emailString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            
+            if let url = URL(string: emailString), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
+    }
+    
+    private func handlePhoneURL(_ urlString: String) {
+        guard let range = urlString.range(of: "//") else { return }
+        let phoneNumber = urlString[range.upperBound...]
+        
+        if let phoneURL = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(phoneURL) {
+            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+        }
+    }
+    
+    private func handleTangerineMessage(with body: Any) {
+        guard let array = body as? [String], let first = array.first else { return }
+        self.genjuurltovc(from: first)
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -162,9 +188,9 @@ extension LLWYViewController: WKScriptMessageHandler, WKNavigationDelegate {
             decisionHandler(.allow)
             return
         }
-        let urlStr = url.absoluteString
-        if shouldOpenInExternalApp(urlStr) {
-            handleExternalURL(url: url, urlStr: urlStr)
+        
+        if shouldHandleExternalURL(url) {
+            openExternalURL(url)
             decisionHandler(.cancel)
         } else {
             decisionHandler(.allow)
@@ -187,19 +213,27 @@ extension LLWYViewController: WKScriptMessageHandler, WKNavigationDelegate {
         LoadingManager.hideLoadingView()
     }
     
-    private func shouldOpenInExternalApp(_ urlStr: String) -> Bool {
-        return urlStr.hasPrefix("whatsapp:") || urlStr.hasPrefix("mailto:")
+    private func shouldHandleExternalURL(_ url: URL) -> Bool {
+        return url.scheme == "whatsapp" || url.scheme == "mailto"
     }
     
-    private func handleExternalURL(url: URL, urlStr: String) {
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else if urlStr.hasPrefix("whatsapp:") {
+    private func openExternalURL(_ url: URL) {
+        guard UIApplication.shared.canOpenURL(url) else {
+            showToast(for: url)
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    private func showToast(for url: URL) {
+        if url.scheme == "whatsapp" {
             ToastViewConfig.showToast(message: "To continue, please install WhatsApp.")
+        } else if url.scheme == "mailto" {
+            ToastViewConfig.showToast(message: "Please configure your email app.")
         }
     }
     
-    private func topjapp() {
+    private func tcshowapp() {
         if #available(iOS 14.0, *) {
             if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 SKStoreReviewController.requestReview(in: scene)

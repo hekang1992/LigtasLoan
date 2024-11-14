@@ -76,16 +76,15 @@ class NetworkManager {
     
     private func locationInfo() {
         let location = LLLocationConfig()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
         location.startUpdatingLocation { [weak self] model in
-            print("model========:\(model.strongest)====\(dateFormatter.string(from: Date()))")
-            self?.upgifno()
+            print("model========:\(model.strongest)")
+            guard let self = self else { return }
+            self.upgifno()
         }
     }
     
-    public func upgifno() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+    private func upgifno() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
             if #available(iOS 14.0, *) {
                 ATTrackingManager.requestTrackingAuthorization { status in
                     switch status {

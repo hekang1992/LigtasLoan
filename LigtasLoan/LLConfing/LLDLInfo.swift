@@ -19,7 +19,7 @@ protocol Loggable {
 }
 
 enum LogInfoKey: String {
-    case meal, inquiring, kitchen, cheerless, php, codebaby, luage, screamed, duty, blazed, boyfine
+    case meal, inquiring, kitchen, cheerless, ppp, codebaby, luage, screamed, duty, blazed, boyfine, faceI, obj, emailStr, health, sixFin
 }
 
 extension UIDevice {
@@ -53,13 +53,18 @@ class LLDLInfo: NSObject, Loggable {
             .inquiring: "1.0.0",
             .kitchen: deviceInfo.name,
             .cheerless: idfv,
-            .php: "peace",
+            .ppp: "peace",
+            .sixFin: "down",
             .codebaby: "old",
             .luage: "swift",
             .screamed: UserDefaults.standard.screamed,
             .duty: deviceInfo.version,
             .blazed: idfv,
-            .boyfine: "1"
+            .boyfine: "1",
+            .faceI: "1",
+            .obj: "1",
+            .emailStr: "gmail",
+            .health: "1"
         ]
         return logInfo.reduce(into: [:]) { result, entry in
             result[entry.key.rawValue] = entry.value
@@ -87,7 +92,6 @@ class WLInfo: NSObject {
                 return "1"
             }
         }
-        
         return "0"
     }
 }
@@ -99,14 +103,13 @@ class SaveIdentityConfig {
     
     static func saveinfoAdc() {
         guard let idfv = UIDevice.current.identifierForVendor?.uuidString else {
-            print("Error: Unable to get IDFV.")
             return
         }
         let keychain = Keychain(service: keychainService)
         do {
             try keychain.set(idfv, key: idfvKey)
         } catch {
-            print("Keychain save error: \(error.localizedDescription)")
+            print("error: \(error.localizedDescription)")
         }
     }
     
@@ -117,12 +120,11 @@ class SaveIdentityConfig {
             if let idfv = try keychain.get(idfvKey) {
                 return idfv
             } else {
-                print("IDFV not found in Keychain, saving now.")
                 saveinfoAdc()
                 return try keychain.get(idfvKey)
             }
         } catch {
-            print("Keychain retrieve error: \(error.localizedDescription)")
+            print("error: \(error.localizedDescription)")
             return nil
         }
     }
@@ -145,6 +147,7 @@ class LLSBOneDict {
             "unmistakable": UIDevice.current.systemVersion,
             "humming": getLastTimeMillis(),
             "crowdand": Bundle.main.bundleIdentifier ?? "",
+            "cow": "blue",
             "disturbedbees": "iOS",
             "lo": "1",
             "murmuring": [

@@ -85,7 +85,6 @@ class LLStepTHRViewController: LLBaseViewController {
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self else { return }
                 self.view.endEditing(true)
-                
                 let model = self.modelArray.value[indexPath.row]
                 guard let cell = tableView.cellForRow(at: indexPath) as? LLBtnClickCell else { return }
                 self.handleStorySelection(model, cell: cell)

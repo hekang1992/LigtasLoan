@@ -319,7 +319,12 @@ extension TwoView: UITableViewDelegate, FSPagerViewDataSource, FSPagerViewDelega
     }
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        return model.value?.herplacid?.aviolence.count ?? 0
+        if pagerView == lunboView {
+            return model.value?.herplacid?.aviolence.count ?? 0
+        }else {
+            return model.value?.toldyou?.aviolence?.count ?? 0
+        }
+        
     }
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {

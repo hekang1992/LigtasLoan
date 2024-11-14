@@ -139,13 +139,13 @@ class SanPopConfig {
 }
 
 class OneTwoThreePopConfig {
+    
     static func popLastEnum<T: widehallModel>(_ model: BRAddressPickerMode, _ label: UILabel, _ provinces: [BRProvinceModel], _ modelData: T, complete: @escaping complete) {
         let addressPickerView = BRAddressPickerView()
         addressPickerView.title = modelData.hatred ?? ""
         addressPickerView.pickerMode = model
         addressPickerView.selectIndexs = [0, 0, 0]
         addressPickerView.dataSourceArr = provinces
-        
         addressPickerView.resultBlock = { province, city, area in
             let addressDetails = self.getAddressDetails(province: province, city: city, area: area)
             if let haddreamed = modelData.haddreamed, !haddreamed.isEmpty {
@@ -177,12 +177,11 @@ class OneTwoThreePopConfig {
             addressString += provinceName
             code += province?.code ?? ""
             if !cityName.isEmpty {
-                addressString += "-\(cityName)"
-                code += "-\(city?.code ?? "")"
-                
+                addressString += "|\(cityName)"
+                code += "|\(city?.code ?? "")"
                 if !areaName.isEmpty {
-                    addressString += "-\(areaName)"
-                    code += "-\(area?.code ?? "")"
+                    addressString += "|\(areaName)"
+                    code += "|\(area?.code ?? "")"
                 }
             }
         }
@@ -213,8 +212,6 @@ class TPopConfig {
             proviceModel.name = proviceDic.aquizzical
             proviceModel.code = proviceDic.elemental
             proviceModel.index = dataSourceArr.enumerated().first { $0.element as? theirbeautyModel === proviceDic }?.offset ?? 0
-            
-            // 城市列表
             proviceModel.citylist = proviceDic.theirbeauty?.compactMap { cityDic in
                 createCityModel(from: cityDic, in: proviceDic.theirbeauty ?? [])
             } ?? []
@@ -228,11 +225,9 @@ class TPopConfig {
         cityModel.name = cityDic.aquizzical
         cityModel.code = cityDic.elemental
         cityModel.index = cityList.enumerated().first { $0.element === cityDic }?.offset ?? 0
-        
         cityModel.arealist = cityDic.theirbeauty?.compactMap { areaDic in
             createAreaModel(from: areaDic, in: cityDic.theirbeauty ?? [])
         } ?? []
-        
         return cityModel
     }
     
@@ -240,9 +235,7 @@ class TPopConfig {
         let areaModel = BRAreaModel()
         areaModel.name = areaDic.aquizzical
         areaModel.code = areaDic.elemental
-        
         areaModel.index = areaList.enumerated().first { $0.element === areaDic }?.offset ?? 0
-        
         return areaModel
     }
 }
